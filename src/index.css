@@ -1,0 +1,25 @@
+/* Clearance */
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	outline: none;
+	font-family: 'Open Sans', Tahoma, sans-serif;
+	box-sizing: border-box;
+	border: none;
+}
+a {
+	text-decoration: none;
+}
+
+body {
+	background-color: var(--black);
+}
+
+/* Variables */
+:root {
+	--brown: #A15423;
+	--green: #7EC57F;
+	--grey: #252525;
+	--black: #140F16;
+}
