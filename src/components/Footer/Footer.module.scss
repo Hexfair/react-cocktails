@@ -1,0 +1,25 @@
+.footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--brown);
+	padding: 10px 60px;
+	font-size: 16px;
+	margin: 0px -20px;
+	@media (max-width: 1400px) {
+		padding: 10px 50px;
+	}
+	@media (max-width: 1200px) {
+		padding: 10px 40px;
+	}
+	@media (max-width: 768px) {
+		padding: 10px 30px;
+	}
+	span {
+		text-decoration: underline;
+	}
+
+	.back {
+		text-transform: uppercase;
+	}
+}

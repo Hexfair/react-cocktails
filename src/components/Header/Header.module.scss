@@ -62,7 +62,7 @@
 		background-color: var(--black);
 		z-index: 5;
 		padding-top: 80px;
-		transition: all 0.3s ease 0s;
+		transition: all 0.3s ease-out;
 		overflow: auto; // Меню будет прокручиваться, если не помещается на экран
 		&.active {
 			top: 0px;

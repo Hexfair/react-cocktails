@@ -19,7 +19,9 @@ body {
 /* Variables */
 :root {
 	--brown: #A15423;
+	--brown-light: rgba(161, 84, 35, 0.05);
 	--green: #7EC57F;
 	--grey: #252525;
 	--black: #140F16;
+	--black-light: rgba(20, 15, 22, 0.85);
 }
