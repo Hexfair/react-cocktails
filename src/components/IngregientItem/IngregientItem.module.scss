@@ -1,0 +1,9 @@
+.item {
+	text-align: center;
+	cursor: pointer;
+	width: 100px;
+
+	.label {
+		color: var(--green);
+	}
+}

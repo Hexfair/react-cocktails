@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './Header.module.scss';
 import logo from '../../assets/header-logo.png';
 import { useMediaQuery } from 'react-responsive';
-import { BurgerMenu } from '../../UI/BurgerMenu/BurgerMenu';
-import { Favorites } from '../../UI/Favorites/Favorites';
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
+import { Favorites } from '../Favorites/Favorites';
 import cn from 'classnames';
 
 

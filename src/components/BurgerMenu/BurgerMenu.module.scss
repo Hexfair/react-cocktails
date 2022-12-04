@@ -40,7 +40,7 @@
 		transition: all 0.3s ease 0s;
 	}
 
-	.burger::before,	
+	.burger::before,
 	.burger::after {
 		content: "";
 		background-color: var(--green);

@@ -4,10 +4,11 @@
 	margin: 0;
 	list-style: none;
 	outline: none;
-	font-family: 'Open Sans', Tahoma, sans-serif;
+	font-family: 'Merriweather', Tahoma, sans-serif;
 	box-sizing: border-box;
 	border: none;
 }
+
 a {
 	text-decoration: none;
 }
