@@ -5,6 +5,7 @@ import { Home } from "./pages/Home/Home";
 
 import styles from './App.module.scss';
 import { Footer } from "./components/Footer/Footer";
+import { Cocktail } from "./pages/Cocktail/Cocktail";
 
 function App() {
 	return (
@@ -13,7 +14,8 @@ function App() {
 				<Header />
 				<div className='content'>
 					<Routes>
-						<Route path="/" element={<Home />} />
+						<Route path="" element={<Home />} />
+						<Route path="cocktail/:id" element={<Cocktail />} />
 					</Routes>
 				</div>
 				<Footer />

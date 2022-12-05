@@ -40,7 +40,7 @@ const initialState = {
 	nonAlcoholicDrinks: [],
 	optionalAlcoholicDrinks: [],
 	status: 'loading',
-	activeType: 0,
+	activeSort: 0,
 }
 
 export const mainSlice = createSlice({
@@ -48,7 +48,7 @@ export const mainSlice = createSlice({
 	initialState,
 	reducers: {
 		setActiveType: (state, action) => {
-			state.activeType = action.payload;
+			state.activeSort = action.payload;
 		},
 	},
 	extraReducers: (builder) => {

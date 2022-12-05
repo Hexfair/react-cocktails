@@ -1,0 +1,21 @@
+.btn {
+	display: inline-block;
+	background-color: transparent;
+	border: 3px solid var(--green);
+	border-radius: 5px;
+	padding: 7px 20px;
+	color: var(--green);
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+
+	&:hover {
+		background-color: var(--green);
+		color: var(--black);
+	}
+
+	&:active {
+		top: 5px;
+		transform: translateY(3px);
+	}
+}

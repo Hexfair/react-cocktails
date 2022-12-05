@@ -9,9 +9,9 @@ export const getIngredients = BASE_URL + 'list.php?i=list';
 export const getCategories = BASE_URL + 'list.php?c=list';
 export const getGlasses = BASE_URL + 'list.php?g=list';
 
+export const getCocktailById = (id) => BASE_URL + 'lookup.php?i=' + id;
+
 export const getImageOfIngredient = (name) => {
 	return `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png`
 }
-
-
 

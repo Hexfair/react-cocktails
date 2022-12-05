@@ -2,9 +2,10 @@
 	display: flex;
 	align-self: center;
 	justify-self: end;
-	@media (max-width: 768px) {
+
+	@media (max-width: 880px) {
 		grid-column-start: one;
-  		grid-column-end: two;
+		grid-column-end: two;
 		justify-self: start;
 	}
 
@@ -13,6 +14,7 @@
 		width: 50px;
 		position: relative;
 		cursor: pointer;
+
 		@media (max-width: 1400px) {
 			width: calc(35px + (50 - 35) * ((100vw - 320px) / (1400 - 320)));
 		}
@@ -35,12 +37,14 @@
 		width: 18px;
 		height: 18px;
 		font-weight: 700;
+
 		@media (max-width: 1400px) {
-			width: calc(15px + (18 - 15) * ((100vw - 768px) / (1400 - 768)));
-			height: calc(15px + (18 - 15) * ((100vw - 768px) / (1400 - 768)));
-			font-size: calc(8px + (10 - 8) * ((100vw - 768px) / (1400 - 768)));
+			width: calc(15px + (18 - 15) * ((100vw - 880px) / (1400 - 880)));
+			height: calc(15px + (18 - 15) * ((100vw - 880px) / (1400 - 880)));
+			font-size: calc(8px + (10 - 8) * ((100vw - 880px) / (1400 - 880)));
 		}
-		@media (max-width: 768px) {
+
+		@media (max-width: 880px) {
 			width: 16px;
 			height: 16px;
 			font-size: 10px;

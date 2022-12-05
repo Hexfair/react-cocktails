@@ -16,7 +16,7 @@
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 880px) {
 	.burger {
 		display: block;
 		position: relative;
@@ -27,7 +27,6 @@
 		justify-self: end;
 		grid-column-start: three;
 		grid-column-end: four;
-
 	}
 
 	.burger span {

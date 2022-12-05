@@ -1,49 +1,69 @@
 import React from 'react';
-import { Options } from '../../components/Options/Options';
 import styles from './Home.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadAlcoholicDrinks, loadPopularDrinks, setActiveType, loadNonAlcoholicDrinks, loadOptionalAlcoholicDrinks } from '../../redux/main/main-slice';
 import { CocktailItem } from '../../components/CocktailItem/CocktailItem';
 import cn from 'classnames';
+import { Button } from '../../components/Button/Button';
+import { useParams } from 'react-router';
 //=========================================================================================================================
 
 export const Home = () => {
 	const dispatch = useDispatch();
 	const drinksList = useSelector(state => state.main);
-	const activeTypeCategory = useSelector(state => state.main.activeType);
+	const activeTypeSort = useSelector(state => state.main.activeSort);
 	const [value, setValue] = React.useState(20);
+
+	let [visibleBackButton, setVisibleBackButton] = React.useState(false);
 
 	React.useEffect(() => {
 		dispatch(loadPopularDrinks());
 	}, [dispatch])
 
 
+	React.useEffect(() => {
+		const handleScroll = () => {
+			window.scrollY > 600 ? setVisibleBackButton(true) : setVisibleBackButton(false);
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
 	const onClickButton = () => {
 		setValue(value + 20)
+	}
+
+	const changeCategory = (value) => {
+		dispatch(setActiveType(value));
+		setValue(20);
 	}
 
 	const onChangeCategory = (value) => {
 		switch (value) {
 			case 1:
-				dispatch(setActiveType(value));
+				changeCategory(value);
 				!drinksList.alcoholicDrinks.length && dispatch(loadAlcoholicDrinks());
 				break;
 			case 2:
-				dispatch(setActiveType(value));
+				changeCategory(value);
 				!drinksList.nonAlcoholicDrinks.length && dispatch(loadNonAlcoholicDrinks());
 				break;
 			case 3:
-				dispatch(setActiveType(value));
+				changeCategory(value);
 				!drinksList.optionalAlcoholicDrinks.length && dispatch(loadOptionalAlcoholicDrinks());
 				break;
 			default:
 				dispatch(setActiveType(0));
+				setValue(20);
+
 				!drinksList.popularDrinks.length && dispatch(loadPopularDrinks());
 		}
 	}
 
 	let drinks;
-	switch (activeTypeCategory) {
+	switch (activeTypeSort) {
 		case 1:
 			drinks = drinksList.alcoholicDrinks.slice(0, value);
 			break;
@@ -59,12 +79,11 @@ export const Home = () => {
 
 	return (
 		<div className={styles.home}>
-			<Options />
 
-			<div className={styles.categories}>
+			<div className={styles.drinks} >
 
 				<button
-					className={cn(`${styles.category}`, `${activeTypeCategory === 0 ? styles.active : ''}`)}
+					className={cn(`${styles.sort}`, `${activeTypeSort === 0 ? styles.active : ''}`)}
 					onClick={() => onChangeCategory(0)}>
 					<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 						<path d="M395.637,0.001c-56.196,0-103.21,40.041-114.021,93.091H23.274c-9.413,0-17.901,5.671-21.502,14.37 c-3.603,8.698-1.609,18.71,5.05,25.364l179.361,179.254v153.375H116.31c-12.853,0-23.273,10.418-23.273,23.273
@@ -78,7 +97,7 @@ export const Home = () => {
 				<span className={styles.septum}></span>
 
 				<button
-					className={cn(`${styles.category}`, `${activeTypeCategory === 1 ? styles.active : ''}`)}
+					className={cn(`${styles.sort}`, `${activeTypeSort === 1 ? styles.active : ''}`)}
 					onClick={() => onChangeCategory(1)}>
 					<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
 						<path d="M167.9,126.9c12-8.5,32.1-23.4,32.1-62.6c0-31.7-18.5-60-18.5-60H74.6c0,0-18.5,28.5-18.5,60.3c0,39.2,20.1,54.1,32,62.6	c13.8,9.8,34.8,28.5,34.8,31.4v78.6H75.9v13.4h102.9v-13.4h-45.7v-78.6C133.1,155.4,154.1,136.8,167.9,126.9z M81.8,14.6h92.5	c4.8,0,15.4,28.6,15.4,49.7c0,0.6,0,1.2,0,1.7H66.3c0-0.5,0-1,0-1.4C66.3,43.5,77,23,81.8,14.6z" />
@@ -89,7 +108,7 @@ export const Home = () => {
 				<span className={styles.septum}></span>
 
 				<button
-					className={cn(`${styles.category}`, `${activeTypeCategory === 2 ? styles.active : ''}`)}
+					className={cn(`${styles.sort}`, `${activeTypeSort === 2 ? styles.active : ''}`)}
 					onClick={() => onChangeCategory(2)}>
 					<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28">
 						<path d="m2.43673,0.43751l-1.49922,2.01988l2.49871,3.32159l0,0.04489c-0.01523,0.36466 -0.03332,0.69804 -0.03332,1.07727c0,6.75761 3.27404,12.40497 7.46281,13.24146l0,4.44375l-4.26446,0l0,2.87272l10.66115,0l0,-2.87272l-4.26446,0l0,-4.39886c0.29845,-0.06234 0.60849,-0.15757 0.89953,-0.26932l5.69705,7.67556l1.49922,-2.01988l-17.1578,-23.11645l-1.49922,-2.01988zm3.83135,1.16704l2.13223,2.87272l9.7283,0c0.10661,0.86182 0.1999,1.56204 0.1999,2.42386l0,0.44886l-7.79597,0l7.06302,9.47101c1.8124,-2.44182 2.86519,-6.0417 2.86519,-9.91988c0,-1.86727 -0.1999,-3.71659 -0.73295,-5.29659l-13.45971,0z" />
@@ -100,7 +119,7 @@ export const Home = () => {
 				<span className={styles.septum}></span>
 
 				<button
-					className={cn(`${styles.category}`, `${activeTypeCategory === 3 ? styles.active : ''}`)}
+					className={cn(`${styles.sort}`, `${activeTypeSort === 3 ? styles.active : ''}`)}
 					onClick={() => onChangeCategory(3)}>
 					<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
 						<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)">
@@ -117,11 +136,16 @@ export const Home = () => {
 
 
 			<div className={styles.content}>
-				{drinks && drinks.map((obj, index) => <CocktailItem key={index} isBackSide={false} {...obj} />)}
+				{drinks && drinks.map((obj, index) => <CocktailItem key={index} isBackSide={false} id={obj.idDrink} {...obj} />)}
 			</div>
 
-			<button onClick={() => onClickButton()}>++</button>
+			{value <= drinks.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}
 
-		</div>
+			{visibleBackButton && <button className={styles.but} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" >
+					<path d="M894.9,96.3l665,749.7h-374.6v850.3L894.9,1406l-290.3,290.3V846H232.1L894.9,96.3z" />
+				</svg>
+			</button>}
+		</div >
 	)
 }
