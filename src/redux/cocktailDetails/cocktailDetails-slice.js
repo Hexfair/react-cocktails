@@ -2,9 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 //=========================================================================================================================
 
 export const loadCocktailById = createAsyncThunk(
-	'@@cocktail/load-cocktail',
+	'@@cocktailDetails/load-cocktail',
 	async (id, { extra: { client, api } }) => {
-
 		const res = await client.get(api.getCocktailById(id));
 		return res.data.drinks[0];
 	}
@@ -15,8 +14,8 @@ const initialState = {
 	cocktail: null,
 }
 
-export const cocktailSlice = createSlice({
-	name: '@@cocktail',
+export const cocktailDetailsSlice = createSlice({
+	name: '@@cocktailDetails',
 	initialState,
 	reducers: {
 		// setActiveType: (state, action) => {
@@ -43,4 +42,4 @@ export const cocktailSlice = createSlice({
 
 //export const { setActiveType } = mainSlice.actions;
 
-export const cocktailReducer = cocktailSlice.reducer;
+export const cocktailDetailsReducer = cocktailDetailsSlice.reducer;

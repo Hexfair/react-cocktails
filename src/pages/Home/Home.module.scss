@@ -6,12 +6,18 @@
 .drinks {
 	text-align: center;
 	margin-top: 40px;
-	height: 100px;
+	margin-bottom: 30px;
+
+	@media (max-width: 450px) {
+		display: flex;
+		flex-direction: column;
+	}
 
 	.sort {
 		text-align: center;
 		color: var(--green);
 		background-color: transparent;
+		margin-bottom: 20px;
 		cursor: pointer;
 
 		.icon {
@@ -27,6 +33,14 @@
 			font-size: 20px;
 			letter-spacing: 1px;
 			line-height: 20px;
+
+			@media (max-width: 1400px) {
+				font-size: calc(15px + (20 - 15) * ((100vw - 680px) / (1400 - 680)));
+			}
+
+			@media (max-width: 450px) {
+				font-size: 17px;
+			}
 		}
 
 		&.active {
@@ -44,6 +58,16 @@
 				letter-spacing: 3px;
 				line-height: 30px;
 				color: var(--brown);
+
+				@media (max-width: 1400px) {
+					font-size: calc(20px + (28 - 20) * ((100vw - 680px) / (1400 - 680)));
+				}
+
+				@media (max-width: 450px) {
+					font-size: 21px;
+					letter-spacing: 2px;
+
+				}
 			}
 		}
 	}
@@ -55,6 +79,10 @@
 	height: 25px;
 	background-color: var(--green);
 	margin: 0px 20px;
+
+	@media (max-width: 1400px) {
+		height: calc(20px + (25 - 20) * ((100vw - 680px) / (1400 - 680)));
+	}
 }
 
 .content {
@@ -83,7 +111,7 @@
 	}
 }
 
-.but {
+.buttonBack {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;

@@ -5,7 +5,8 @@ import { loadAlcoholicDrinks, loadPopularDrinks, setActiveType, loadNonAlcoholic
 import { CocktailItem } from '../../components/CocktailItem/CocktailItem';
 import cn from 'classnames';
 import { Button } from '../../components/Button/Button';
-import { useParams } from 'react-router';
+import { useMediaQuery } from 'react-responsive';
+
 //=========================================================================================================================
 
 export const Home = () => {
@@ -13,6 +14,8 @@ export const Home = () => {
 	const drinksList = useSelector(state => state.main);
 	const activeTypeSort = useSelector(state => state.main.activeSort);
 	const [value, setValue] = React.useState(20);
+
+	const isMobile = useMediaQuery({ query: '(max-width: 450px)' });
 
 	let [visibleBackButton, setVisibleBackButton] = React.useState(false);
 
@@ -94,7 +97,7 @@ export const Home = () => {
 					<span className={styles.text}>Poppular Drinks</span>
 				</button>
 
-				<span className={styles.septum}></span>
+				{!isMobile && <span className={styles.septum}></span>}
 
 				<button
 					className={cn(`${styles.sort}`, `${activeTypeSort === 1 ? styles.active : ''}`)}
@@ -105,7 +108,7 @@ export const Home = () => {
 					<span className={styles.text}>Alcoholic</span>
 				</button>
 
-				<span className={styles.septum}></span>
+				{!isMobile && <span className={styles.septum}></span>}
 
 				<button
 					className={cn(`${styles.sort}`, `${activeTypeSort === 2 ? styles.active : ''}`)}
@@ -116,7 +119,7 @@ export const Home = () => {
 					<span className={styles.text}>Non Alcoholic</span>
 				</button>
 
-				<span className={styles.septum}></span>
+				{!isMobile && <span className={styles.septum}></span>}
 
 				<button
 					className={cn(`${styles.sort}`, `${activeTypeSort === 3 ? styles.active : ''}`)}
@@ -141,7 +144,7 @@ export const Home = () => {
 
 			{value <= drinks.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}
 
-			{visibleBackButton && <button className={styles.but} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+			{visibleBackButton && <button className={styles.buttonBack} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" >
 					<path d="M894.9,96.3l665,749.7h-374.6v850.3L894.9,1406l-290.3,290.3V846H232.1L894.9,96.3z" />
 				</svg>

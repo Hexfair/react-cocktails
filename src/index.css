@@ -23,8 +23,8 @@ body {
 	--brown-light: rgba(161, 84, 35, 0.05);
 	--green: #7EC57F;
 	--green-light: #c4e6c4;
-
 	--grey: #252525;
+	--grey-light: #b2adad;
 	--black: #140F16;
 	--black-light: rgba(20, 15, 22, 0.85);
 }
