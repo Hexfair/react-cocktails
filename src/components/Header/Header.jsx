@@ -7,6 +7,7 @@ import { Favorites } from '../Favorites/Favorites';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCategories, loadGlasses } from '../../redux/options/options-slice';
+import { Link } from 'react-router-dom';
 //=========================================================================================================================
 
 export const Header = () => {
@@ -23,7 +24,7 @@ export const Header = () => {
 	const categories = useSelector(state => state.options.categoriesList)
 
 	return (
-		<div className={styles.header}>
+		<header className={styles.header}>
 			<div className={styles.logo}>
 				<img src={logo} alt='Logo' />
 				<span className={styles.title}>React {!isTabletOrMobile && <br />}Cocktails</span>
@@ -32,13 +33,13 @@ export const Header = () => {
 			<div className={cn(`${styles.navigation}`, `${isBurgerMenuOpen ? styles.active : ''}`)}>
 				<ul className={styles.list}>
 
-					<li className={styles.link}>
+					<Link to="/" className={styles.link}>
 						<button className={styles.button}>
 							<span className={styles.text}>HOME</span>
 						</button>
-					</li>
+					</Link>
 
-					<li className={styles.link}>
+					<Link to="/ingredients" className={styles.link}>
 						<button className={styles.button}>
 							<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.984 40.984">
 								<path d="M26.894 40.946c.6 0 1.083-.487 1.083-1.083v-2.148c-2.373.85-4.901 1.299-7.485 1.299s-5.117-.444-7.485-1.299v2.148c0 .6.488 1.083 1.083 1.083h12.804zM38.063 4.974a3.959 3.959 0 0 0-5.535.811l-7.791 10.471h9.862l4.275-5.746a3.958 3.958 0 0 0-.811-5.535z" />
@@ -46,7 +47,7 @@ export const Header = () => {
 							</svg>
 							<span className={styles.text}>Ingredients</span>
 						</button>
-					</li>
+					</Link>
 
 					<li className={cn(styles.link, styles.categories)}>
 						<button className={styles.button}>
@@ -87,6 +88,6 @@ export const Header = () => {
 
 			<Favorites />
 			{isTabletOrMobile && <BurgerMenu isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />}
-		</div >
+		</header >
 	)
 }

@@ -15,6 +15,7 @@ a {
 
 body {
 	background-color: var(--black);
+	height: 100%;
 }
 
 /* Variables */

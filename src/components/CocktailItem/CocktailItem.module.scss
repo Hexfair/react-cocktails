@@ -1,4 +1,6 @@
 .item {
+	display: grid;
+	height: 100%;
 	background: var(--brown-light);
 	border: 2px solid var(--brown);
 	border-radius: 10px;
@@ -26,6 +28,7 @@
 
 .front {
 	text-align: center;
+	display: grid;
 
 	.image {
 		margin-bottom: 15px;
@@ -39,7 +42,6 @@
 
 	.label {
 		position: relative;
-		display: inline-block;
 		font-size: 20px;
 		font-weight: 600;
 		color: var(--green);

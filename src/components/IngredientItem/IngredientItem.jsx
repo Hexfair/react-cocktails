@@ -1,9 +1,9 @@
 import React from "react";
 import { getImageOfIngredient } from '../../api/api';
-import styles from './IngregientItem.module.scss';
+import styles from './IngredientItem.module.scss';
 //=========================================================================================================================
 
-export const IngregientItem = ({ name }) => {
+export const IngredientItem = ({ name }) => {
 	return (
 		<div className={styles.item}>
 			<img src={getImageOfIngredient(name)} alt='' />

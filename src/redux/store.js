@@ -1,16 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import * as api from '../api/api';
-import { mainReducer } from './main/main-slice';
+import { drinksReducer } from './drinks/drinks-slice';
 import { optionsReducer } from './options/options-slice';
 import { cocktailDetailsReducer } from './cocktailDetails/cocktailDetails-slice';
+import { ingredientsReducer } from './ingredients/ingredients-slice';
 //=========================================================================================================================
 
 const store = configureStore({
 	reducer: {
-		main: mainReducer,
+		drinks: drinksReducer,
 		options: optionsReducer,
 		cocktailDetails: cocktailDetailsReducer,
+		ingredients: ingredientsReducer,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
 		thunk: {

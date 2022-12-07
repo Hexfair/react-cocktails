@@ -1,30 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
-export const loadCategories = createAsyncThunk(
-	'@@options/load-categories',
+export const loadIngredients = createAsyncThunk(
+	'@@ingredients/load-ingredients',
 	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getCategories);
-		return res.data.drinks
-	}
-)
-
-export const loadGlasses = createAsyncThunk(
-	'@@options/load-glasses',
-	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getGlasses);
+		const res = await client.get(api.getIngredients);
 		return res.data.drinks
 	}
 )
 
 const initialState = {
-	categoriesList: [],
-	glassesList: [],
+	ingredientsList: [],
 	status: 'loading'
 }
 
-export const optionsSlice = createSlice({
-	name: '@@options',
+export const ingredientsSlice = createSlice({
+	name: '@@ingredients',
 	initialState,
 	reducers: {
 		// setPopularDrinks: (state, action) => {
@@ -33,13 +24,9 @@ export const optionsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(loadCategories.fulfilled, (state, action) => {
+			.addCase(loadIngredients.fulfilled, (state, action) => {
 				state.status = 'success';
-				state.categoriesList = action.payload;
-			})
-			.addCase(loadGlasses.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.glassesList = action.payload;
+				state.ingredientsList = action.payload;
 			})
 			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
 				state.status = 'pending';
@@ -54,4 +41,4 @@ export const optionsSlice = createSlice({
 
 //export const { setPopularDrinks } = popularSlice.actions;
 
-export const optionsReducer = optionsSlice.reducer;
+export const ingredientsReducer = ingredientsSlice.reducer;

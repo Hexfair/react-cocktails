@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 //=========================================================================================================================
 
 export const loadPopularDrinks = createAsyncThunk(
-	'@@main/load-popularDrinks',
+	'@@drinks/load-popularDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getPopularDrinks);
 		return res.data.drinks;
@@ -10,7 +10,7 @@ export const loadPopularDrinks = createAsyncThunk(
 )
 
 export const loadAlcoholicDrinks = createAsyncThunk(
-	'@@main/load-alcoholicDrinks',
+	'@@drinks/load-alcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getAlcoholicDrinks);
 		return res.data.drinks;
@@ -18,7 +18,7 @@ export const loadAlcoholicDrinks = createAsyncThunk(
 )
 
 export const loadNonAlcoholicDrinks = createAsyncThunk(
-	'@@main/load-nonAlcoholicDrinks',
+	'@@drinks/load-nonAlcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getNonAlcoholicDrinks);
 		return res.data.drinks;
@@ -26,7 +26,7 @@ export const loadNonAlcoholicDrinks = createAsyncThunk(
 )
 
 export const loadOptionalAlcoholicDrinks = createAsyncThunk(
-	'@@main/load-optionalAlcoholicDrinks',
+	'@@drinks/load-optionalAlcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getOptionalAlcoholicDrinks);
 		return res.data.drinks;
@@ -43,8 +43,8 @@ const initialState = {
 	activeSort: 0,
 }
 
-export const mainSlice = createSlice({
-	name: '@@main',
+export const drinksSlice = createSlice({
+	name: '@@drinks',
 	initialState,
 	reducers: {
 		setActiveType: (state, action) => {
@@ -81,6 +81,6 @@ export const mainSlice = createSlice({
 	}
 })
 
-export const { setActiveType } = mainSlice.actions;
+export const { setActiveType } = drinksSlice.actions;
 
-export const mainReducer = mainSlice.reducer;
+export const drinksReducer = drinksSlice.reducer;

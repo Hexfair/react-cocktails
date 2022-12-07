@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './Home.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadAlcoholicDrinks, loadPopularDrinks, setActiveType, loadNonAlcoholicDrinks, loadOptionalAlcoholicDrinks } from '../../redux/main/main-slice';
+import {
+	loadAlcoholicDrinks,
+	loadPopularDrinks,
+	setActiveType,
+	loadNonAlcoholicDrinks,
+	loadOptionalAlcoholicDrinks
+} from '../../redux/drinks/drinks-slice';
 import { CocktailItem } from '../../components/CocktailItem/CocktailItem';
 import cn from 'classnames';
 import { Button } from '../../components/Button/Button';
@@ -11,17 +17,20 @@ import { useMediaQuery } from 'react-responsive';
 
 export const Home = () => {
 	const dispatch = useDispatch();
-	const drinksList = useSelector(state => state.main);
-	const activeTypeSort = useSelector(state => state.main.activeSort);
+	const drinksList = useSelector(state => state.drinks);
+	const activeTypeSort = useSelector(state => state.drinks.activeSort);
 	const [value, setValue] = React.useState(20);
+	const popularDrinksItems = useSelector(state => state.drinks.popularDrinks)
 
 	const isMobile = useMediaQuery({ query: '(max-width: 450px)' });
 
 	let [visibleBackButton, setVisibleBackButton] = React.useState(false);
 
 	React.useEffect(() => {
-		dispatch(loadPopularDrinks());
-	}, [dispatch])
+		if (popularDrinksItems.length === 0) {
+			dispatch(loadPopularDrinks())
+		}
+	}, [dispatch, popularDrinksItems])
 
 
 	React.useEffect(() => {
@@ -90,9 +99,9 @@ export const Home = () => {
 					onClick={() => onChangeCategory(0)}>
 					<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 						<path d="M395.637,0.001c-56.196,0-103.21,40.041-114.021,93.091H23.274c-9.413,0-17.901,5.671-21.502,14.37 c-3.603,8.698-1.609,18.71,5.05,25.364l179.361,179.254v153.375H116.31c-12.853,0-23.273,10.418-23.273,23.273
-			c0,12.851,10.42,23.273,23.273,23.273h93.145H302.6c12.853,0,23.273-10.422,23.273-23.273c0-12.854-10.42-23.273-23.273-23.273 h-69.872V312.079l98.696-98.639c18.882,12.546,41.027,19.288,64.212,19.288c64.163,0,116.363-52.202,116.363-116.363
-			C512,52.201,459.799,0.001,395.637,0.001z M395.637,186.182c-10.603,0-20.843-2.355-30.129-6.803l46.581-46.555 c6.659-6.654,8.653-16.666,5.052-25.364c-3.603-8.696-12.091-14.369-21.504-14.369h-65.815
-			c9.607-27.088,35.475-46.545,65.815-46.545c38.499,0,69.818,31.32,69.818,69.818S434.134,186.182,395.637,186.182z"/>
+					c0,12.851,10.42,23.273,23.273,23.273h93.145H302.6c12.853,0,23.273-10.422,23.273-23.273c0-12.854-10.42-23.273-23.273-23.273 h-69.872V312.079l98.696-98.639c18.882,12.546,41.027,19.288,64.212,19.288c64.163,0,116.363-52.202,116.363-116.363
+					C512,52.201,459.799,0.001,395.637,0.001z M395.637,186.182c-10.603,0-20.843-2.355-30.129-6.803l46.581-46.555 c6.659-6.654,8.653-16.666,5.052-25.364c-3.603-8.696-12.091-14.369-21.504-14.369h-65.815
+					c9.607-27.088,35.475-46.545,65.815-46.545c38.499,0,69.818,31.32,69.818,69.818S434.134,186.182,395.637,186.182z"/>
 					</svg>
 					<span className={styles.text}>Poppular Drinks</span>
 				</button>
@@ -150,5 +159,6 @@ export const Home = () => {
 				</svg>
 			</button>}
 		</div >
+
 	)
 }
