@@ -16,8 +16,12 @@ a {
 body {
 	background-color: var(--black);
 	height: 100%;
-}
 
+}
+body.active {
+	overflow: hidden;
+	height: 100%;
+}
 /* Variables */
 :root {
 	--brown: #A15423;
@@ -27,5 +31,6 @@ body {
 	--grey: #252525;
 	--grey-light: #b2adad;
 	--black: #140F16;
-	--black-light: rgba(20, 15, 22, 0.85);
+	--black-light: rgba(20, 15, 22, 0.80);
+	
 }

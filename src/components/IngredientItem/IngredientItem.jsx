@@ -1,13 +1,36 @@
 import React from "react";
-import { getImageOfIngredient } from '../../api/api';
+import { getSmallImageOfIngredient } from '../../api/api';
 import styles from './IngredientItem.module.scss';
+import { IngredientPopup } from "../IngredientPopup/IngredientPopup";
+import { clearIngredient } from "../../redux/ingredients/ingredients-slice";
+import { useDispatch } from "react-redux";
 //=========================================================================================================================
 
 export const IngredientItem = ({ name }) => {
+	const dispatch = useDispatch();
+
+	const [openPopup, setOpenPopup] = React.useState(false);
+
+	const onClickOpenPopup = (name) => {
+		setOpenPopup(true);
+		document.body.classList.add('active');
+	}
+
+	const onClickClosePopup = () => {
+		setOpenPopup(false);
+		document.body.classList.remove('active');
+		dispatch(clearIngredient());
+	}
+
 	return (
-		<div className={styles.item}>
-			<img src={getImageOfIngredient(name)} alt='' />
-			<div className={styles.label}> {name}</div>
-		</div>
+		<>
+			<div className={styles.item} onClick={() => onClickOpenPopup(name)}>
+				<img src={getSmallImageOfIngredient(name)} alt='' />
+				<div className={styles.label}> {name}</div>
+			</div>
+			{
+				openPopup && <IngredientPopup name={name} onClickClosePopup={onClickClosePopup} />
+			}
+		</>
 	)
 }

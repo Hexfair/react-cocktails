@@ -10,8 +10,13 @@ export const getCategories = BASE_URL + 'list.php?c=list';
 export const getGlasses = BASE_URL + 'list.php?g=list';
 
 export const getCocktailById = (id) => BASE_URL + 'lookup.php?i=' + id;
+export const getIngredientItem = (name) => BASE_URL + 'search.php?i=' + name;
 
-export const getImageOfIngredient = (name) => {
+
+export const getSmallImageOfIngredient = (name) => {
 	return `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png`
 }
 
+export const getMediumImageOfIngredient = (name) => {
+	return `https://www.thecocktaildb.com/images/ingredients/${name}-Medium.png`
+}

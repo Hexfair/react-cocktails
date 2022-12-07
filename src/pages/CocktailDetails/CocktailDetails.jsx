@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadCocktailById } from "../../redux/cocktailDetails/cocktailDetails-slice";
-import { getImageOfIngredient } from "../../api/api";
+import { getSmallImageOfIngredient } from "../../api/api";
 import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
 import { selectCocktailDetails, selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
@@ -81,7 +81,7 @@ export const Cocktail = () => {
 			<div className={styles.ingredients}>
 				{ingredientsArray && ingredientsArray.map((obj, index) =>
 					<div className={styles.ingredient} key={index}>
-						<img src={getImageOfIngredient(obj)} alt='' />
+						<img src={getSmallImageOfIngredient(obj)} alt='' />
 						<span className={styles.caption} >{obj}:</span>
 						<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
 					</div>

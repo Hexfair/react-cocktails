@@ -20,8 +20,13 @@ export const Header = () => {
 		dispatch(loadCategories())
 	}, [dispatch]);
 
-	const glasses = useSelector(state => state.options.glassesList)
-	const categories = useSelector(state => state.options.categoriesList)
+	const glasses = useSelector(state => state.options.glassesList);
+	const categories = useSelector(state => state.options.categoriesList);
+
+	const BurgerMenuOpen = (value) => {
+		setIsBurgerMenuOpen(value);
+		document.body.classList.toggle('active');
+	}
 
 	return (
 		<header className={styles.header}>
@@ -87,7 +92,7 @@ export const Header = () => {
 			</div>
 
 			<Favorites />
-			{isTabletOrMobile && <BurgerMenu isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />}
+			{isTabletOrMobile && <BurgerMenu isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={BurgerMenuOpen} />}
 		</header >
 	)
 }
