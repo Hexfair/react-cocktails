@@ -148,7 +148,7 @@ export const Home = () => {
 
 
 			<div className={styles.content}>
-				{drinks && drinks.map((obj, index) => <CocktailItem key={index} isBackSide={false} id={obj.idDrink} {...obj} />)}
+				{drinks && drinks.map((obj, index) => <CocktailItem key={obj.idDrink} isBackSide={false} id={obj.idDrink} {...obj} />)}
 			</div>
 
 			{value <= drinks.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}

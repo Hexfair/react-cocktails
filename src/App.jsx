@@ -7,6 +7,8 @@ import styles from './App.module.scss';
 import { Footer } from "./components/Footer/Footer";
 import { Cocktail } from "./pages/CocktailDetails/CocktailDetails";
 import { Ingredients } from "./pages/Ingredients/Ingredients";
+import { Categories } from "./pages/Categories/Categories";
+import { Glasses } from "./pages/Glasses/Glasses";
 //=========================================================================================================================
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
 						<Route path="" element={<Home />} />
 						<Route path="cocktail/:id" element={<Cocktail />} />
 						<Route path="ingredients" element={<Ingredients />} />
+						<Route exact path="categories/:category" element={<Categories />} />
+						<Route exact path="glasses/:glass" element={<Glasses />} />
 					</Routes>
 				</main>
 				<Footer />

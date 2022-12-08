@@ -29,7 +29,7 @@ export const Ingredients = () => {
 			<h2 className={styles.title}>Cocktail Ingredients</h2>
 
 			<div className={styles.items}>
-				{ingredients && ingredients.map((obj, index) => <IngredientItem key={index} name={obj.strIngredient1} {...obj} />)}
+				{ingredients && ingredients.map((obj, index) => <IngredientItem key={obj.strIngredient1} name={obj.strIngredient1} {...obj} />)}
 			</div>
 
 			{value <= ingredients.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}

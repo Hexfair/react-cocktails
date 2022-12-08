@@ -59,6 +59,7 @@
 
 .navigation {
 	align-self: center;
+	position: relative;
 
 	@media (max-width: 880px) {
 		position: fixed;
@@ -171,7 +172,6 @@
 
 .link.glasses,
 .link.categories {
-	position: relative;
 	cursor: auto;
 
 	&:hover .options {
@@ -186,10 +186,10 @@
 	background-color: var(--green-light);
 	position: absolute;
 	top: 100%;
-	width: 800px;
+	max-width: 800px;
 	z-index: 3;
 	//display: none;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	flex-wrap: wrap;
 	border-radius: 5px;

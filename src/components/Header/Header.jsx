@@ -6,7 +6,8 @@ import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { Favorites } from '../Favorites/Favorites';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCategories, loadGlasses } from '../../redux/options/options-slice';
+import { loadCategories } from '../../redux/categories/categories-slice';
+import { loadGlasses } from '../../redux/glasses/glasses-slice';
 import { Link } from 'react-router-dom';
 //=========================================================================================================================
 
@@ -20,8 +21,8 @@ export const Header = () => {
 		dispatch(loadCategories())
 	}, [dispatch]);
 
-	const glasses = useSelector(state => state.options.glassesList);
-	const categories = useSelector(state => state.options.categoriesList);
+	const glasses = useSelector(state => state.glasses.glassesList);
+	const categories = useSelector(state => state.categories.categoriesList);
 
 	const BurgerMenuOpen = (value) => {
 		setIsBurgerMenuOpen(value);
@@ -62,7 +63,10 @@ export const Header = () => {
 							<span className={styles.text}>Categories...</span>
 						</button>
 						<div className={styles.options}>
-							{categories && categories.map((obj, index) => <span key={obj.strCategory}>{obj.strCategory} </span>)}
+							{categories && categories.map((obj, index) =>
+								<Link to={`/categories/${obj.strCategory}`} key={obj.strCategory}>
+									<span>{obj.strCategory}</span>
+								</Link>)}
 						</div>
 					</li>
 
@@ -74,7 +78,10 @@ export const Header = () => {
 							<span className={styles.text}>Glasses...</span>
 						</button>
 						<div className={styles.options}>
-							{glasses && glasses.map((obj, index) => <span key={obj.strGlass}>{obj.strGlass} </span>)}
+							{glasses && glasses.map((obj, index) =>
+								<Link to={`/glasses/${obj.strGlass}`} key={obj.strGlass}>
+									<span>{obj.strGlass}</span>
+								</Link>)}
 						</div>
 					</li>
 

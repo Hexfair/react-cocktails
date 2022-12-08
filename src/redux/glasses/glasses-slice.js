@@ -1,30 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
-export const loadCategories = createAsyncThunk(
-	'@@options/load-categories',
+export const loadGlasses = createAsyncThunk(
+	'@@glasses/load-glasses',
 	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getCategories);
-		return res.data.drinks
+		const res = await client.get(api.getGlasses);
+		const drinksWithFilter = res.data.drinks.filter(obj => !obj.strGlass.includes('/'));
+		return drinksWithFilter;
 	}
 )
 
-export const loadGlasses = createAsyncThunk(
-	'@@options/load-glasses',
-	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getGlasses);
+export const loadGlassesItems = createAsyncThunk(
+	'@@glasses/load-glassesItems',
+	async (name, { extra: { client, api } }) => {
+		const res = await client.get(api.getGlassesItem(name));
 		return res.data.drinks
 	}
 )
 
 const initialState = {
-	categoriesList: [],
 	glassesList: [],
+	glassesItems: [],
 	status: 'loading'
 }
 
-export const optionsSlice = createSlice({
-	name: '@@options',
+export const glassesSlice = createSlice({
+	name: '@@glasses',
 	initialState,
 	reducers: {
 		// setPopularDrinks: (state, action) => {
@@ -33,19 +34,19 @@ export const optionsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(loadCategories.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.categoriesList = action.payload;
-			})
 			.addCase(loadGlasses.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.glassesList = action.payload;
 			})
-			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+			.addCase(loadGlassesItems.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.glassesItems = action.payload;
+			})
+			.addCase(loadGlasses.pending, (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+			.addCase(loadGlasses.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})
@@ -54,4 +55,4 @@ export const optionsSlice = createSlice({
 
 //export const { setPopularDrinks } = popularSlice.actions;
 
-export const optionsReducer = optionsSlice.reducer;
+export const glassesReducer = glassesSlice.reducer;
