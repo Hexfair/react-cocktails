@@ -4,6 +4,8 @@ import { IngredientItem } from "../../components/IngredientItem/IngredientItem";
 import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import styles from './Ingredients.module.scss';
 import { Button } from "../../components/Button/Button";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 //=========================================================================================================================
 
 export const Ingredients = () => {
@@ -15,6 +17,8 @@ export const Ingredients = () => {
 		if (ingredientsItems.length === 0) {
 			dispatch(loadIngredients())
 		}
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
 	}, [dispatch, ingredientsItems])
 
 	const onClickButton = () => {

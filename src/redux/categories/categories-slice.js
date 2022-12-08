@@ -42,11 +42,11 @@ export const categoriesSlice = createSlice({
 				state.status = 'success';
 				state.categoriesItems = action.payload;
 			})
-			.addCase(loadCategories.pending, (state) => {
+			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addCase(loadCategories.rejected, (state, action) => {
+			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})

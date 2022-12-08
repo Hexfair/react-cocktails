@@ -3,43 +3,42 @@ import styles from './Glasses.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadGlassesItems } from "../../redux/glasses/glasses-slice";
-import { CocktailItem } from "../../components/CocktailItem/CocktailItem";
-import { Button } from "../../components/Button/Button";
+import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
+import { Preloader } from "../../components/Preloader/Preloader";
 //=========================================================================================================================
 
 export const Glasses = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 
+
 	React.useEffect(() => {
 		dispatch(loadGlassesItems(params.glass));
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
 	}, [dispatch, params.glass])
 
-	const glassesItems = useSelector(state => state.glasses.glassesItems);
 
-	const [value, setValue] = React.useState(25);
+	const glassesItems = useSelector(state => state.glasses.glassesItems);
+	const status = useSelector(state => state.glasses.status)
+	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
 	const onClickButton = () => {
-		setValue(value + 25)
+		setVisibleDrinks(visibleDrinks + 20)
 	}
 
-	let glasses = glassesItems.slice(0, value);
+	let glasses = glassesItems.slice(0, visibleDrinks);
 
-	if (!glassesItems) {
-		return (
-			<div>Ошибка</div>
-		)
+
+	if (status === 'pending') {
+		return <Preloader />
 	}
 
 	return (
 		<div className={styles.content}>
-			<h2 className={styles.title}>Cocktail Categories: <span>{params.category}</span></h2>
-
-			<div className={styles.items}>
-				{glasses && glasses.map((obj, index) => <CocktailItem key={obj.idDrink} name={obj.strGlasses} id={obj.idDrink} {...obj} />)}
-			</div>
-
-			{value <= glasses.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}
-
+			<h2 className={styles.title}>Cocktail Glasses: <span>{params.glass}</span></h2>
+			<DrinksBlock drinks={glasses} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
 		</div>
 	)
 }

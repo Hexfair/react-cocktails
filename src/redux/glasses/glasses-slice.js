@@ -21,7 +21,7 @@ export const loadGlassesItems = createAsyncThunk(
 const initialState = {
 	glassesList: [],
 	glassesItems: [],
-	status: 'loading'
+	status: 'pending'
 }
 
 export const glassesSlice = createSlice({
@@ -42,11 +42,11 @@ export const glassesSlice = createSlice({
 				state.status = 'success';
 				state.glassesItems = action.payload;
 			})
-			.addCase(loadGlasses.pending, (state) => {
+			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addCase(loadGlasses.rejected, (state, action) => {
+			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})

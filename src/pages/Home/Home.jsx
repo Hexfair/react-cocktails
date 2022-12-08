@@ -8,19 +8,21 @@ import {
 	loadNonAlcoholicDrinks,
 	loadOptionalAlcoholicDrinks
 } from '../../redux/drinks/drinks-slice';
-import { CocktailItem } from '../../components/CocktailItem/CocktailItem';
 import cn from 'classnames';
-import { Button } from '../../components/Button/Button';
 import { useMediaQuery } from 'react-responsive';
-
+import { DrinksBlock } from '../../components/DrinksBlock/DrinksBlock';
+import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
+import { Preloader } from '../../components/Preloader/Preloader';
 //=========================================================================================================================
 
 export const Home = () => {
 	const dispatch = useDispatch();
 	const drinksList = useSelector(state => state.drinks);
 	const activeTypeSort = useSelector(state => state.drinks.activeSort);
-	const [value, setValue] = React.useState(20);
-	const popularDrinksItems = useSelector(state => state.drinks.popularDrinks)
+	const [visibleDrinks, setVisibleDrinks] = React.useState(25);
+	const popularDrinksItems = useSelector(state => state.drinks.popularDrinks);
+	const status = useSelector(state => state.drinks.status);
 
 	const isMobile = useMediaQuery({ query: '(max-width: 450px)' });
 
@@ -30,6 +32,8 @@ export const Home = () => {
 		if (popularDrinksItems.length === 0) {
 			dispatch(loadPopularDrinks())
 		}
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
 	}, [dispatch, popularDrinksItems])
 
 
@@ -44,12 +48,12 @@ export const Home = () => {
 	}, []);
 
 	const onClickButton = () => {
-		setValue(value + 20)
+		setVisibleDrinks(visibleDrinks + 20)
 	}
 
 	const changeCategory = (value) => {
 		dispatch(setActiveType(value));
-		setValue(20);
+		setVisibleDrinks(20);
 	}
 
 	const onChangeCategory = (value) => {
@@ -68,7 +72,7 @@ export const Home = () => {
 				break;
 			default:
 				dispatch(setActiveType(0));
-				setValue(20);
+				setVisibleDrinks(20);
 
 				!drinksList.popularDrinks.length && dispatch(loadPopularDrinks());
 		}
@@ -77,16 +81,20 @@ export const Home = () => {
 	let drinks;
 	switch (activeTypeSort) {
 		case 1:
-			drinks = drinksList.alcoholicDrinks.slice(0, value);
+			drinks = drinksList.alcoholicDrinks.slice(0, visibleDrinks);
 			break;
 		case 2:
-			drinks = drinksList.nonAlcoholicDrinks.slice(0, value);
+			drinks = drinksList.nonAlcoholicDrinks.slice(0, visibleDrinks);
 			break;
 		case 3:
-			drinks = drinksList.optionalAlcoholicDrinks.slice(0, value);
+			drinks = drinksList.optionalAlcoholicDrinks.slice(0, visibleDrinks);
 			break;
 		default:
 			drinks = drinksList.popularDrinks;
+	}
+
+	if (status === 'loading') {
+		return <Preloader />
 	}
 
 	return (
@@ -144,14 +152,7 @@ export const Home = () => {
 
 			</div>
 
-
-
-
-			<div className={styles.content}>
-				{drinks && drinks.map((obj, index) => <CocktailItem key={obj.idDrink} isBackSide={false} id={obj.idDrink} {...obj} />)}
-			</div>
-
-			{value <= drinks.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}
+			<DrinksBlock drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
 
 			{visibleBackButton && <button className={styles.buttonBack} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" >
@@ -162,3 +163,4 @@ export const Home = () => {
 
 	)
 }
+

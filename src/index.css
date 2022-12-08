@@ -18,7 +18,7 @@ body {
 	height: 100%;
 
 }
-body.active {
+body.lock {
 	overflow: hidden;
 	height: 100%;
 }

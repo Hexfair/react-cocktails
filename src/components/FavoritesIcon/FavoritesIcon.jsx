@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Favorites.module.scss';
+import styles from './FavoritesIcon.module.scss';
 
-export const Favorites = () => {
+export const FavoritesIcon = () => {
 	return (
 		<div className={styles.favorites}  >
 			<button className={styles.button} >

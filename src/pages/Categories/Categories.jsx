@@ -3,43 +3,42 @@ import styles from './Categories.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadCategoriesItems } from "../../redux/categories/categories-slice";
-import { CocktailItem } from "../../components/CocktailItem/CocktailItem";
-import { Button } from "../../components/Button/Button";
+import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
+import { Preloader } from "../../components/Preloader/Preloader";
 //=========================================================================================================================
 
 export const Categories = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
+	const status = useSelector(state => state.categories.status)
+
 
 	React.useEffect(() => {
 		dispatch(loadCategoriesItems(params.category));
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
 	}, [dispatch, params.category])
 
 	const categoriesItems = useSelector(state => state.categories.categoriesItems);
 
-	const [value, setValue] = React.useState(25);
+	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
 	const onClickButton = () => {
-		setValue(value + 25)
+		setVisibleDrinks(visibleDrinks + 20)
 	}
 
-	let categories = categoriesItems.slice(0, value);
+	let categories = categoriesItems.slice(0, visibleDrinks);
 
-	if (!categoriesItems) {
-		return (
-			<div>Ошибка</div>
-		)
+	if (status === 'pending') {
+		return <Preloader />
 	}
+
 
 	return (
 		<div className={styles.content}>
 			<h2 className={styles.title}>Cocktail Categories: <span>{params.category}</span></h2>
-
-			<div className={styles.items}>
-				{categories && categories.map((obj, index) => <CocktailItem key={obj.strCategory} name={obj.strCategory} id={obj.idDrink} {...obj} />)}
-			</div>
-
-			{value <= categories.length ? <Button label='Show more' onClickButton={onClickButton} /> : ''}
-
+			<DrinksBlock drinks={categories} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
 		</div>
 	)
 }
