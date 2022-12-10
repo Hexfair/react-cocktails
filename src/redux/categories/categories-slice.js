@@ -38,15 +38,23 @@ export const categoriesSlice = createSlice({
 				state.status = 'success';
 				state.categoriesList = action.payload;
 			})
+			.addCase(loadCategories.pending, (state) => {
+				state.status = 'pending';
+				state.error = null;
+			})
+			.addCase(loadCategories.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.payload || action.meta.error;
+			})
 			.addCase(loadCategoriesItems.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.categoriesItems = action.payload;
 			})
-			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+			.addCase(loadCategoriesItems.pending, (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+			.addCase(loadCategoriesItems.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})

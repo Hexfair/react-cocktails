@@ -9,38 +9,36 @@
 	justify-content: center;
 	text-align: center;
 	margin-top: 40px;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	height: 30px;
+	flex-wrap: wrap;
+	row-gap: 30px;
+
+	@media (max-width: 1400px) {
+		height: calc(130px + (30 - 130) * ((100vw - 320px) / (1400 - 320)));
+		margin-top: calc(30px + (40 - 30) * ((100vw - 320px) / (1400 - 320)));
+		margin-bottom: calc(30px + (40 - 30) * ((100vw - 320px) / (1400 - 320)));
+	}
 
 	@media (max-width: 450px) {
 		display: flex;
 		flex-direction: column;
+		flex-wrap: nowrap;
+		margin: 60px auto;
 	}
 
 	.sort {
 		text-align: center;
 		color: var(--green);
 		background-color: transparent;
-		//margin-bottom: 20px;
 		cursor: pointer;
-
-		.icon {
-			transition: all 0.6s ease;
-			width: 18px;
-			fill: var(--green);
-			margin: 0px 3px 0px 0px;
-		}
-
 		.text {
 			transition: all 0.6s ease;
 			font-weight: 400;
 			font-size: 20px;
 			letter-spacing: 1px;
 			line-height: 20px;
-
-			@media (max-width: 1400px) {
-				font-size: calc(15px + (20 - 15) * ((100vw - 680px) / (1400 - 680)));
-			}
+			white-space: nowrap;
 
 			@media (max-width: 450px) {
 				font-size: 17px;
@@ -48,13 +46,6 @@
 		}
 
 		&.active {
-			.icon {
-				transition: all 0.6s ease;
-				width: 22px;
-				margin: 0px 5px 0px 0px;
-				fill: var(--brown)
-			}
-
 			.text {
 				transition: all 0.6s ease;
 				font-weight: 600;
@@ -70,7 +61,6 @@
 				@media (max-width: 450px) {
 					font-size: 21px;
 					letter-spacing: 2px;
-
 				}
 			}
 		}

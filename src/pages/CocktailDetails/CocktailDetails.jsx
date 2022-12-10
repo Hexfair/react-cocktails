@@ -6,6 +6,7 @@ import { getSmallImageOfIngredient } from "../../api/api";
 import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
 import { selectCocktailDetails, selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
+import { Preloader } from "../../components/Preloader/Preloader";
 //=========================================================================================================================
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
@@ -20,15 +21,18 @@ export const Cocktail = () => {
 
 	const item = useSelector(selectCocktailDetails);
 	const { ingredientsArray, measuresArray } = useSelector(selectIngredients());
+	const status = useSelector(state => state.cocktailDetails.status);
 
 	React.useEffect(() => {
 		dispatch(loadCocktailById(params.id));
 	}, [dispatch, params.id])
 
-	if (!item) {
-		return (
-			<div>Ошибка</div>
-		)
+	const onChangeText = (lang) => {
+		setCurrentLang(lang);
+	}
+
+	if (!item || status === 'pending') {
+		return <Preloader />
 	}
 
 	const instructions = {
@@ -37,10 +41,6 @@ export const Cocktail = () => {
 		'DEU': item.strInstructionsDE,
 		'FRA': item.strInstructionsFR,
 		'ITA': item.strInstructionsIT
-	}
-
-	const onChangeText = (lang) => {
-		setCurrentLang(lang);
 	}
 
 	return (

@@ -7,6 +7,7 @@ import { ingredientsReducer } from './ingredients/ingredients-slice';
 import { categoriesReducer } from './categories/categories-slice';
 import { glassesReducer } from './glasses/glasses-slice';
 import { burgerReducer } from './burgerMenu/burgerMenu';
+import { ingredientDetailsReducer } from './ingredientDetails/ingredientDetails-slice';
 //=========================================================================================================================
 
 const store = configureStore({
@@ -14,6 +15,7 @@ const store = configureStore({
 		drinks: drinksReducer,
 		cocktailDetails: cocktailDetailsReducer,
 		ingredients: ingredientsReducer,
+		ingredientDetails: ingredientDetailsReducer,
 		categories: categoriesReducer,
 		glasses: glassesReducer,
 		burger: burgerReducer,

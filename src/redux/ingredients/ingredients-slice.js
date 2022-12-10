@@ -9,49 +9,30 @@ export const loadIngredients = createAsyncThunk(
 	}
 )
 
-export const loadIngredientItem = createAsyncThunk(
-	'@@ingredients/load-ingredientItem',
-	async (name, { extra: { client, api } }) => {
-		const res = await client.get(api.getIngredientItem(name));
-		return res.data.ingredients[0];
-	}
-)
-
 const initialState = {
 	ingredientsList: [],
-	ingredient: null,
-	status: 'loading'
+	status: 'pending'
 }
 
 export const ingredientsSlice = createSlice({
 	name: '@@ingredients',
 	initialState,
-	reducers: {
-		clearIngredient: (state) => {
-			state.ingredient = null;
-		},
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadIngredients.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.ingredientsList = action.payload;
 			})
-			.addCase(loadIngredientItem.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.ingredient = action.payload;
-			})
-			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+			.addCase(loadIngredients.pending, (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+			.addCase(loadIngredients.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})
 	}
 })
-
-export const { clearIngredient } = ingredientsSlice.actions;
 
 export const ingredientsReducer = ingredientsSlice.reducer;

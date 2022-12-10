@@ -8,8 +8,9 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCategories } from '../../redux/categories/categories-slice';
 import { loadGlasses } from '../../redux/glasses/glasses-slice';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { SearchIcon } from '../SearchIcon/SearchIcon';
 //=========================================================================================================================
 
 export const Header = () => {
@@ -46,13 +47,13 @@ export const Header = () => {
 			<div className={cn(`${styles.navigation}`, `${isBurgerMenuOpen ? styles.active : ''}`)}>
 				<ul className={styles.list}>
 
-					<NavLink to="/" className={styles.link}>
+					<Link to="/" className={styles.link}>
 						<button className={styles.button}>
 							<span className={styles.text}>HOME</span>
 						</button>
-					</NavLink>
+					</Link>
 
-					<NavLink to="/ingredients" className={styles.link}>
+					<Link to="/ingredients" className={styles.link}>
 						<button className={styles.button}>
 							<svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.984 40.984">
 								<path d="M26.894 40.946c.6 0 1.083-.487 1.083-1.083v-2.148c-2.373.85-4.901 1.299-7.485 1.299s-5.117-.444-7.485-1.299v2.148c0 .6.488 1.083 1.083 1.083h12.804zM38.063 4.974a3.959 3.959 0 0 0-5.535.811l-7.791 10.471h9.862l4.275-5.746a3.958 3.958 0 0 0-.811-5.535z" />
@@ -60,7 +61,7 @@ export const Header = () => {
 							</svg>
 							<span className={styles.text}>Ingredients</span>
 						</button>
-					</NavLink>
+					</Link>
 
 					<li onClick={onClickBut} className={cn(`${styles.link}`, `${styles.categories}`, `${isOpen ? styles.mobile : ''}`)}>
 						<button className={styles.button}>
@@ -101,11 +102,22 @@ export const Header = () => {
 						</button>
 					</li>
 
+					{isTabletOrMobile &&
+						<Link to="/search" className={styles.link}>
+							<button className={styles.button}>
+								<svg className={styles.icon} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+									<path d="m28.102 23.421 -4.751 -4.751 -3.654 -1.51A10.255 10.255 0 0 0 21.563 11.25c0 -5.686 -4.626 -10.313 -10.313 -10.313S0.938 5.564 0.938 11.25s4.626 10.313 10.313 10.313a10.256 10.256 0 0 0 5.954 -1.897l1.506 3.645 4.751 4.751a3.281 3.281 0 1 0 4.641 -4.64ZM2.813 11.25c0 -4.652 3.785 -8.438 8.438 -8.438s8.438 3.785 8.438 8.438 -3.785 8.438 -8.438 8.438S2.813 15.902 2.813 11.25Zm23.963 15.485a1.408 1.408 0 0 1 -1.989 0l-4.487 -4.487 -1.4 -3.389 3.389 1.4 4.487 4.487a1.408 1.408 0 0 1 0 1.989Z" />
+								</svg>
+								<span className={styles.text}>Search</span>
+							</button>
+						</Link>}
 
 				</ul>
 			</div>
 
+			{!isTabletOrMobile && <SearchIcon />}
 			<FavoritesIcon />
+
 			{isTabletOrMobile && <BurgerMenu />}
 		</header >
 	)

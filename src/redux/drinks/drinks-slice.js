@@ -69,15 +69,14 @@ export const drinksSlice = createSlice({
 				state.status = 'success';
 				state.optionalAlcoholicDrinks = action.payload;
 			})
-			.addCase(loadPopularDrinks.pending, (state, action) => {
-				state.status = 'loading';
+			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+				state.status = 'pending';
 				state.error = null;
 			})
-			.addCase(loadPopularDrinks.rejected, (state, action) => {
+			.addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
 				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
+				state.error = null;
 			})
-
 	}
 })
 

@@ -6,27 +6,32 @@ import styles from './Ingredients.module.scss';
 import { Button } from "../../components/Button/Button";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
+import { Preloader } from "../../components/Preloader/Preloader";
 //=========================================================================================================================
 
 export const Ingredients = () => {
 	const dispatch = useDispatch();
-	const ingredientsItems = useSelector(state => state.ingredients.ingredientsList)
+	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
+	const status = useSelector(state => state.ingredients.status);
 	const [value, setValue] = React.useState(25);
 
 	React.useEffect(() => {
-		if (ingredientsItems.length === 0) {
+		if (ingredientsList.length === 0) {
 			dispatch(loadIngredients())
 		}
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
-	}, [dispatch, ingredientsItems])
+	}, [dispatch, ingredientsList])
 
 	const onClickButton = () => {
 		setValue(value + 25)
 	}
 
-	let ingredients = ingredientsItems.slice(0, value);
+	if (!ingredientsList || status === 'pending') {
+		return <Preloader />
+	}
 
+	let ingredients = ingredientsList.slice(0, value);
 
 	return (
 		<div className={styles.content}>
