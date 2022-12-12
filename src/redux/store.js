@@ -8,6 +8,7 @@ import { categoriesReducer } from './categories/categories-slice';
 import { glassesReducer } from './glasses/glasses-slice';
 import { burgerReducer } from './burgerMenu/burgerMenu';
 import { ingredientDetailsReducer } from './ingredientDetails/ingredientDetails-slice';
+import { cocktailsByIngredientReducer } from './cocktailsByIngredient/cocktailsByIngredient-slice';
 //=========================================================================================================================
 
 const store = configureStore({
@@ -19,6 +20,7 @@ const store = configureStore({
 		categories: categoriesReducer,
 		glasses: glassesReducer,
 		burger: burgerReducer,
+		cocktailsByIngredient: cocktailsByIngredientReducer,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
 		thunk: {

@@ -10,7 +10,7 @@ import {
 } from '../../redux/drinks/drinks-slice';
 import cn from 'classnames';
 import { useMediaQuery } from 'react-responsive';
-import { DrinksBlock } from '../../components/DrinksBlock/DrinksBlock';
+import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
@@ -29,6 +29,7 @@ export const Home = () => {
 	let [visibleBackButton, setVisibleBackButton] = React.useState(false);
 
 	React.useEffect(() => {
+		window.scrollTo(0, 0);
 		if (popularDrinksItems.length === 0) {
 			dispatch(loadPopularDrinks())
 		}
@@ -132,7 +133,7 @@ export const Home = () => {
 				</button>
 			</div>
 
-			<DrinksBlock drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
+			<DrinksList drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
 
 			{visibleBackButton && <button className={styles.buttonBack} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" >

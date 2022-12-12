@@ -10,6 +10,7 @@ import { Ingredients } from "./pages/Ingredients/Ingredients";
 import { Categories } from "./pages/Categories/Categories";
 import { Glasses } from "./pages/Glasses/Glasses";
 import { Search } from "./pages/Search/Search";
+import { CocktailsByIngredient } from "./pages/CocktailsByIngredient/CocktailsByIngredient";
 //=========================================================================================================================
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 						<Route path="" element={<Home />} />
 						<Route path="cocktail/:id" element={<Cocktail />} />
 						<Route path="ingredients" element={<Ingredients />} />
+						<Route path="ingredients/:cocktails" element={<CocktailsByIngredient />} />
 						<Route path="categories/:category" element={<Categories />} />
 						<Route path="glasses/:glass" element={<Glasses />} />
 						<Route path="search" element={<Search />} />

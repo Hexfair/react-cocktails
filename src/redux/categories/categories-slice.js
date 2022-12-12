@@ -5,8 +5,8 @@ export const loadCategories = createAsyncThunk(
 	'@@categories/load-categories',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getCategories);
-		const drinksWithFilter = res.data.drinks.filter(obj => !obj.strCategory.includes('/'));
-		return drinksWithFilter;
+		//const drinksWithFilter = res.data.drinks.filter(obj => !obj.strCategory.includes('/'));
+		return res.data.drinks;
 	}
 )
 
@@ -38,25 +38,17 @@ export const categoriesSlice = createSlice({
 				state.status = 'success';
 				state.categoriesList = action.payload;
 			})
-			.addCase(loadCategories.pending, (state) => {
-				state.status = 'pending';
-				state.error = null;
-			})
-			.addCase(loadCategories.rejected, (state, action) => {
-				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
-			})
 			.addCase(loadCategoriesItems.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.categoriesItems = action.payload;
 			})
-			.addCase(loadCategoriesItems.pending, (state) => {
+			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addCase(loadCategoriesItems.rejected, (state, action) => {
+			.addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
 				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
+				state.error = null;
 			})
 	}
 })

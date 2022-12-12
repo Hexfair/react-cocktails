@@ -7,6 +7,7 @@ import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
 import { selectCocktailDetails, selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { Link } from "react-router-dom";
 //=========================================================================================================================
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
@@ -24,6 +25,7 @@ export const Cocktail = () => {
 	const status = useSelector(state => state.cocktailDetails.status);
 
 	React.useEffect(() => {
+		window.scrollTo(0, 0);
 		dispatch(loadCocktailById(params.id));
 	}, [dispatch, params.id])
 
@@ -80,11 +82,13 @@ export const Cocktail = () => {
 			<h3 className={styles.label}>Ingredients</h3>
 			<div className={styles.ingredients}>
 				{ingredientsArray && ingredientsArray.map((obj, index) =>
-					<div className={styles.ingredient} key={index}>
-						<img src={getSmallImageOfIngredient(obj)} alt='' />
-						<span className={styles.caption} >{obj}:</span>
-						<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
-					</div>
+					<Link to={`/ingredients/${obj}`}>
+						<div className={styles.ingredient} key={index}>
+							<img src={getSmallImageOfIngredient(obj)} alt='' />
+							<span className={styles.caption} >{obj}:</span>
+							<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
+						</div>
+					</Link>
 				)}
 			</div>
 		</div>

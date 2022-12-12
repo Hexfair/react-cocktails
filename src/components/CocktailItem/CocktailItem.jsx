@@ -1,6 +1,5 @@
 import React from "react";
 import styles from './CocktailItem.module.scss';
-import cn from 'classnames';
 import { Link } from "react-router-dom";
 //=========================================================================================================================
 

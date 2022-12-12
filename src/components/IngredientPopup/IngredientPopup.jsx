@@ -3,10 +3,10 @@ import styles from './IngredientPopup.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { loadIngredientDetails } from "../../redux/ingredientDetails/ingredientDetails-slice";
 import { getMediumImageOfIngredient } from '../../api/api';
-import { Button } from '../Button/Button';
 import { Preloader } from '../Preloader/Preloader';
 import { clearIngredient } from '../../redux/ingredientDetails/ingredientDetails-slice';
-
+import { Link } from 'react-router-dom';
+//=========================================================================================================================
 
 export const IngredientPopup = ({ name, onClickClosePopup }) => {
 	const dispatch = useDispatch();
@@ -36,6 +36,9 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 							{ingredient.strAlcohol ? <span>Alcoholic</span> : <span>Non Alcoholic</span>}
 							{ingredient.strAlcoholic && <span>{ingredient.strAlcoholic}</span>}
 						</div>
+						<Link to={`/ingredients/${name}`}>
+							<button className={styles.button}>{`Search cocktails with ${name}`}</button>
+						</Link>
 					</div>
 					<div className={styles.description}>
 
@@ -45,7 +48,7 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 
 					</div>
 				</div>
-				<div onClick={onClickClosePopup}><Button label='Close' /></div>
+				<div onClick={onClickClosePopup}><button className={styles.btn}>Close</button></div>
 
 			</div>
 

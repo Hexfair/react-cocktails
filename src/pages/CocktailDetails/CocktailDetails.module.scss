@@ -130,11 +130,11 @@
 			transition: all 0.3s ease 0s;
 			white-space: nowrap;
 			margin-bottom: 10px;
-			cursor: pointer;
+			//cursor: pointer;
 
-			&:hover {
-				background-color: var(--green)
-			}
+			// &:hover {
+			// 	background-color: var(--green)
+			// }
 		}
 	}
 }

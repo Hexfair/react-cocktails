@@ -72,7 +72,7 @@ export const Header = () => {
 						</button>
 						<div className={styles.options}>
 							{categories && categories.map((obj, index) =>
-								<Link to={`/categories/${obj.strCategory}`} key={obj.strCategory}>
+								<Link to={`/categories/${obj.strCategory.replace(/\//g, "%2f")}`} key={obj.strCategory}>
 									<span>{obj.strCategory}</span>
 								</Link>)}
 						</div>
@@ -87,7 +87,7 @@ export const Header = () => {
 						</button>
 						<div className={styles.options}>
 							{glasses && glasses.map((obj, index) =>
-								<Link to={`/glasses/${obj.strGlass}`} key={obj.strGlass}>
+								<Link to={`/glasses/${obj.strGlass.replace(/\//g, "%2f")}`} key={obj.strGlass}>
 									<span>{obj.strGlass}</span>
 								</Link>)}
 						</div>

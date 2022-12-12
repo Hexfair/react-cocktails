@@ -5,8 +5,8 @@ export const loadGlasses = createAsyncThunk(
 	'@@glasses/load-glasses',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getGlasses);
-		const drinksWithFilter = res.data.drinks.filter(obj => !obj.strGlass.includes('/'));
-		return drinksWithFilter;
+		//const drinksWithFilter = res.data.drinks.filter(obj => !obj.strGlass.includes('/'));
+		return res.data.drinks;
 	}
 )
 
@@ -46,9 +46,9 @@ export const glassesSlice = createSlice({
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addMatcher((action) => action.type.endsWith('/rejected'), (state, action) => {
+			.addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
 				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
+				state.error = null;
 			})
 	}
 })
