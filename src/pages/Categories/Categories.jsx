@@ -6,6 +6,8 @@ import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
+import { useVisibleButton } from "../../utils/use-visibleButton";
+import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
 //=========================================================================================================================
 
 export const Categories = () => {
@@ -18,12 +20,21 @@ export const Categories = () => {
 		dispatch(loadCategoriesItems(params.category));
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
-	}, [dispatch, params.category])
+	}, [dispatch, params.category]);
+
+	const visibleBackButton = useVisibleButton();
+
 
 	if (status === 'pending') {
 		return <Preloader />
 	}
 
-	return <DrinksBlock drinksList={categoriesItems} name={params.category} label='Categories' />
+	return (
+		<>
+			<DrinksBlock drinksList={categoriesItems} name={params.category} label='Categories' />
+			{visibleBackButton && <ButtonScrollTop />}
+		</>
+	)
+
 
 }

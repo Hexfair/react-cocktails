@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-slice";
+import { useVisibleButton } from "../../utils/use-visibleButton";
 //=========================================================================================================================
 
 export const CocktailsByIngredient = () => {
@@ -16,9 +18,16 @@ export const CocktailsByIngredient = () => {
 		dispatch(loadCocktailsByIngredient(params.cocktails));
 	}, [dispatch, params.cocktails])
 
+	const visibleBackButton = useVisibleButton();
+
 	if (status === 'pending') {
 		return <Preloader />
 	}
 
-	return <DrinksBlock drinksList={cocktailsList} name={params.cocktails} label='with' />
+	return (
+		<>
+			<DrinksBlock drinksList={cocktailsList} name={params.cocktails} label='with' />
+			{visibleBackButton && <ButtonScrollTop />}
+		</>
+	)
 }

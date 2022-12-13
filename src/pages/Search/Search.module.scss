@@ -61,27 +61,80 @@
 		margin-bottom: 10px;
 		text-align: center;
 	}
+
+	
 }
 
 .radio {
 	display: flex;
 	flex-direction: column;
 	margin-top: 20px;
-	row-gap: 30px;
+	row-gap: 25px;
 	align-items: flex-start;
 	margin-left: 40px;
-	color: var(--green);
+	color: var(--brown);
 	font-size: 18px;
 
-	input {
-		margin-right: 10px;
+		.real {
+			position: absolute;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			z-index: -1;
+		}
 
-		:checked span {
+		.custom {
+			position: relative;
+			display: inline-block;
+			width: 18px;
+			height: 18px;
+			border: 2px solid var(--brown);
+			border-radius: 40%;
+			margin-right: 10px;
+			color: var(--brown);
+
+		}
+
+		.custom::before {
+			content: '';
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background-color: var(--brown);
+			border-radius: 40%;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%) scale(0);
+			transition: all 0.2s ease-in;
+			
+		}
+
+		.real:checked + .custom::before {
+			transform: translate(-50%, -50%) scale(1);
 			color: var(--brown);
 		}
+
+		label {
+			cursor: pointer;
+		
 	}
 
-	input:checked+span {
-		color: var(--brown);
-	}
+
+
+
+
+
+
+	// input {
+	// 	margin-right: 10px;
+
+	// 	:checked span {
+	// 		color: var(--brown);
+	// 	}
+	// }
+
+	// input:checked+span {
+	// 	color: var(--brown);
+	// }
 }

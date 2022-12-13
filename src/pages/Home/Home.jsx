@@ -14,6 +14,8 @@ import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
+import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
+import { useVisibleButton } from '../../utils/use-visibleButton';
 //=========================================================================================================================
 
 export const Home = () => {
@@ -26,8 +28,6 @@ export const Home = () => {
 
 	const isMobile = useMediaQuery({ query: '(max-width: 450px)' });
 
-	let [visibleBackButton, setVisibleBackButton] = React.useState(false);
-
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 		if (popularDrinksItems.length === 0) {
@@ -37,16 +37,8 @@ export const Home = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch, popularDrinksItems])
 
+	const visibleBackButton = useVisibleButton();
 
-	React.useEffect(() => {
-		const handleScroll = () => {
-			window.scrollY > 600 ? setVisibleBackButton(true) : setVisibleBackButton(false);
-		};
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
 
 	const onClickButton = () => {
 		setVisibleDrinks(visibleDrinks + 20)
@@ -135,11 +127,7 @@ export const Home = () => {
 
 			<DrinksList drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
 
-			{visibleBackButton && <button className={styles.buttonBack} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" >
-					<path d="M894.9,96.3l665,749.7h-374.6v850.3L894.9,1406l-290.3,290.3V846H232.1L894.9,96.3z" />
-				</svg>
-			</button>}
+			{visibleBackButton && <ButtonScrollTop />}
 		</div >
 
 	)

@@ -6,6 +6,8 @@ import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { useVisibleButton } from "../../utils/use-visibleButton";
+import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
 //=========================================================================================================================
 
 export const Glasses = () => {
@@ -20,10 +22,17 @@ export const Glasses = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch, params.glass])
 
+	const visibleBackButton = useVisibleButton();
+
 	if (status === 'pending') {
 		return <Preloader />
 	}
 
-	return <DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />
+	return (
+		<>
+			<DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />
+			{visibleBackButton && <ButtonScrollTop />}
+		</>
+	)
 
 }

@@ -3,12 +3,16 @@ import styles from './Search.module.scss';
 import allCocktails from '../../api/AllCocktails.json';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { useSearch } from './use-search';
+import { useVisibleButton } from '../../utils/use-visibleButton';
+import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
 //=========================================================================================================================
 
 export const Search = () => {
 
 	const [value, setValue] = React.useState('');
 	const inputRef = React.useRef();
+	const visibleBackButton = useVisibleButton();
+
 	const onChangeInput = (event) => {
 		setValue(event.target.value)
 	}
@@ -46,12 +50,26 @@ export const Search = () => {
 				</div>
 				<div className={styles.radio}>
 					<label>
-						<input type="radio" name="options" value="names" onChange={radioInputChange} checked={valueRadioInput === 'names'} />
-						<span>Names</span>
+						<input
+							className={styles.real}
+							type="radio"
+							name="options"
+							value="names"
+							onChange={radioInputChange}
+							checked={valueRadioInput === 'names'}
+						/>
+						<span className={styles.custom}></span>Names
 					</label>
 					<label>
-						<input type="radio" name="options" value="ingredients" onChange={radioInputChange} checked={valueRadioInput === 'ingredients'} />
-						<span>Ingredients</span>
+						<input
+							className={styles.real}
+							type="radio"
+							name="options"
+							value="ingredients"
+							onChange={radioInputChange}
+							checked={valueRadioInput === 'ingredients'}
+						/>
+						<span className={styles.custom}></span>Ingredients
 					</label>
 				</div>
 			</div>
@@ -60,6 +78,7 @@ export const Search = () => {
 					? <DrinksList drinks={drinks} />
 					: <div className={styles.text}>On this page you can try to find your favorite cocktail!</div>}
 			</div>
+			{visibleBackButton && <ButtonScrollTop />}
 
 		</div >
 	)

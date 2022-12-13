@@ -1,0 +1,38 @@
+.buttonBack {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: fixed;
+	bottom: 80px;
+	right: 60px;
+	background-color: transparent;
+	cursor: pointer;
+	animation: drive 1.8s linear infinite 0s;
+
+	@keyframes drive {
+		0% {
+			transform: translateY(0px);
+			opacity: 0.5;
+		}
+
+		50% {
+			transform: translateY(-8px);
+			opacity: 1;
+		}
+
+		100% {
+			transform: translateY(0px);
+			opacity: 0.5;
+		}
+	}
+
+	&:hover {
+		transform: translateY(0px);
+		animation-name: none;
+	}
+
+	svg {
+		fill: var(--green)
+	}
+}
+

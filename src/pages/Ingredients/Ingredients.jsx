@@ -6,6 +6,8 @@ import styles from './Ingredients.module.scss';
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { useVisibleButton } from "../../utils/use-visibleButton";
+import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
 //=========================================================================================================================
 
 export const Ingredients = () => {
@@ -27,6 +29,8 @@ export const Ingredients = () => {
 		setValue(value + 25)
 	}
 
+	const visibleBackButton = useVisibleButton();
+
 	if (!ingredientsList || status === 'pending') {
 		return <Preloader />
 	}
@@ -44,7 +48,7 @@ export const Ingredients = () => {
 			{value <= ingredients.length
 				? <button className={styles.btn} onClick={onClickButton}>Show more</button>
 				: ''}
-
+			{visibleBackButton && <ButtonScrollTop />}
 		</div>
 	)
 }
