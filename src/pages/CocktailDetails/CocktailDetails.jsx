@@ -5,9 +5,9 @@ import { loadCocktailById } from "../../redux/cocktailDetails/cocktailDetails-sl
 import { getSmallImageOfIngredient } from "../../api/api";
 import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
-import { selectCocktailDetails, selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
+import { selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { Link } from "react-router-dom";
+import { IngredientPopup } from "../../components/IngredientPopup/IngredientPopup";
 //=========================================================================================================================
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
@@ -20,9 +20,8 @@ export const Cocktail = () => {
 
 	const [currentLang, setCurrentLang] = React.useState('GBR');
 
-	const item = useSelector(selectCocktailDetails);
+	const { item, status } = useSelector(state => state.cocktailDetails);
 	const { ingredientsArray, measuresArray } = useSelector(selectIngredients());
-	const status = useSelector(state => state.cocktailDetails.status);
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
@@ -32,6 +31,27 @@ export const Cocktail = () => {
 	const onChangeText = (lang) => {
 		setCurrentLang(lang);
 	}
+
+
+	const [openPopup, setOpenPopup] = React.useState(false);
+	const [name, setName] = React.useState('');
+
+
+	const onClickOpenPopup = (obj) => {
+		setOpenPopup(true);
+		document.body.classList.add('active');
+		setName(obj);
+	}
+
+	const onClickClosePopup = () => {
+		setOpenPopup(false);
+		document.body.classList.remove('active');
+	}
+
+
+
+
+
 
 	if (!item || status === 'pending') {
 		return <Preloader />
@@ -82,14 +102,13 @@ export const Cocktail = () => {
 			<h3 className={styles.label}>Ingredients</h3>
 			<div className={styles.ingredients}>
 				{ingredientsArray && ingredientsArray.map((obj, index) =>
-					<Link to={`/ingredients/${obj}`}>
-						<div className={styles.ingredient} key={index}>
-							<img src={getSmallImageOfIngredient(obj)} alt='' />
-							<span className={styles.caption} >{obj}:</span>
-							<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
-						</div>
-					</Link>
+					<div className={styles.ingredient} key={index} onClick={() => onClickOpenPopup(obj)}>
+						<img src={getSmallImageOfIngredient(obj)} alt='' />
+						<span className={styles.caption} >{obj}:</span>
+						<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
+					</div>
 				)}
+				{openPopup && <IngredientPopup name={name} onClickClosePopup={onClickClosePopup} />}
 			</div>
 		</div>
 	)

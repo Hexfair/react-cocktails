@@ -1,7 +1,5 @@
-export const selectCocktailDetails = state => state.cocktailDetails.cocktail;
-
 export const selectIngredients = () => (state) => {
-	const item = state.cocktailDetails.cocktail;
+	const item = state.cocktailDetails.item;
 	const entries = item ? Object.entries(item) : [];
 	const ingredientsArray = [];
 	const measuresArray = [];

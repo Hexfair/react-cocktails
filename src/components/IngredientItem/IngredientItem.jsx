@@ -20,7 +20,7 @@ export const IngredientItem = ({ name }) => {
 
 	return (
 		<>
-			<div className={styles.item} onClick={() => onClickOpenPopup()}>
+			<div className={styles.item} onClick={onClickOpenPopup}>
 				<img src={getSmallImageOfIngredient(name)} alt='' />
 				<div className={styles.label}> {name}</div>
 			</div>

@@ -11,7 +11,7 @@ export const loadCocktailById = createAsyncThunk(
 
 
 const initialState = {
-	cocktail: null,
+	item: null,
 	status: 'pending'
 }
 
@@ -27,7 +27,7 @@ export const cocktailDetailsSlice = createSlice({
 		builder
 			.addCase(loadCocktailById.fulfilled, (state, action) => {
 				state.status = 'success';
-				state.cocktail = action.payload;
+				state.item = action.payload;
 			})
 			.addCase(loadCocktailById.pending, (state) => {
 				state.status = 'pending';
