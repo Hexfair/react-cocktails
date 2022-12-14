@@ -39,7 +39,7 @@ const initialState = {
 	alcoholicDrinks: [],
 	nonAlcoholicDrinks: [],
 	optionalAlcoholicDrinks: [],
-	status: 'loading',
+	status: 'pending',
 	activeSort: 0,
 }
 

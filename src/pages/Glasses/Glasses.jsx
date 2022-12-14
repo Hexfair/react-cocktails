@@ -8,6 +8,7 @@ import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { useVisibleButton } from "../../utils/use-visibleButton";
 import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
+import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
 export const Glasses = () => {
@@ -26,6 +27,10 @@ export const Glasses = () => {
 
 	if (status === 'pending') {
 		return <Preloader />
+	}
+
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	return (

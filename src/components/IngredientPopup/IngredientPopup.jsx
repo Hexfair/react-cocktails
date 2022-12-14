@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadIngredientDetails } from "../../redux/ingredientDetails/ingredientDetails-slice";
 import { getMediumImageOfIngredient } from '../../api/api';
 import { Preloader } from '../Preloader/Preloader';
-import { clearIngredient } from '../../redux/ingredientDetails/ingredientDetails-slice';
 import { Link } from 'react-router-dom';
+import { NotFound } from '../../pages/NotFound/NotFound';
 //=========================================================================================================================
 
 export const IngredientPopup = ({ name, onClickClosePopup }) => {
@@ -14,14 +14,14 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 
 	React.useEffect(() => {
 		dispatch(loadIngredientDetails(name));
-		return () => dispatch(clearIngredient());
 	}, [dispatch, name])
 
 	if (!ingredient || status === 'pending') {
-		return (
-			<div className={styles.preload}><Preloader /></div>
+		return <div className={styles.preload}><Preloader /></div>
+	}
 
-		)
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	return (

@@ -5,13 +5,22 @@ import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { useSearch } from './use-search';
 import { useVisibleButton } from '../../utils/use-visibleButton';
 import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
+import { useDispatch } from 'react-redux';
+import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 //=========================================================================================================================
 
 export const Search = () => {
-
+	const dispatch = useDispatch();
 	const [value, setValue] = React.useState('');
 	const inputRef = React.useRef();
 	const visibleBackButton = useVisibleButton();
+
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
+	}, [dispatch]);
 
 	const onChangeInput = (event) => {
 		setValue(event.target.value)

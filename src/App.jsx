@@ -11,6 +11,7 @@ import { Categories } from "./pages/Categories/Categories";
 import { Glasses } from "./pages/Glasses/Glasses";
 import { Search } from "./pages/Search/Search";
 import { CocktailsByIngredient } from "./pages/CocktailsByIngredient/CocktailsByIngredient";
+import { NotFound } from "./pages/NotFound/NotFound";
 //=========================================================================================================================
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 						<Route path="categories/:category" element={<Categories />} />
 						<Route path="glasses/:glass" element={<Glasses />} />
 						<Route path="search" element={<Search />} />
+						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</main>
 				<Footer />

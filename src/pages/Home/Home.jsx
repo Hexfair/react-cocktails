@@ -16,6 +16,7 @@ import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
 import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
 import { useVisibleButton } from '../../utils/use-visibleButton';
+import { NotFound } from '../NotFound/NotFound';
 //=========================================================================================================================
 
 export const Home = () => {
@@ -85,8 +86,12 @@ export const Home = () => {
 			drinks = drinksList.popularDrinks;
 	}
 
-	if (status === 'loading') {
+	if (status === 'pending') {
 		return <Preloader />
+	}
+
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	return (

@@ -8,12 +8,12 @@ import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { useVisibleButton } from "../../utils/use-visibleButton";
 import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
+import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
 export const Ingredients = () => {
 	const dispatch = useDispatch();
-	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
-	const status = useSelector(state => state.ingredients.status);
+	const { ingredientsList, status } = useSelector(state => state.ingredients);
 	const [value, setValue] = React.useState(25);
 
 	React.useEffect(() => {
@@ -31,8 +31,12 @@ export const Ingredients = () => {
 
 	const visibleBackButton = useVisibleButton();
 
-	if (!ingredientsList || status === 'pending') {
+	if (status === 'pending') {
 		return <Preloader />
+	}
+
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	let ingredients = ingredientsList.slice(0, value);

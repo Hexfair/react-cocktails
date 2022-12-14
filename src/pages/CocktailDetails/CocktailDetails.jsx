@@ -8,6 +8,7 @@ import cn from 'classnames';
 import { selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { IngredientPopup } from "../../components/IngredientPopup/IngredientPopup";
+import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
@@ -48,13 +49,12 @@ export const Cocktail = () => {
 		document.body.classList.remove('active');
 	}
 
-
-
-
-
-
-	if (!item || status === 'pending') {
+	if (status === 'pending') {
 		return <Preloader />
+	}
+
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	const instructions = {

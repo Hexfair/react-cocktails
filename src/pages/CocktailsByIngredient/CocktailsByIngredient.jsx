@@ -6,6 +6,7 @@ import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-slice";
 import { useVisibleButton } from "../../utils/use-visibleButton";
+import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
 export const CocktailsByIngredient = () => {
@@ -22,6 +23,10 @@ export const CocktailsByIngredient = () => {
 
 	if (status === 'pending') {
 		return <Preloader />
+	}
+
+	if (status === 'rejected') {
+		return <NotFound />
 	}
 
 	return (
