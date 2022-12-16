@@ -6,9 +6,7 @@ import { NotFound } from '../../pages/NotFound/NotFound';
 
 export const DrinksBlock = ({ drinksList, name, label }) => {
 	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
-	const onClickButton = () => {
-		setVisibleDrinks(visibleDrinks + 20)
-	}
+	const onClickButton = () => setVisibleDrinks(visibleDrinks + 20)
 
 	if (!drinksList) {
 		return <NotFound />

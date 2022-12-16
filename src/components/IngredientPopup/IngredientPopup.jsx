@@ -16,7 +16,7 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 		dispatch(loadIngredientDetails(name));
 	}, [dispatch, name])
 
-	if (!ingredient || status === 'pending') {
+	if (status === 'pending') {
 		return <div className={styles.preload}><Preloader /></div>
 	}
 

@@ -13,8 +13,7 @@ export const DrinksList = ({ drinks, onClickButton, visibleDrinks }) => {
 						name={obj.strCategory || obj.strGlasses}
 						id={obj.idDrink}
 						{...obj}
-					/>
-				)}
+					/>)}
 			</div>
 			{visibleDrinks <= drinks.length
 				? <button className={styles.btn} onClick={onClickButton}>Show more</button>

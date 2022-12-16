@@ -22,9 +22,7 @@ export const Search = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch]);
 
-	const onChangeInput = (event) => {
-		setValue(event.target.value)
-	}
+	const onChangeInput = (event) => setValue(event.target.value);
 
 	const onClickCloseIcon = () => {
 		setValue('');
@@ -32,9 +30,7 @@ export const Search = () => {
 	}
 
 	const [valueRadioInput, setValueRadioInput] = React.useState('names');
-	const radioInputChange = (event) => {
-		setValueRadioInput(event.target.value)
-	}
+	const radioInputChange = (event) => setValueRadioInput(event.target.value)
 
 	const drinks = useSearch(valueRadioInput, value, allCocktails);
 

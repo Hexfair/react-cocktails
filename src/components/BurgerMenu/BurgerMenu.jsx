@@ -13,9 +13,8 @@ export const BurgerMenu = () => {
 	const burgerMenuOpen = (value) => {
 		dispatch(setBurgerStatus(value));
 		burgerOpenOrClose(value);
-
-		//document.body.classList.toggle('active');
 	}
+
 	return (
 		<div
 			className={cn(`${styles.burger}`, `${isBurgerMenuOpen ? styles.active : ''}`)}

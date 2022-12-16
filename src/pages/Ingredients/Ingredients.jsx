@@ -25,9 +25,7 @@ export const Ingredients = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch, ingredientsList])
 
-	const onClickButton = () => {
-		setValue(value + 25)
-	}
+	const onClickButton = () => setValue(value + 25)
 
 	const visibleBackButton = useVisibleButton();
 
@@ -46,12 +44,14 @@ export const Ingredients = () => {
 			<h2 className={styles.title}>Cocktail Ingredients</h2>
 
 			<div className={styles.items}>
-				{ingredients && ingredients.map((obj, index) => <IngredientItem key={obj.strIngredient1} name={obj.strIngredient1} {...obj} />)}
+				{ingredients && ingredients.map((obj) =>
+					<IngredientItem key={obj.strIngredient1} name={obj.strIngredient1} {...obj} />
+				)}
 			</div>
 
 			{value <= ingredients.length
 				? <button className={styles.btn} onClick={onClickButton}>Show more</button>
-				: ''}
+				: null}
 			{visibleBackButton && <ButtonScrollTop />}
 		</div>
 	)

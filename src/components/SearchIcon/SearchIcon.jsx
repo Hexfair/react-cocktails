@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './SearchIcon.module.scss';
 import { Link } from 'react-router-dom';
+//=========================================================================================================================
 
 export const SearchIcon = () => {
 	return (

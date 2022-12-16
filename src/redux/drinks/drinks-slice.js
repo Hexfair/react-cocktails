@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 //=========================================================================================================================
 
-export const loadPopularDrinks = createAsyncThunk(
+export const loadPopDrinks = createAsyncThunk(
 	'@@drinks/load-popularDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getPopularDrinks);
@@ -9,7 +9,7 @@ export const loadPopularDrinks = createAsyncThunk(
 	}
 )
 
-export const loadAlcoholicDrinks = createAsyncThunk(
+export const loadAlcDrinks = createAsyncThunk(
 	'@@drinks/load-alcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getAlcoholicDrinks);
@@ -17,7 +17,7 @@ export const loadAlcoholicDrinks = createAsyncThunk(
 	}
 )
 
-export const loadNonAlcoholicDrinks = createAsyncThunk(
+export const loadNonAlcDrinks = createAsyncThunk(
 	'@@drinks/load-nonAlcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getNonAlcoholicDrinks);
@@ -25,7 +25,7 @@ export const loadNonAlcoholicDrinks = createAsyncThunk(
 	}
 )
 
-export const loadOptionalAlcoholicDrinks = createAsyncThunk(
+export const loadOptAlcDrinks = createAsyncThunk(
 	'@@drinks/load-optionalAlcoholicDrinks',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getOptionalAlcoholicDrinks);
@@ -33,13 +33,12 @@ export const loadOptionalAlcoholicDrinks = createAsyncThunk(
 	}
 )
 
-
 const initialState = {
-	popularDrinks: [],
-	alcoholicDrinks: [],
-	nonAlcoholicDrinks: [],
-	optionalAlcoholicDrinks: [],
-	status: 'pending',
+	popDrinks: [],
+	alcDrinks: [],
+	nonAlcDrinks: [],
+	optAlcDrinks: [],
+	status: '',
 	activeSort: 0,
 }
 
@@ -53,29 +52,56 @@ export const drinksSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(loadPopularDrinks.fulfilled, (state, action) => {
+			.addCase(loadPopDrinks.fulfilled, (state, action) => {
 				state.status = 'success';
-				state.popularDrinks = action.payload;
+				state.popDrinks = action.payload;
 			})
-			.addCase(loadAlcoholicDrinks.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.alcoholicDrinks = action.payload;
+			.addCase(loadPopDrinks.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.payload || action.meta.error;
 			})
-			.addCase(loadNonAlcoholicDrinks.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.nonAlcoholicDrinks = action.payload;
-			})
-			.addCase(loadOptionalAlcoholicDrinks.fulfilled, (state, action) => {
-				state.status = 'success';
-				state.optionalAlcoholicDrinks = action.payload;
-			})
-			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+			.addCase(loadPopDrinks.pending, (state) => {
 				state.status = 'pending';
 				state.error = null;
 			})
-			.addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
-				state.status = 'rejected';
+
+			.addCase(loadAlcDrinks.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.alcDrinks = action.payload;
+			})
+			.addCase(loadAlcDrinks.pending, (state) => {
+				state.status = 'pending';
 				state.error = null;
+			})
+			.addCase(loadAlcDrinks.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.payload || action.meta.error;
+			})
+
+			.addCase(loadNonAlcDrinks.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.nonAlcDrinks = action.payload;
+			})
+			.addCase(loadNonAlcDrinks.pending, (state) => {
+				state.status = 'pending';
+				state.error = null;
+			})
+			.addCase(loadNonAlcDrinks.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.payload || action.meta.error;
+			})
+
+			.addCase(loadOptAlcDrinks.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.optAlcDrinks = action.payload;
+			})
+			.addCase(loadOptAlcDrinks.pending, (state) => {
+				state.status = 'pending';
+				state.error = null;
+			})
+			.addCase(loadOptAlcDrinks.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.payload || action.meta.error;
 			})
 	}
 })

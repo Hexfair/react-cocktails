@@ -25,7 +25,6 @@ export const Categories = () => {
 
 	const visibleBackButton = useVisibleButton();
 
-
 	if (status === 'pending') {
 		return <Preloader />
 	}

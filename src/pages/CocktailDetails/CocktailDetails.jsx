@@ -33,7 +33,6 @@ export const Cocktail = () => {
 		setCurrentLang(lang);
 	}
 
-
 	const [openPopup, setOpenPopup] = React.useState(false);
 	const [name, setName] = React.useState('');
 

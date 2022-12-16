@@ -1,22 +1,21 @@
 import React from 'react';
 import styles from './Header.module.scss';
 import logo from '../../assets/header-logo.png';
-import { useMediaQuery } from 'react-responsive';
-import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
-import { FavoritesIcon } from '../FavoritesIcon/FavoritesIcon';
+import { BurgerMenu } from '../../components/BurgerMenu/BurgerMenu'
+import { FavoritesIcon } from '../../components/FavoritesIcon/FavoritesIcon';
+import { SearchIcon } from '../../components/SearchIcon/SearchIcon'
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCategories } from '../../redux/categories/categories-slice';
 import { loadGlasses } from '../../redux/glasses/glasses-slice';
 import { Link } from 'react-router-dom';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
-import { SearchIcon } from '../SearchIcon/SearchIcon';
+import { useMedia } from '../../utils/use-media';
 //=========================================================================================================================
 
 export const Header = () => {
 	const dispatch = useDispatch();
-	const isTabletOrMobile = useMediaQuery({ query: '(max-width: 880px)' });
-	// const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
+	const { isTablet } = useMedia();
 	const isBurgerMenuOpen = useSelector(state => state.burger.isBurgerMenuOpen);
 
 	React.useEffect(() => {
@@ -28,20 +27,17 @@ export const Header = () => {
 	const glasses = useSelector(state => state.glasses.glassesList);
 	const categories = useSelector(state => state.categories.categoriesList);
 
-
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	const onClickBut = () => {
-		if (isTabletOrMobile) {
-			setIsOpen(!isOpen)
-		}
+		if (isTablet) setIsOpen(!isOpen)
 	}
 
 	return (
 		<header className={styles.header}>
 			<div className={styles.logo}>
 				<img src={logo} alt='Logo' />
-				<span className={styles.title}>React {!isTabletOrMobile && <br />}Cocktails</span>
+				<span className={styles.title}>React {!isTablet && <br />}Cocktails</span>
 			</div>
 
 			<div className={cn(`${styles.navigation}`, `${isBurgerMenuOpen ? styles.active : ''}`)}>
@@ -102,7 +98,7 @@ export const Header = () => {
 						</button>
 					</li>
 
-					{isTabletOrMobile &&
+					{isTablet &&
 						<Link to="/search" className={styles.link}>
 							<button className={styles.button}>
 								<svg className={styles.icon} viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
@@ -115,10 +111,10 @@ export const Header = () => {
 				</ul>
 			</div>
 
-			{!isTabletOrMobile && <SearchIcon />}
+			{!isTablet && <SearchIcon />}
 			<FavoritesIcon />
 
-			{isTabletOrMobile && <BurgerMenu />}
+			{isTablet && <BurgerMenu />}
 		</header >
 	)
 }
