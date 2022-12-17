@@ -61,17 +61,27 @@
 	right: 10px;
 	background-color: white;
 	border-radius: 10px;
+	border: 2px solid white;
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
+	fill: transparent;
+	stroke: var(--green);
+	box-shadow: 0px 0px 9px 0px var(--green);
+
+	&.active {
+		stroke: var(--brown);
+		fill: var(--brown);
+		border: 2px solid var(--brown);
+		box-shadow: 0px 0px 11px 0px var(--brown);
+	}
 
 	svg {
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 25px;
-		fill: var(--green);
+		width: 22px;
 	}
 }
 
@@ -170,6 +180,7 @@
 		color: var(--green);
 		margin-bottom: 30px;
 		cursor: pointer;
+
 		img {
 			max-width: 100px;
 			margin-bottom: 10px;

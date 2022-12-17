@@ -18,10 +18,12 @@ body {
 	height: 100%;
 
 }
+
 body.lock {
 	overflow: hidden;
 	height: 100%;
 }
+
 /* Variables */
 :root {
 	--brown: #A15423;
@@ -32,5 +34,5 @@ body.lock {
 	--grey-light: #b2adad;
 	--black: #140F16;
 	--black-light: rgba(20, 15, 22, 0.80);
-	
+
 }

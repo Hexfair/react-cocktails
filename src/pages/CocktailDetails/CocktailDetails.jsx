@@ -9,13 +9,15 @@ import { selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-s
 import { Preloader } from "../../components/Preloader/Preloader";
 import { IngredientPopup } from "../../components/IngredientPopup/IngredientPopup";
 import { NotFound } from "../NotFound/NotFound";
+import { useFavorites } from "../../utils/use-favorites";
+import { setFavoritesList } from "../../redux/favorites/favorites-slice";
 //=========================================================================================================================
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
 
 //=========================================================================================================================
 
-export const Cocktail = () => {
+export const CocktailDetails = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 
@@ -29,13 +31,10 @@ export const Cocktail = () => {
 		dispatch(loadCocktailById(params.id));
 	}, [dispatch, params.id])
 
-	const onChangeText = (lang) => {
-		setCurrentLang(lang);
-	}
+	const onChangeText = (lang) => setCurrentLang(lang);
 
 	const [openPopup, setOpenPopup] = React.useState(false);
 	const [name, setName] = React.useState('');
-
 
 	const onClickOpenPopup = (obj) => {
 		setOpenPopup(true);
@@ -47,6 +46,12 @@ export const Cocktail = () => {
 		setOpenPopup(false);
 		document.body.classList.remove('active');
 	}
+
+	const isFavorite = useFavorites(params.id);
+	const addFavoritesCocktail = (id, name, image) => {
+		dispatch(setFavoritesList({ id, name, image }));
+	};
+
 
 	if (status === 'pending') {
 		return <Preloader />
@@ -70,11 +75,15 @@ export const Cocktail = () => {
 			<div className={styles.row}>
 				<div className={styles.image}>
 					<img src={item.strDrinkThumb} alt='Cocktail' />
-					<div className={styles.like}>
-						<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-							<path d="m16 2.125-.906 2.063-3.25 7.28-7.938.845-2.25.25 1.688 1.5 5.906 5.343-1.656 7.813-.469 2.187 1.969-1.125 6.906-4 6.906 4 1.969 1.125-.469-2.187-1.656-7.813 5.906-5.343 1.688-1.5-2.25-.25-7.938-.844-3.25-7.281Zm0 4.906 2.563 5.782.25.53.562.063 6.281.656-4.687 4.22-.438.405.125.563 1.313 6.156-5.469-3.125-.5-.312-.5.312-5.469 3.125 1.313-6.156.125-.563-.438-.406-4.687-4.218 6.281-.657.563-.062.25-.531Z" />
+
+					<div
+						className={cn(`${styles.like}`, `${isFavorite ? styles.active : ''}`)}
+						onClick={() => addFavoritesCocktail(params.id, item.strDrink, item.strDrinkThumb)}>
+						<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<path d="M10 1.3l2.388 6.722H18.8l-5.232 3.948 1.871 6.928L10 14.744l-5.438 4.154 1.87-6.928-5.233-3.948h6.412L10 1.3z" />
 						</svg>
 					</div>
+
 				</div>
 				<div className={styles.content}>
 					<div className={styles.description}>

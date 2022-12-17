@@ -33,6 +33,17 @@ export const Header = () => {
 		if (isTablet) setIsOpen(!isOpen)
 	}
 
+	// Сохранение коктелей в localStorage
+	const isMounted = React.useRef(false);
+	const items = useSelector(state => state.favorites.favoritesList)
+	React.useEffect(() => {
+		if (isMounted.current) {
+			const json = JSON.stringify(items);
+			localStorage.setItem('favorites', json)
+		};
+		isMounted.current = true;
+	}, [items]);
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.logo}>
