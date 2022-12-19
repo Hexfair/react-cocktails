@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 export const getPopularDrinks = BASE_URL + 'filter.php?g=Champagne_flute';
@@ -19,3 +21,4 @@ export const getSmallImageOfIngredient = (name) => `https://www.thecocktaildb.co
 export const getMediumImageOfIngredient = (name) => `https://www.thecocktaildb.com/images/ingredients/${name}-Medium.png`;
 
 export const getUserCocktails = 'https://633b5933c1910b5de0c41000.mockapi.io/cocktails-favorites';
+
