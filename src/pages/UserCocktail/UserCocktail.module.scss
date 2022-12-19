@@ -90,7 +90,7 @@
 	.ingredient {
 		display: flex;
 		column-gap: 10px;
-		margin-top: 10px;
+		margin-bottom: 10px;
 
 		.image {
 			width: 30px;
@@ -101,7 +101,7 @@
 		}
 
 		.meas {
-			width: 100px;
+			width: 120px;
 		}
 	}
 }

@@ -60,6 +60,11 @@ export const UserCocktail = () => {
 		<div className={styles.content}>
 			<h2 className={styles.title}>Add Your Cocktail</h2>
 			<form className={styles.form}>
+				<datalist id="ingredients">
+					{ingredientsList && ingredientsList.map((obj) =>
+						<option key={obj.strIngredient1}>{obj.strIngredient1}</option>
+					)}
+				</datalist>
 				<div className={styles.item}>
 					<span className={styles.label}>Name:</span>
 					<input
@@ -101,6 +106,7 @@ export const UserCocktail = () => {
 									placeholder={`Ingredient...`}
 									value={cocktail['customIngredient' + (index + 1)]}
 									onChange={onChangeInput}
+									list='ingredients'
 								/>
 								<input
 									className={styles.meas}
@@ -111,12 +117,12 @@ export const UserCocktail = () => {
 								/>
 								<span className={styles.image}><img src='' alt='' /></span>
 							</div>)}
-						<div className={styles.list}>
+						{/* <div className={styles.list}>
 							{ingredientsList && ingredientsList.map((obj) =>
 								<span className={styles.link} key={obj.strIngredient1}>{obj.strIngredient1}</span>
 							)}
 
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<button onClick={addIngr}>+++</button>
