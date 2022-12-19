@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Home.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadAlcDrinks, loadPopDrinks, loadNonAlcDrinks, loadOptAlcDrinks, setActiveType, } from '../../redux/drinks/drinks-slice';
+import { loadAlcDrinks, loadPopDrinks, loadNonAlcDrinks, loadOptAlcDrinks, setActiveSort, } from '../../redux/drinks/drinks-slice';
 import cn from 'classnames';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
-import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
 import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
@@ -28,11 +28,11 @@ export const Home = () => {
 	const onClickButton = () => setVisibleDrinks(visibleDrinks + 20)
 
 	const changeCategory = (value) => {
-		dispatch(setActiveType(value));
+		dispatch(setActiveSort(value));
 		setVisibleDrinks(20);
 	}
 
-	const onChangeCategory = (value) => {
+	const onClickCategory = (value) => {
 		switch (value) {
 			case 1:
 				changeCategory(value);
@@ -47,7 +47,7 @@ export const Home = () => {
 				!optAlcDrinks.length && dispatch(loadOptAlcDrinks());
 				break;
 			default:
-				dispatch(setActiveType(0));
+				dispatch(setActiveSort(0));
 				setVisibleDrinks(20);
 				!popDrinks.length && dispatch(loadPopDrinks());
 		}
@@ -91,7 +91,7 @@ export const Home = () => {
 					<React.Fragment key={type}>
 						<button
 							className={cn(`${styles.sort}`, `${activeSort === index ? styles.active : ''}`)}
-							onClick={() => onChangeCategory(index)}>
+							onClick={() => onClickCategory(index)}>
 							<span className={styles.text}>{type}</span>
 						</button>
 						{!isMobile && <span className={styles.septum}></span>}

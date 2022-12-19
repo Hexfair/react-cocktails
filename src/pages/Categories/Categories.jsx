@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadCategoriesItems } from "../../redux/categories/categories-slice";
-import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";

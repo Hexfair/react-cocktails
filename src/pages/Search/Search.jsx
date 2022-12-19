@@ -6,7 +6,7 @@ import { useSearch } from './use-search';
 import { useVisibleButton } from '../../utils/use-visibleButton';
 import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
 import { useDispatch } from 'react-redux';
-import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 //=========================================================================================================================
 

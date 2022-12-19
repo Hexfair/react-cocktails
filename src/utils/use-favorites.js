@@ -7,7 +7,7 @@ export const useFavorites = (id) => {
 	const favoritesList = useSelector(state => state.favorites.favoritesList)
 
 	React.useEffect(() => {
-		const item = favoritesList.find(obj => obj.id === id);
+		const item = favoritesList.find(obj => obj.idDrink === id);
 		setIsFavorite(item);
 	}, [favoritesList, id]);
 

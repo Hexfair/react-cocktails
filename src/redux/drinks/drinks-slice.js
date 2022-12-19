@@ -46,7 +46,7 @@ export const drinksSlice = createSlice({
 	name: '@@drinks',
 	initialState,
 	reducers: {
-		setActiveType: (state, action) => {
+		setActiveSort: (state, action) => {
 			state.activeSort = action.payload;
 		},
 	},
@@ -106,6 +106,6 @@ export const drinksSlice = createSlice({
 	}
 })
 
-export const { setActiveType } = drinksSlice.actions;
+export const { setActiveSort } = drinksSlice.actions;
 
 export const drinksReducer = drinksSlice.reducer;

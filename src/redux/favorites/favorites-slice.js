@@ -13,11 +13,11 @@ export const favoritesSlice = createSlice({
 	initialState,
 	reducers: {
 		setFavoritesList: (state, action) => {
-			const findItem = state.favoritesList.find(obj => obj.id === action.payload.id);
+			const findItem = state.favoritesList.find(obj => obj.idDrink === action.payload.idDrink);
 			if (!findItem) {
 				state.favoritesList.push(action.payload);
 			} else {
-				state.favoritesList = state.favoritesList.filter(obj => obj.id !== action.payload.id);
+				state.favoritesList = state.favoritesList.filter(obj => obj.idDrink !== action.payload.idDrink);
 			}
 		}
 	}

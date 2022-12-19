@@ -6,10 +6,11 @@ import { cocktailDetailsReducer } from './cocktailDetails/cocktailDetails-slice'
 import { ingredientsReducer } from './ingredients/ingredients-slice';
 import { categoriesReducer } from './categories/categories-slice';
 import { glassesReducer } from './glasses/glasses-slice';
-import { burgerReducer } from './burgerMenu/burgerMenu';
+import { burgerReducer } from './burgerMenu/burgerMenu-slice';
 import { ingredientDetailsReducer } from './ingredientDetails/ingredientDetails-slice';
 import { cocktailsByIngredientReducer } from './cocktailsByIngredient/cocktailsByIngredient-slice';
 import { favoritesReducer } from './favorites/favorites-slice';
+import { userCocktailsReducer } from './userCocktails/userCocktails-slice';
 //=========================================================================================================================
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
 		burger: burgerReducer,
 		cocktailsByIngredient: cocktailsByIngredientReducer,
 		favorites: favoritesReducer,
+		userCocktails: userCocktailsReducer,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
 		thunk: {

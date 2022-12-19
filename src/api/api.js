@@ -15,6 +15,7 @@ export const getCategoriesItem = (name) => BASE_URL + 'filter.php?c=' + name;
 export const getGlassesItem = (name) => BASE_URL + 'filter.php?g=' + name;
 export const getCocktailsByIngredient = (name) => BASE_URL + 'filter.php?i=' + name;
 
-
 export const getSmallImageOfIngredient = (name) => `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png`;
 export const getMediumImageOfIngredient = (name) => `https://www.thecocktaildb.com/images/ingredients/${name}-Medium.png`;
+
+export const getUserCocktails = 'https://633b5933c1910b5de0c41000.mockapi.io/cocktails-favorites';

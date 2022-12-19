@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BurgerMenu.module.scss';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu';
+import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 //=========================================================================================================================
 

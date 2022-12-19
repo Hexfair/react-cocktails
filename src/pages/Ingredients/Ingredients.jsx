@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IngredientItem } from "../../components/IngredientItem/IngredientItem";
 import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import styles from './Ingredients.module.scss';
-import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { useVisibleButton } from "../../utils/use-visibleButton";

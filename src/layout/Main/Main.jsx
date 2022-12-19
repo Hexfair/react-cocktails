@@ -10,6 +10,7 @@ import { Glasses } from "../../pages/Glasses/Glasses";
 import { Search } from "../../pages/Search/Search";
 import { NotFound } from "../../pages/NotFound/NotFound";
 import { Favorites } from "../../pages/Favorites/Favorites";
+import { UserCocktail } from "../../pages/UserCocktail/UserCocktail";
 //=========================================================================================================================
 
 export const Main = () => {
@@ -24,6 +25,7 @@ export const Main = () => {
 				<Route path="glasses/:glass" element={<Glasses />} />
 				<Route path="search" element={<Search />} />
 				<Route path="favorites" element={<Favorites />} />
+				<Route path="addCocktail" element={<UserCocktail />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</main>

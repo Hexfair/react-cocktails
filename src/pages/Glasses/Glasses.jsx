@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadGlassesItems } from "../../redux/glasses/glasses-slice";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
-import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { useVisibleButton } from "../../utils/use-visibleButton";

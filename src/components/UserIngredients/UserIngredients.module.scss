@@ -1,0 +1,37 @@
+.ingredients {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	column-gap: 20px;
+	flex-wrap: wrap;
+
+	@media (max-width: 880px) {
+		column-gap: 10px;
+	}
+
+	.ingredient {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: var(--green);
+		margin-bottom: 30px;
+		cursor: pointer;
+
+		img {
+			max-width: 70px;
+			margin-bottom: 10px;
+		}
+
+		.caption {
+			font-size: 13px;
+		}
+
+		.dose {
+			font-size: 13px;
+			color: var(--green-light);
+		}
+	}
+
+
+}

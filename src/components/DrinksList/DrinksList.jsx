@@ -10,10 +10,9 @@ export const DrinksList = ({ drinks, onClickButton, visibleDrinks }) => {
 				{drinks && drinks.map((obj, index) =>
 					<CocktailItem
 						key={obj.idDrink}
-						name={obj.strCategory || obj.strGlasses || obj.strDrink || obj.name}
-						id={obj.idDrink || obj.id}
-						image={obj.strDrinkThumb || obj.image}
-
+						name={obj.strCategory || obj.strGlasses || obj.strDrink}
+						id={obj.idDrink}
+						image={obj.strDrinkThumb}
 					/>)}
 			</div>
 			{visibleDrinks <= drinks.length
