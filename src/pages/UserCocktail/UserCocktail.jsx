@@ -102,7 +102,6 @@ export const UserCocktail = () => {
 		return () => document.body.removeEventListener('click', handleClickOutside);
 	}, [open])
 
-
 	if (isPreloader === true) {
 		return <Preloader />
 	}
@@ -175,7 +174,8 @@ export const UserCocktail = () => {
 									onChange={onChangeInput}
 								/>
 								<span className={styles.image}>
-									<img src={getSmallImageOfIngredient(cocktail['customIngredient' + obj]) || noImage} alt='' />
+									{!(cocktail['customIngredient' + obj] === '')
+										&& <img src={getSmallImageOfIngredient(cocktail['customIngredient' + obj])} alt='' onError={(e) => { e.target.src = noImage }} />}
 								</span>
 							</div>)}
 
