@@ -4,13 +4,15 @@ import { CocktailItem } from '../CocktailItem/CocktailItem';
 //=========================================================================================================================
 
 export const DrinksList = ({ drinks, onClickButton, visibleDrinks }) => {
+	console.log('drinks', drinks);
+
 	return (
 		<>
 			<div className={styles.items}>
 				{drinks && drinks.map((obj, index) =>
 					<CocktailItem
 						key={obj.idDrink}
-						name={obj.strCategory || obj.strGlasses || obj.strDrink}
+						name={obj.strDrink || obj.strCategory || obj.strGlasses}
 						id={obj.idDrink}
 						image={obj.strDrinkThumb}
 					/>)}

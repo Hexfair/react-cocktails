@@ -12,11 +12,16 @@ import noImage from '../../assets/no-image.svg'
 export const UserCocktail = () => {
 	const dispatch = useDispatch();
 	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
+	const arrIngredients = React.useRef([]);
 
 	React.useEffect(() => {
 		if (ingredientsList.length === 0) {
 			dispatch(loadIngredients())
 		}
+		if (ingredientsList) {
+			ingredientsList.map((obj) => arrIngredients.current.push(obj.strIngredient1));
+		}
+
 	}, [dispatch, ingredientsList]);
 
 	const [cocktail, setCocktail] = React.useState({
@@ -174,8 +179,11 @@ export const UserCocktail = () => {
 									onChange={onChangeInput}
 								/>
 								<span className={styles.image}>
-									{!(cocktail['customIngredient' + obj] === '')
-										&& <img src={getSmallImageOfIngredient(cocktail['customIngredient' + obj])} alt='' onError={(e) => { e.target.src = noImage }} />}
+									{cocktail['customIngredient' + obj] === ''
+										? null
+										: arrIngredients.current.includes(cocktail['customIngredient' + obj])
+											? <img src={getSmallImageOfIngredient(cocktail['customIngredient' + obj])} alt='' />
+											: <img src={noImage} alt='' />}
 								</span>
 							</div>)}
 
