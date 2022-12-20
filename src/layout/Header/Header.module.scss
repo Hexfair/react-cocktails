@@ -32,7 +32,7 @@
 		width: 45px;
 
 		@media (max-width: 1400px) {
-			width: calc(25px + (45 - 25) * ((100vw - 880px) / (1400 - 880)));
+			width: calc(25px + (45 - 25) * ((100vw - 320px) / (1400 - 320)));
 		}
 	}
 
@@ -171,9 +171,9 @@
 		transform-origin: top;
 	}
 
-&.mobile {
-	position: relative;
-}
+	&.mobile {
+		position: relative;
+	}
 
 }
 
