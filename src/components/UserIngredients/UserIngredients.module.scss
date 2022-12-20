@@ -10,6 +10,7 @@
 	}
 
 	.ingredient {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -17,11 +18,29 @@
 		color: var(--green);
 		margin-bottom: 30px;
 		cursor: pointer;
+.image {
+	width: 70px;
+	height: 80px;
 
-		img {
-			max-width: 70px;
-			margin-bottom: 10px;
-		}
+	img {
+		max-width: 70px;
+		margin-bottom: 10px;
+	}
+
+	// img:after {
+	// 	content: '';
+	// 	position: absolute;
+	// 	display: block;
+	// 	width: 70px;
+	// 	height: 70px;
+	// 	top: 4%;
+	// 	left: 50%;
+	// 	transform: translateX(-50%);
+	// 	background-image: url(../../assets/no-image.png);
+	// 	background-repeat: no-repeat;
+	// }
+}
+
 
 		.caption {
 			font-size: 13px;
@@ -35,3 +54,4 @@
 
 
 }
+

@@ -6,7 +6,7 @@ import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import cn from 'classnames';
 import { Preloader } from "../../components/Preloader/Preloader";
 import { getSmallImageOfIngredient } from "../../api/api";
-import noImage from '../../assets/no-image.svg'
+import noImage from '../../assets/no-image.png'
 //=========================================================================================================================
 
 export const UserCocktail = () => {
@@ -166,9 +166,15 @@ export const UserCocktail = () => {
 										data-type="ingr"
 									/>
 									<ul className={cn(`${styles.list}`, `${(open === true && numInput === index) ? styles.active : ''}`)}>
-										{ingredientsList && ingredientsList.map((obj) =>
-											<li className={styles.link} key={obj.strIngredient1} onClick={() => onClickLi(obj.strIngredient1)}>{obj.strIngredient1}</li>
-										)}
+										{ingredientsList && ingredientsList
+											.filter((obj) => obj.strIngredient1.toLowerCase().includes(cocktail['customIngredient' + (index + 1)].toLowerCase()))
+											.map((obj) =>
+												<li
+													className={styles.link}
+													key={obj.strIngredient1}
+													onClick={() => onClickLi(obj.strIngredient1)}>
+													{obj.strIngredient1}
+												</li>)}
 									</ul>
 								</div>
 								<textarea
