@@ -11,6 +11,7 @@ export const IngredientImage = ({ obj }) => {
 			setVisibleImage(false)
 		}
 	}
+
 	return (
 		<>
 			{visibleImage
