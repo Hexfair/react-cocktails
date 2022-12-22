@@ -6,22 +6,17 @@ import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import cn from 'classnames';
 import { Preloader } from "../../components/Preloader/Preloader";
 import { getSmallImageOfIngredient } from "../../api/api";
-import noImage from '../../assets/no-image.png'
+import { ImageItem } from "../../UI/ImageItem/ImageItem";
 //=========================================================================================================================
 
 export const UserCocktail = () => {
 	const dispatch = useDispatch();
 	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
-	const arrIngredients = React.useRef([]);
 
 	React.useEffect(() => {
 		if (ingredientsList.length === 0) {
 			dispatch(loadIngredients())
 		}
-		if (ingredientsList) {
-			ingredientsList.map((obj) => arrIngredients.current.push(obj.strIngredient1));
-		}
-
 	}, [dispatch, ingredientsList]);
 
 	const [cocktail, setCocktail] = React.useState({
@@ -187,9 +182,7 @@ export const UserCocktail = () => {
 								<span className={styles.image}>
 									{cocktail['customIngredient' + obj] === ''
 										? null
-										: arrIngredients.current.includes(cocktail['customIngredient' + obj])
-											? <img src={getSmallImageOfIngredient(cocktail['customIngredient' + obj])} alt='' />
-											: <img src={noImage} alt='' />}
+										: <ImageItem srcData={getSmallImageOfIngredient(cocktail['customIngredient' + obj])} />}
 								</span>
 							</div>)}
 

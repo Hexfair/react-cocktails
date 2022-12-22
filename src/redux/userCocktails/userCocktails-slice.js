@@ -17,7 +17,11 @@ const initialState = {
 export const userCocktailsSlice = createSlice({
 	name: '@@userCocktails',
 	initialState,
-	reducers: {},
+	reducers: {
+		deleteUserCocktail: (state, action) => {
+			state.userCocktailsList = state.userCocktailsList.filter(obj => obj.idDrink !== action.payload);
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadUserCocktails.fulfilled, (state, action) => {
@@ -35,6 +39,6 @@ export const userCocktailsSlice = createSlice({
 	}
 })
 
-export const { setActiveType } = userCocktailsSlice.actions;
+export const { deleteUserCocktail } = userCocktailsSlice.actions;
 
 export const userCocktailsReducer = userCocktailsSlice.reducer;

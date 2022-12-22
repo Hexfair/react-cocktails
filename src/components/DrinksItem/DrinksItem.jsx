@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './CocktailItem.module.scss';
+import styles from './DrinksItem.module.scss';
 import { Link } from "react-router-dom";
 import { setFavoritesList } from "../../redux/favorites/favorites-slice";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { useFavorites } from "../../utils/use-favorites";
 //import axios from 'axios';
 //=========================================================================================================================
 
-export const CocktailItem = ({ id, name, image }) => {
+export const DrinksItem = ({ id, name, image }) => {
 	const dispatch = useDispatch();
 	console.log('name', name);
 	const addFavoritesCocktail = (id, name, image) => {

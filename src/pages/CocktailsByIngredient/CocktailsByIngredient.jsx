@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
+import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-slice";

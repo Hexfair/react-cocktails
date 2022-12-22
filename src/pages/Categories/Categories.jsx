@@ -7,7 +7,7 @@ import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { useVisibleButton } from "../../utils/use-visibleButton";
-import { ButtonScrollTop } from "../../components/ButtonScrollTop/ButtonScrollTop";
+import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 

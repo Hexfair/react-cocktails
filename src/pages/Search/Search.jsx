@@ -4,7 +4,7 @@ import allCocktails from '../../api/AllCocktails.json';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { useSearch } from './use-search';
 import { useVisibleButton } from '../../utils/use-visibleButton';
-import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
+import { ButtonScrollTop } from '../../UI/ButtonScrollTop/ButtonScrollTop';
 import { useDispatch } from 'react-redux';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';

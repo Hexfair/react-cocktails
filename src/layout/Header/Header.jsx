@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './Header.module.scss';
 import logo from '../../assets/header-logo.png';
-import { BurgerMenu } from '../../components/BurgerMenu/BurgerMenu'
-import { FavoritesIcon } from '../../components/FavoritesIcon/FavoritesIcon';
-import { SearchIcon } from '../../components/SearchIcon/SearchIcon'
+import { FavoritesIcon } from '../../UI/FavoritesIcon/FavoritesIcon';
+import { SearchIcon } from '../../UI/SearchIcon/SearchIcon'
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCategories } from '../../redux/categories/categories-slice';
@@ -11,6 +10,7 @@ import { loadGlasses } from '../../redux/glasses/glasses-slice';
 import { Link } from 'react-router-dom';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { useMedia } from '../../utils/use-media';
+import { BurgerMenu } from '../../UI/BurgerMenu/BurgerMenu';
 //=========================================================================================================================
 
 export const Header = () => {

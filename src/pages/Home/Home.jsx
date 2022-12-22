@@ -7,7 +7,7 @@ import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
-import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
+import { ButtonScrollTop } from '../../UI/ButtonScrollTop/ButtonScrollTop';
 import { useVisibleButton } from '../../utils/use-visibleButton';
 import { NotFound } from '../NotFound/NotFound';
 import { useMedia } from '../../utils/use-media';
