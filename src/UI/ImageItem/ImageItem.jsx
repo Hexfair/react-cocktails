@@ -6,8 +6,9 @@ import styles from './ImageItem.module.scss';
 export const ImageItem = ({ srcData }) => {
 
 	const [visibleImage, setVisibleImage] = React.useState(true);
-
-	React.useEffect(() => { setVisibleImage(true) }, [srcData])
+	React.useEffect(() => {
+		setVisibleImage(true)
+	}, [srcData])
 
 	const changeImage = () => {
 		setVisibleImage(false);

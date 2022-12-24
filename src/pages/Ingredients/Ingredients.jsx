@@ -42,13 +42,11 @@ export const Ingredients = () => {
 	return (
 		<div className={styles.content}>
 			<h2 className={styles.title}>Cocktail Ingredients</h2>
-
 			<div className={styles.items}>
 				{ingredients && ingredients.map((obj) =>
 					<IngredientItem key={obj.strIngredient1} name={obj.strIngredient1} {...obj} />
 				)}
 			</div>
-
 			{value <= ingredients.length
 				? <button className={styles.btn} onClick={onClickButton}>Show more</button>
 				: null}

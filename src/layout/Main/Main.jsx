@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Main.module.scss";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "../../pages/Home/Home";
 import { CocktailDetails } from "../../pages/CocktailDetails/CocktailDetails";
@@ -10,12 +9,12 @@ import { Glasses } from "../../pages/Glasses/Glasses";
 import { Search } from "../../pages/Search/Search";
 import { NotFound } from "../../pages/NotFound/NotFound";
 import { Favorites } from "../../pages/Favorites/Favorites";
-import { UserCocktail } from "../../pages/UserCocktail/UserCocktail";
+import { AddUserCocktail } from "../../pages/AddUserCocktail/AddUserCocktail";
 //=========================================================================================================================
 
 export const Main = () => {
 	return (
-		<main className={styles.main}>
+		<main >
 			<Routes>
 				<Route path="" element={<Home />} />
 				<Route path="cocktail/:id" element={<CocktailDetails />} />
@@ -25,7 +24,7 @@ export const Main = () => {
 				<Route path="glasses/:glass" element={<Glasses />} />
 				<Route path="search" element={<Search />} />
 				<Route path="favorites" element={<Favorites />} />
-				<Route path="addCocktail" element={<UserCocktail />} />
+				<Route path="addCocktail" element={<AddUserCocktail />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</main>

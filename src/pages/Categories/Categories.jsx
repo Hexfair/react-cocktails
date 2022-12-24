@@ -39,6 +39,4 @@ export const Categories = () => {
 			{visibleBackButton && <ButtonScrollTop />}
 		</>
 	)
-
-
 }

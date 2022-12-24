@@ -4,8 +4,6 @@ import { DrinksItem } from '../DrinksItem/DrinksItem';
 //=========================================================================================================================
 
 export const DrinksList = ({ drinks, onClickButton, visibleDrinks }) => {
-	console.log('drinks', drinks);
-
 	return (
 		<>
 			<div className={styles.items}>

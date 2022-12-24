@@ -10,13 +10,12 @@ export const Footer = () => {
 	const theme = useSelector(state => state.theme.theme)
 
 	const changeTheme = () => {
-		dispatch(setTheme(theme === 'brown' ? 'yellow' : 'brown'))
+		dispatch(setTheme(theme === 'brown' ? 'blue' : 'brown'))
 	}
-
 
 	React.useEffect(() => {
 		document.body.setAttribute('data-theme', theme)
-	})
+	}, [theme])
 
 	return (
 		<footer className={styles.footer}>
@@ -25,7 +24,7 @@ export const Footer = () => {
 				<span className={styles.label}>Theme:</span>
 				<div className={styles.item}>brown</div>
 				<div
-					className={cn(`${styles.circle}`, `${theme === 'yellow' ? styles.active : ''}`)}
+					className={cn(`${styles.circle}`, `${theme === 'blue' ? styles.active : ''}`)}
 					onClick={changeTheme}>
 				</div>
 				<div className={styles.item}>blue</div>

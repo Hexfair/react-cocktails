@@ -20,21 +20,17 @@ const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
 export const CocktailDetails = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
-
 	const [currentLang, setCurrentLang] = React.useState('GBR');
 
 	const { item, status } = useSelector(state => state.cocktailDetails);
 	const { ingredientsArray, measuresArray } = useSelector(selectIngredients());
 
-	React.useEffect(() => {
-		window.scrollTo(0, 0);
-		dispatch(loadCocktailById(params.id));
-	}, [dispatch, params.id])
-
-	const onChangeText = (lang) => setCurrentLang(lang);
-
 	const [openPopup, setOpenPopup] = React.useState(false);
 	const [name, setName] = React.useState('');
+
+	const onChangeText = (lang) => {
+		setCurrentLang(lang)
+	}
 
 	const onClickOpenPopup = (obj) => {
 		setOpenPopup(true);
@@ -52,6 +48,10 @@ export const CocktailDetails = () => {
 		dispatch(setFavoritesList({ id, name, image }));
 	};
 
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(loadCocktailById(params.id));
+	}, [dispatch, params.id])
 
 	if (status === 'pending') {
 		return <Preloader />
@@ -75,7 +75,6 @@ export const CocktailDetails = () => {
 			<div className={styles.row}>
 				<div className={styles.image}>
 					<img src={item.strDrinkThumb} alt='Cocktail' />
-
 					<div
 						className={cn(`${styles.like}`, `${isFavorite ? styles.active : ''}`)}
 						onClick={() => addFavoritesCocktail(params.id, item.strDrink, item.strDrinkThumb)}>
@@ -83,7 +82,6 @@ export const CocktailDetails = () => {
 							<path d="M10 1.3l2.388 6.722H18.8l-5.232 3.948 1.871 6.928L10 14.744l-5.438 4.154 1.87-6.928-5.233-3.948h6.412L10 1.3z" />
 						</svg>
 					</div>
-
 				</div>
 				<div className={styles.content}>
 					<div className={styles.description}>

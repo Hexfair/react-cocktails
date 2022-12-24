@@ -18,8 +18,7 @@ export const BurgerMenu = () => {
 	return (
 		<div
 			className={cn(`${styles.burger}`, `${isBurgerMenuOpen ? styles.active : ''}`)}
-			onClick={() => burgerMenuOpen(!isBurgerMenuOpen)}
-		>
+			onClick={() => burgerMenuOpen(!isBurgerMenuOpen)}	>
 			<span></span>
 		</div >
 	)

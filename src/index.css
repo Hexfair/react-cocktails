@@ -39,14 +39,14 @@ body[data-theme='brown'] {
 	--black-light: rgba(20, 15, 22, 0.80);
 }
 
-body[data-theme='yellow'] {
+body[data-theme='blue'] {
 	--primary: rgb(127, 125, 225);
 	--primary-light: #150834b3;
 
 	--primary2: #150834;
 	--primary2-light: #b19ae4;
 
-	--primary3: #e3b6d5;
+	--primary3: #eb8ecd;
 	--primary3-light: #e9d4e3;
 
 	--black: #09021a;

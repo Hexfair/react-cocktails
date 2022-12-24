@@ -1,0 +1,41 @@
+.label {
+	display: inline-block;
+	margin-right: 20px;
+	min-width: 110px;
+	text-align: end;
+	font-size: 18px;
+	color: var(--primary);
+	align-self: flex-start;
+
+
+	@media (max-width: 520px) {
+		text-align: center;
+		align-self: center;
+		margin: 0px 0px 10px 0px;
+	}
+}
+
+.descript {
+	height: 100px;
+	width: 400px;
+	resize: none;
+	display: inline-block;
+	border: 2px solid var(--primary);
+	background-color: var(--primary-light);
+	border-radius: 5px;
+	padding: 8px 10px;
+	font-size: 15px;
+	color: var(--primary3-light);
+
+	@media (max-width: 810px) {
+		width: calc(270px + (400 - 270) * ((100vw - 520px) / (810 - 520)));
+	}
+
+	@media (max-width: 520px) {
+		width: 100%;
+	}
+
+	&:focus {
+		border: 2px solid var(--primary3);
+	}
+}

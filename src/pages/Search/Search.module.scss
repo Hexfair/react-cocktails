@@ -77,8 +77,6 @@
 		margin-bottom: 10px;
 		text-align: center;
 	}
-
-
 }
 
 .radio {
@@ -116,7 +114,6 @@
 		border-radius: 40%;
 		margin-right: 10px;
 		color: var(--primary);
-
 	}
 
 	.custom::before {
@@ -131,7 +128,6 @@
 		top: 50%;
 		transform: translate(-50%, -50%) scale(0);
 		transition: all 0.2s ease-in;
-
 	}
 
 	.real:checked+.custom::before {
@@ -141,6 +137,5 @@
 
 	label {
 		cursor: pointer;
-
 	}
 }

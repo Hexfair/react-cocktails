@@ -14,7 +14,6 @@
 	flex-wrap: wrap;
 	row-gap: 30px;
 
-
 	@media (max-width: 1400px) {
 		height: calc(130px + (30 - 130) * ((100vw - 320px) / (1400 - 320)));
 		margin-top: calc(30px + (40 - 30) * ((100vw - 320px) / (1400 - 320)));
