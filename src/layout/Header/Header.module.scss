@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: [one] auto [two] 1fr [three] auto [four] auto [five];
 	padding-bottom: 12px;
-	border-bottom: 3px solid var(--brown);
+	border-bottom: 3px solid var(--primary);
 
 	@media (max-width: 1400px) {
 		padding-bottom: calc(8px + (12 - 8) * ((100vw - 320px) / (1400 - 320)));
@@ -41,7 +41,7 @@
 		text-transform: uppercase;
 		font-weight: 700;
 		font-size: 22px;
-		color: var(--brown);
+		color: var(--primary);
 
 		@media (max-width: 1400px) {
 			font-size: calc(13px + (22 - 13) * ((100vw - 880px) / (1400 - 880)));
@@ -95,7 +95,7 @@
 	.link {
 		padding: 6px 11px;
 		border-radius: 5px;
-		background-color: var(--brown);
+		background-color: var(--primary);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -104,7 +104,7 @@
 		cursor: pointer;
 
 		&:hover {
-			background-color: var(--green);
+			background-color: var(--primary3);
 		}
 
 		@media (max-width: 1400px) {
@@ -178,7 +178,7 @@
 }
 
 .options {
-	background-color: var(--green-light);
+	background-color: var(--primary3-light);
 	position: absolute;
 	top: 100%;
 	max-width: 800px;
@@ -198,7 +198,7 @@
 		display: inline-block;
 		margin: 10px;
 		font-size: 14px;
-		color: var(--grey);
+		color: var(--primary2);
 		cursor: pointer;
 	}
 }

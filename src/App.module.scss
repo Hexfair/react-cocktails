@@ -7,12 +7,12 @@
 .container {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
-	background-color: var(--grey);
+	background-color: var(--primary2);
 	max-width: 1580px;
 	margin: 0 auto;
 	padding: 10px 15px 0px 15px;
 	min-height: 100vh;
-	border: 2px solid var(--brown);
+	border: 2px solid var(--primary);
 	border-radius: 15px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;

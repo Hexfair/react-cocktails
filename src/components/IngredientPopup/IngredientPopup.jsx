@@ -41,17 +41,13 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 						</Link>
 					</div>
 					<div className={styles.description}>
-
 						{ingredient.strDescription
 							? <p className={styles.text}>{ingredient.strDescription}</p>
 							: <p className={styles.text}>Ingredient description missing from database...:(</p>}
-
 					</div>
 				</div>
 				<div onClick={onClickClosePopup}><button className={styles.btn}>Close</button></div>
-
 			</div>
-
 		</div>
 	)
 }

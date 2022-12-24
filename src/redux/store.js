@@ -11,6 +11,7 @@ import { ingredientDetailsReducer } from './ingredientDetails/ingredientDetails-
 import { cocktailsByIngredientReducer } from './cocktailsByIngredient/cocktailsByIngredient-slice';
 import { favoritesReducer } from './favorites/favorites-slice';
 import { userCocktailsReducer } from './userCocktails/userCocktails-slice';
+import { themeReducer } from './theme/theme-slice';
 //=========================================================================================================================
 
 const store = configureStore({
@@ -25,6 +26,7 @@ const store = configureStore({
 		cocktailsByIngredient: cocktailsByIngredientReducer,
 		favorites: favoritesReducer,
 		userCocktails: userCocktailsReducer,
+		theme: themeReducer,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
 		thunk: {

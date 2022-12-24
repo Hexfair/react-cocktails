@@ -24,9 +24,7 @@ export const IngredientItem = ({ name }) => {
 				<img src={getSmallImageOfIngredient(name)} alt='' />
 				<div className={styles.label}> {name}</div>
 			</div>
-			{
-				openPopup && <IngredientPopup name={name} onClickClosePopup={onClickClosePopup} />
-			}
+			{openPopup && <IngredientPopup name={name} onClickClosePopup={onClickClosePopup} />}
 		</>
 	)
 }

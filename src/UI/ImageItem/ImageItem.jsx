@@ -5,14 +5,15 @@ import styles from './ImageItem.module.scss';
 
 export const ImageItem = ({ srcData }) => {
 
-	const [visibleImage, setVisibleImage] = React.useState(true)
+	const [visibleImage, setVisibleImage] = React.useState(true);
 
-	const changeImage = (e) => {
-		if (e.type === 'error') {
-			setVisibleImage(false)
-		}
+	React.useEffect(() => { setVisibleImage(true) }, [srcData])
+
+	const changeImage = () => {
+		setVisibleImage(false);
 	}
 
+	console.log(visibleImage);
 	return (
 		<>
 			{visibleImage

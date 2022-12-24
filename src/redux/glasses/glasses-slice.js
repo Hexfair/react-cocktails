@@ -53,6 +53,4 @@ export const glassesSlice = createSlice({
 	}
 })
 
-//export const { setPopularDrinks } = popularSlice.actions;
-
 export const glassesReducer = glassesSlice.reducer;

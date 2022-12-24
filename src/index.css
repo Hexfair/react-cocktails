@@ -25,14 +25,30 @@ body.lock {
 }
 
 /* Variables */
-:root {
-	--brown: #A15423;
-	--brown-light: rgba(161, 84, 35, 0.05);
-	--green: #7EC57F;
-	--green-light: #c4e6c4;
-	--grey: #252525;
-	--grey-light: #b2adad;
+body[data-theme='brown'] {
+	--primary: #A15423;
+	--primary-light: rgba(161, 84, 35, 0.05);
+
+	--primary2: #252525;
+	--primary2-light: #b2adad;
+
+	--primary3: #7EC57F;
+	--primary3-light: #c4e6c4;
+
 	--black: #140F16;
 	--black-light: rgba(20, 15, 22, 0.80);
+}
 
+body[data-theme='yellow'] {
+	--primary: rgb(127, 125, 225);
+	--primary-light: #150834b3;
+
+	--primary2: #150834;
+	--primary2-light: #b19ae4;
+
+	--primary3: #e3b6d5;
+	--primary3-light: #e9d4e3;
+
+	--black: #09021a;
+	--black-light: rgba(20, 15, 22, 0.80);
 }

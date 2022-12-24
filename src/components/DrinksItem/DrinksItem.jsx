@@ -5,15 +5,13 @@ import { setFavoritesList } from "../../redux/favorites/favorites-slice";
 import { useDispatch } from "react-redux";
 import cn from 'classnames';
 import { useFavorites } from "../../utils/use-favorites";
-//import axios from 'axios';
 //=========================================================================================================================
 
 export const DrinksItem = ({ id, name, image }) => {
 	const dispatch = useDispatch();
-	console.log('name', name);
+
 	const addFavoritesCocktail = (id, name, image) => {
 		dispatch(setFavoritesList({ idDrink: id, strDrink: name, strDrinkThumb: image }))
-		//axios.post('https://633b5933c1910b5de0c41000.mockapi.io/cocktails-favorites', { id, name, image })
 	};
 
 	const isFavorite = useFavorites(id);
