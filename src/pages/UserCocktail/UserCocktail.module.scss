@@ -1,5 +1,5 @@
 .body {
-	padding: 0px 40px 80px 40px;
+	padding: 0px 40px 60px 40px;
 	text-align: center;
 
 	@media (max-width: 1300px) {
@@ -23,6 +23,10 @@
 	font-size: 30px;
 	color: var(--green);
 	margin: 40px 0px 40px 0px;
+
+	@media (max-width: 520px) {
+		font-size: 25px;
+	}
 }
 
 .form {
@@ -37,11 +41,23 @@
 		display: flex;
 		align-items: center;
 		margin-bottom: 10px;
+
+		@media (max-width: 520px) {
+			flex-direction: column;
+			margin: 0px auto 10px auto;
+			width: 100%;
+		}
 	}
 
 	.block {
 		display: flex;
 		align-items: center;
+
+		@media (max-width: 520px) {
+			flex-direction: column;
+			margin: 0px auto 10px auto;
+			width: 100%;
+		}
 	}
 
 	.label {
@@ -52,6 +68,13 @@
 		font-size: 18px;
 		color: var(--brown);
 		align-self: flex-start;
+
+
+		@media (max-width: 520px) {
+			text-align: center;
+			align-self: center;
+			margin: 0px 0px 10px 0px;
+		}
 	}
 
 }
@@ -60,19 +83,39 @@
 	width: 100%;
 
 	.ingredient {
-		display: flex;
+		display: grid;
+		grid-template-columns: [one] auto [two] 1fr [three] auto [four];
 		column-gap: 10px;
-		margin-bottom: 10px;
+		margin-bottom: 15px;
+
+		@media (max-width: 810px) {
+			grid-template-columns: [one] auto [two] 1fr [three];
+			grid-template-rows: [t] auto [m] 1fr [b];
+		}
 
 		.image {
 			img {
 				width: 40px;
-
 			}
+
+			@media (max-width: 810px) {
+				grid-column-start: two;
+				grid-column-end: three;
+			}
+
+			@media (max-width: 520px) {}
 		}
 
 		.ingr {
 			width: 400px;
+
+			@media (max-width: 810px) {
+				width: calc(270px + (400 - 270) * ((100vw - 520px) / (810 - 520)));
+			}
+
+			@media (max-width: 520px) {
+				width: 100%;
+			}
 		}
 
 		.meas {
@@ -81,6 +124,15 @@
 
 		.box {
 			position: relative;
+
+			@media (max-width: 810px) {
+				grid-column-start: one;
+				grid-column-end: three;
+			}
+
+			@media (max-width: 520px) {
+				width: 100%;
+			}
 		}
 	}
 }
@@ -95,6 +147,14 @@ input.names {
 	padding: 8px 10px;
 	font-size: 15px;
 	color: var(--green-light);
+
+	@media (max-width: 810px) {
+		width: calc(270px + (400 - 270) * ((100vw - 520px) / (810 - 520)));
+	}
+
+	@media (max-width: 520px) {
+		width: 100%;
+	}
 
 	&:focus {
 		border: 2px solid var(--green);
@@ -113,6 +173,14 @@ textarea.descript {
 	padding: 8px 10px;
 	font-size: 15px;
 	color: var(--green-light);
+
+	@media (max-width: 810px) {
+		width: calc(270px + (400 - 270) * ((100vw - 520px) / (810 - 520)));
+	}
+
+	@media (max-width: 520px) {
+		width: 100%;
+	}
 
 	&:focus {
 		border: 2px solid var(--green);
@@ -134,7 +202,13 @@ textarea.meas {
 	&:focus {
 		border: 2px solid var(--green);
 	}
+}
 
+textarea.meas {
+	@media (max-width: 810px) {
+		grid-column-start: one;
+		grid-column-end: two;
+	}
 }
 
 input.error {
@@ -212,7 +286,7 @@ input.error {
 }
 
 .buttons {
-	margin: 20px auto 0px auto;
+	margin: 20px auto 40px auto;
 
 	.btn {
 		display: inline-block;

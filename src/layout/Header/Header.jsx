@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { useMedia } from '../../utils/use-media';
 import { BurgerMenu } from '../../UI/BurgerMenu/BurgerMenu';
+import { loadUserCocktails } from '../../redux/userCocktails/userCocktails-slice';
 //=========================================================================================================================
 
 export const Header = () => {
@@ -21,8 +22,9 @@ export const Header = () => {
 	React.useEffect(() => {
 		dispatch(loadGlasses());
 		dispatch(loadCategories());
-		dispatch(setBurgerStatus(false))
-	}, [dispatch]);
+		dispatch(setBurgerStatus(false));
+		dispatch(loadUserCocktails())
+	}, [dispatch]);;
 
 	const glasses = useSelector(state => state.glasses.glassesList);
 	const categories = useSelector(state => state.categories.categoriesList);

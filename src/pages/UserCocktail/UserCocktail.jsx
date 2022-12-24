@@ -7,6 +7,9 @@ import cn from 'classnames';
 import { Preloader } from "../../components/Preloader/Preloader";
 import { getSmallImageOfIngredient } from "../../api/api";
 import { ImageItem } from "../../UI/ImageItem/ImageItem";
+import { loadUserCocktails } from "../../redux/userCocktails/userCocktails-slice";
+import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
+import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 //=========================================================================================================================
 
 export const UserCocktail = () => {
@@ -17,6 +20,8 @@ export const UserCocktail = () => {
 		if (ingredientsList.length === 0) {
 			dispatch(loadIngredients())
 		}
+		dispatch(setBurgerStatus(false));
+		burgerOpenOrClose(false);
 	}, [dispatch, ingredientsList]);
 
 	const [cocktail, setCocktail] = React.useState({
@@ -83,6 +88,7 @@ export const UserCocktail = () => {
 				.then(() => {
 					resetState();
 					setIsPreloader(false);
+					dispatch(loadUserCocktails());
 					alert('Cocktail added successfully!');
 				})
 				.catch((err) => {

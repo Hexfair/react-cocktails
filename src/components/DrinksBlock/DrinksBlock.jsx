@@ -8,11 +8,11 @@ export const DrinksBlock = ({ drinksList, name, label }) => {
 	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
 	const onClickButton = () => setVisibleDrinks(visibleDrinks + 20)
 
+	let drinks = drinksList.slice(0, visibleDrinks);
+
 	if (!drinksList) {
 		return <NotFound />
 	}
-
-	let drinks = drinksList.slice(0, visibleDrinks);
 
 	return (
 		<div className={styles.content}>

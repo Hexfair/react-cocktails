@@ -6,6 +6,7 @@ import { UserIngredients } from "../../../components/UserIngredients/UserIngredi
 import { Preloader } from '../../../components/Preloader/Preloader';
 import { ImageItem } from '../../../UI/ImageItem//ImageItem';
 import { deleteUserCocktail, loadUserCocktails } from '../../../redux/userCocktails/userCocktails-slice'
+import { FavoritesEmpty } from "../FavoritesEmpty/FavoritesEmpty";
 //=========================================================================================================================
 
 export const FavoritesUserBLock = () => {
@@ -35,6 +36,10 @@ export const FavoritesUserBLock = () => {
 		return <Preloader />
 	}
 
+	if (userCocktailsList.length === 0) {
+		return <FavoritesEmpty />
+	}
+
 	return (
 		<div className={styles.body}>
 			{userCocktailsList.map((obj, index) =>
@@ -52,7 +57,7 @@ export const FavoritesUserBLock = () => {
 								<path d="M28.889 40H11.111a4.444 4.444 0 0 1-4.444-4.444v-20a2.222 2.222 0 0 1 2.222-2.222h22.222a2.222 2.222 0 0 1 2.222 2.222v20A4.444 4.444 0 0 1 28.889 40zm6.667-33.333a2.222 2.222 0 0 1-2.222 2.222H6.667a2.222 2.222 0 0 1 0-4.444h6.667V2.222A2.222 2.222 0 0 1 15.556 0h8.889a2.222 2.222 0 0 1 2.222 2.222v2.222h6.667a2.222 2.222 0 0 1 2.222 2.222z" />
 							</svg>
 						</div>
-						<p className={styles.text}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis delectus facere quidem obcaecati suscipit eius voluptates quasi nemo similique, adipisci eveniet consectetur earum accusamus cupiditate? Asperiores numquam laborum architecto. Deserunt!</p>
+						<p className={styles.text}>{obj.customDescription}</p>
 						<h3 className={styles.label}>Ingredients</h3>
 						<UserIngredients idx={index} />
 					</div>

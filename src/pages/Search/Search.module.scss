@@ -5,6 +5,17 @@
 	text-align: center;
 	column-gap: 30px;
 
+	@media (max-width: 880px) {
+		grid-template-columns: 1fr;
+		padding: 40px 0px 80px 0px;
+	}
+
+	.search {
+		@media (max-width: 880px) {
+			grid-row-start: 1fr;
+		}
+	}
+
 	.input {
 		position: relative;
 		margin-top: 60px;
@@ -47,6 +58,11 @@
 		color: var(--green);
 		margin-bottom: 40px;
 
+		@media (max-width: 880px) {
+			grid-column: span 1;
+			margin-bottom: 0px;
+		}
+
 		span {
 			color: var(--green-light);
 			font-style: italic;
@@ -62,7 +78,7 @@
 		text-align: center;
 	}
 
-	
+
 }
 
 .radio {
@@ -75,48 +91,56 @@
 	color: var(--brown);
 	font-size: 18px;
 
-		.real {
-			position: absolute;
-			width: 0;
-			height: 0;
-			opacity: 0;
-			z-index: -1;
-		}
+	@media (max-width: 880px) {
+		flex-direction: row;
+		column-gap: 50px;
+		margin-bottom: 50px;
+		margin-left: 0px;
+		justify-content: center;
+	}
 
-		.custom {
-			position: relative;
-			display: inline-block;
-			width: 18px;
-			height: 18px;
-			border: 2px solid var(--brown);
-			border-radius: 40%;
-			margin-right: 10px;
-			color: var(--brown);
+	.real {
+		position: absolute;
+		width: 0;
+		height: 0;
+		opacity: 0;
+		z-index: -1;
+	}
 
-		}
+	.custom {
+		position: relative;
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		border: 2px solid var(--brown);
+		border-radius: 40%;
+		margin-right: 10px;
+		color: var(--brown);
 
-		.custom::before {
-			content: '';
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			background-color: var(--brown);
-			border-radius: 40%;
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%) scale(0);
-			transition: all 0.2s ease-in;
-			
-		}
+	}
 
-		.real:checked + .custom::before {
-			transform: translate(-50%, -50%) scale(1);
-			color: var(--brown);
-		}
+	.custom::before {
+		content: '';
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		background-color: var(--brown);
+		border-radius: 40%;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%) scale(0);
+		transition: all 0.2s ease-in;
 
-		label {
-			cursor: pointer;
-		
+	}
+
+	.real:checked+.custom::before {
+		transform: translate(-50%, -50%) scale(1);
+		color: var(--brown);
+	}
+
+	label {
+		cursor: pointer;
+
 	}
 }

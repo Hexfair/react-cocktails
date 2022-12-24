@@ -6,6 +6,8 @@
 	@media (max-width: 880px) {
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 0px;
+
 	}
 }
 
@@ -51,15 +53,25 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-bottom: 10px;
+
+		@media (max-width: 880px) {
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+
+		@media (max-width: 520px) {
+			justify-content: space-between;
+		}
 
 		.names {
 			font-size: 24px;
-			margin-bottom: 10px;
 			color: var(--brown);
 
 			@media (max-width: 880px) {
-				margin: 0px auto 20px auto;
+				margin-right: 80px;
 			}
+
 		}
 
 		.delete {
@@ -95,7 +107,7 @@
 		color: var(--green);
 
 		@media (max-width: 880px) {
-			margin: 0px auto 20px auto;
+			margin: 0px auto 50px auto;
 		}
 	}
 }

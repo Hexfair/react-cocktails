@@ -7,6 +7,7 @@
 
 	@media (max-width: 880px) {
 		column-gap: 10px;
+		justify-content: center;
 	}
 
 	.ingredient {
@@ -16,7 +17,7 @@
 		justify-content: center;
 		align-items: center;
 		color: var(--green);
-		margin-bottom: 15px;
+		margin-bottom: 30px;
 		min-height: 100%;
 		cursor: pointer;
 
