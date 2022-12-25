@@ -1,0 +1,15 @@
+.icon {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	top: calc(50% - 9px);
+	right: 10px;
+	opacity: 0.6;
+	fill: var(--primary3-light);
+	cursor: pointer;
+
+	&:hover {
+		fill: var(--primary3);
+		opacity: 1;
+	}
+}

@@ -19,6 +19,10 @@
 		padding: 10px 30px;
 	}
 
+	@media (max-width: 580px) {
+		flex-direction: column;
+	}
+
 	span {
 		text-decoration: underline;
 	}
@@ -32,6 +36,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 580px) {
+		margin-top: 20px;
+	}
 
 	.label {
 		text-decoration: none;

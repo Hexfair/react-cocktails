@@ -10,16 +10,14 @@
 		padding: 40px 0px 80px 0px;
 	}
 
-	.search {
-		@media (max-width: 880px) {
-			grid-row-start: 1fr;
-		}
-	}
-
 	.input {
 		position: relative;
 		margin-top: 60px;
 		align-self: start;
+
+		@media (max-width: 880px) {
+			width: 100%;
+		}
 
 		input {
 			border: 2px solid var(--primary);
@@ -32,22 +30,6 @@
 
 			&:focus {
 				border: 2px solid var(--primary3);
-			}
-		}
-
-		.icon {
-			position: absolute;
-			width: 18px;
-			height: 18px;
-			top: calc(50% - 9px);
-			right: 10px;
-			opacity: 0.6;
-			fill: var(--primary3-light);
-			cursor: pointer;
-
-			&:hover {
-				fill: var(--primary3);
-				opacity: 1;
 			}
 		}
 	}
@@ -67,7 +49,6 @@
 			color: var(--primary3-light);
 			font-style: italic;
 		}
-
 	}
 
 	.text {
@@ -91,7 +72,7 @@
 
 	@media (max-width: 880px) {
 		flex-direction: row;
-		column-gap: 50px;
+		column-gap: 30px;
 		margin-bottom: 50px;
 		margin-left: 0px;
 		justify-content: center;
@@ -137,5 +118,11 @@
 
 	label {
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+
+		@media (max-width: 880px) {
+			flex-wrap: wrap;
+		}
 	}
 }
