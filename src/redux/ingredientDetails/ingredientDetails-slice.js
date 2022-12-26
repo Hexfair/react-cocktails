@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
+// Слайс загрузки детальной информации об ингредиенте =====================================================================
 export const loadIngredientDetails = createAsyncThunk(
 	'@@ingredientDetails/load-ingredientItem',
 	async (name, { extra: { client, api } }) => {

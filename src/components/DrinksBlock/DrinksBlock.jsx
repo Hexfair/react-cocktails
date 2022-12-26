@@ -4,10 +4,12 @@ import { DrinksList } from '../DrinksList/DrinksList';
 import { NotFound } from '../../pages/NotFound/NotFound';
 //=========================================================================================================================
 
+// Компонент отображает блок напитков - заголовок и блок карточек напитков ================================================
 export const DrinksBlock = ({ drinksList, name, label }) => {
-	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
-	const onClickButton = () => setVisibleDrinks(visibleDrinks + 20)
 
+	/* Отображение карточек напитков + работа кнопки Show More */
+	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
+	const onClickShowMore = () => setVisibleDrinks(visibleDrinks + 20)
 	let drinks = drinksList.slice(0, visibleDrinks);
 
 	if (!drinksList) {
@@ -17,7 +19,7 @@ export const DrinksBlock = ({ drinksList, name, label }) => {
 	return (
 		<div className={styles.content}>
 			<h2 className={styles.title}>Cocktails {label}: <span>{name}</span></h2>
-			<DrinksList drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
+			<DrinksList drinks={drinks} onClickShowMore={onClickShowMore} visibleDrinks={visibleDrinks} />
 		</div>
 	)
 }

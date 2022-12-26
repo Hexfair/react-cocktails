@@ -69,7 +69,6 @@
 		color: var(--primary);
 		align-self: flex-start;
 
-
 		@media (max-width: 520px) {
 			text-align: center;
 			align-self: center;
@@ -150,7 +149,6 @@ input.names {
 	&:hover {
 		svg {
 			fill: var(--primary3);
-
 		}
 	}
 }

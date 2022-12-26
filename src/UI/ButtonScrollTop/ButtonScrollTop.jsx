@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ButtonScrollTop.module.scss'
 //=========================================================================================================================
 
+// Компонент кнопки (стрелка) скрола наверх ===============================================================================
 export const ButtonScrollTop = () => {
 	return (
 		<button className={styles.buttonBack} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>

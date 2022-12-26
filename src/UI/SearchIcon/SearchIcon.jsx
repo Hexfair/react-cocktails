@@ -3,6 +3,7 @@ import styles from './SearchIcon.module.scss';
 import { Link } from 'react-router-dom';
 //=========================================================================================================================
 
+// Компонент иконки "поиск" в хедере ==================================================================================
 export const SearchIcon = () => {
 	return (
 		<Link to="/search" className={styles.search}  >

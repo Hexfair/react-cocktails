@@ -9,11 +9,19 @@ import { deleteUserCocktail, loadUserCocktails } from '../../../redux/userCockta
 import { FavoritesEmpty } from "../FavoritesEmpty/FavoritesEmpty";
 //=========================================================================================================================
 
+// Страница с любимыми коктейлями (кастомными) ==============================================================================
 export const FavoritesUserBLock = () => {
 	const dispatch = useDispatch();
+
+	/* Кастомные коктейли хранятся на сервере и подгружаются в редакс */
 	const userCocktailsList = useSelector(state => state.userCocktails.userCocktailsList)
 	const [isPreloader, setIsPreloader] = React.useState(false);
 
+	React.useEffect(() => {
+		dispatch(loadUserCocktails())
+	}, [dispatch])
+
+	/* Удаление кастомного коктейля с сервера */
 	const deleteItem = (id) => {
 		setIsPreloader(true);
 		axios.delete('https://633b5933c1910b5de0c41000.mockapi.io/cocktails-favorites/' + id)
@@ -27,10 +35,6 @@ export const FavoritesUserBLock = () => {
 				console.log(err)
 			});
 	}
-
-	React.useEffect(() => {
-		dispatch(loadUserCocktails())
-	}, [dispatch])
 
 	if (isPreloader === true) {
 		return <Preloader />

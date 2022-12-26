@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import { NotFound } from '../../pages/NotFound/NotFound';
 //=========================================================================================================================
 
+// Компонент с детальной инф-цией об ингредиенете - в отдельном попапе ====================================================
 export const IngredientPopup = ({ name, onClickClosePopup }) => {
 	const dispatch = useDispatch();
-	const { ingredient, status } = useSelector(state => state.ingredientDetails)
 
+	/* Инф-ция об ингредиенте берется с сервера */
+	const { ingredient, status } = useSelector(state => state.ingredientDetails)
 	React.useEffect(() => {
 		dispatch(loadIngredientDetails(name));
 	}, [dispatch, name])
@@ -36,6 +38,7 @@ export const IngredientPopup = ({ name, onClickClosePopup }) => {
 							{ingredient.strAlcohol ? <span>Alcoholic</span> : <span>Non Alcoholic</span>}
 							{ingredient.strAlcoholic && <span>{ingredient.strAlcoholic}</span>}
 						</div>
+						{/* Переход на страницу с коктейлями, в которых есть данный ингредиент */}
 						<Link to={`/ingredients/${name}`}>
 							<button className={styles.button}>{`Search cocktails with ${name}`}</button>
 						</Link>

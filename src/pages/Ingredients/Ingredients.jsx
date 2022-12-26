@@ -6,11 +6,10 @@ import styles from './Ingredients.module.scss';
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { useVisibleButton } from "../../utils/use-visibleButton";
-import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
+// Страница с перечнем всех ингредиентов ==================================================================================
 export const Ingredients = () => {
 	const dispatch = useDispatch();
 	const { ingredientsList, status } = useSelector(state => state.ingredients);
@@ -25,9 +24,7 @@ export const Ingredients = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch, ingredientsList])
 
-	const onClickButton = () => setValue(value + 25)
-
-	const visibleBackButton = useVisibleButton();
+	const onClickShowMore = () => setValue(value + 25)
 
 	if (status === 'pending') {
 		return <Preloader />
@@ -48,9 +45,8 @@ export const Ingredients = () => {
 				)}
 			</div>
 			{value <= ingredients.length
-				? <button className={styles.btn} onClick={onClickButton}>Show more</button>
+				? <button className={styles.btn} onClick={onClickShowMore}>Show more</button>
 				: null}
-			{visibleBackButton && <ButtonScrollTop />}
 		</div>
 	)
 }

@@ -3,6 +3,7 @@ import styles from './FavoritesEmpty.module.scss';
 import emptyImage from '../../../assets/empty.png'
 //=========================================================================================================================
 
+// Страница с любимыми коктейлями (пустая) ================================================================================
 export const FavoritesEmpty = () => {
 	return (
 		<div className={styles.empty}>

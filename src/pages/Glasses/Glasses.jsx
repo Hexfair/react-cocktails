@@ -6,24 +6,22 @@ import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { useVisibleButton } from "../../utils/use-visibleButton";
-import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
+// Страница с коктейлями по типу бокала ===================================================================================
 export const Glasses = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 	const { glassesItems, status } = useSelector(state => state.glasses);
 
+	/* Данные подгружаются с сервера. При открытии страницы закрывается бургер-меню  */
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(loadGlassesItems(params.glass));
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
 	}, [dispatch, params.glass])
-
-	const visibleBackButton = useVisibleButton();
 
 	if (status === 'pending') {
 		return <Preloader />
@@ -33,10 +31,5 @@ export const Glasses = () => {
 		return <NotFound />
 	}
 
-	return (
-		<>
-			<DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />
-			{visibleBackButton && <ButtonScrollTop />}
-		</>
-	)
+	return <DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />
 }

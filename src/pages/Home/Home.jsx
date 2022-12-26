@@ -7,31 +7,32 @@ import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
-import { ButtonScrollTop } from '../../UI/ButtonScrollTop/ButtonScrollTop';
-import { useVisibleButton } from '../../utils/use-visibleButton';
 import { NotFound } from '../NotFound/NotFound';
 import { useMedia } from '../../utils/use-media';
 //=========================================================================================================================
 
 const typeOfDrinks = ['Poppular Drinks', 'Alcoholic', 'Non Alcoholic', 'Optional Alcoholic'];
 
-//=========================================================================================================================
-
+// Главная страница с коктейлями ==========================================================================================
 export const Home = () => {
 	const dispatch = useDispatch();
 	const { activeSort, popDrinks, alcDrinks, nonAlcDrinks, optAlcDrinks, status } = useSelector(state => state.drinks);
 	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
+
+	/* На мобильных устройствах скрывается разделяющая полоска в заголовке */
 	const { isMobile } = useMedia();
 
-	const visibleBackButton = useVisibleButton();
+	const onClickShowMore = () => setVisibleDrinks(visibleDrinks + 20)
 
-	const onClickButton = () => setVisibleDrinks(visibleDrinks + 20)
-
+	/* Изменение категории при соответствующем нажатии */
 	const changeCategory = (value) => {
 		dispatch(setActiveSort(value));
 		setVisibleDrinks(20);
 	}
 
+	/* При изменении категории осуществляется проверка, есть ли она уже в редаксе.
+	Если категория уже ранее была загружена, то данные будут браться из редакса,
+	иначе - с сервера */
 	const onClickCategory = (value) => {
 		switch (value) {
 			case 1:
@@ -53,6 +54,7 @@ export const Home = () => {
 		}
 	}
 
+	/* Работа кнопки Show More для каждой категории */
 	let drinks;
 	switch (activeSort) {
 		case 1:
@@ -98,8 +100,7 @@ export const Home = () => {
 					</React.Fragment>
 				))}
 			</div >
-			<DrinksList drinks={drinks} onClickButton={onClickButton} visibleDrinks={visibleDrinks} />
-			{visibleBackButton && <ButtonScrollTop />}
+			<DrinksList drinks={drinks} onClickShowMore={onClickShowMore} visibleDrinks={visibleDrinks} />
 		</div >
 	)
 }

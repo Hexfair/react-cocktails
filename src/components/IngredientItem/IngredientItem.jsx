@@ -4,8 +4,10 @@ import styles from './IngredientItem.module.scss';
 import { IngredientPopup } from "../IngredientPopup/IngredientPopup";
 //=========================================================================================================================
 
+// Карточка ингредиента (на стр. Ingredients) - картинка и название с открытием попапа ====================================
 export const IngredientItem = ({ name }) => {
 
+	/* Работа попапа - открыть и закрытить */
 	const [openPopup, setOpenPopup] = React.useState(false);
 
 	const onClickOpenPopup = () => {
@@ -13,6 +15,7 @@ export const IngredientItem = ({ name }) => {
 		document.body.classList.add('active');
 	}
 
+	/* Закрывается попап по нажатию кнопки внутри него */
 	const onClickClosePopup = () => {
 		setOpenPopup(false);
 		document.body.classList.remove('active');

@@ -5,10 +5,12 @@ import cn from 'classnames';
 import { setTheme } from '../../redux/theme/theme-slice';
 //=========================================================================================================================
 
+// Компонент футер, который также отвечает за цветовую тему проекта =======================================================
 export const Footer = () => {
 	const dispatch = useDispatch();
-	const theme = useSelector(state => state.theme.theme)
 
+	/* Получение темы из редакса, изменение темы по клику */
+	const theme = useSelector(state => state.theme.theme)
 	const changeTheme = () => {
 		dispatch(setTheme(theme === 'brown' ? 'blue' : 'brown'))
 	}

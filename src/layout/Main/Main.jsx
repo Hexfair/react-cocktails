@@ -10,11 +10,18 @@ import { Search } from "../../pages/Search/Search";
 import { NotFound } from "../../pages/NotFound/NotFound";
 import { Favorites } from "../../pages/Favorites/Favorites";
 import { AddUserCocktail } from "../../pages/AddUserCocktail/AddUserCocktail";
+import { useVisibleButton } from "../../utils/use-visibleButton";
+import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 //=========================================================================================================================
 
+// Основной компонент, в котором отображается содержимое страниц проекта ==================================================
 export const Main = () => {
+
+	/* Хук отображения кнопки скролла вверх */
+	const visibleTopButton = useVisibleButton();
+
 	return (
-		<main >
+		<main>
 			<Routes>
 				<Route path="" element={<Home />} />
 				<Route path="cocktail/:id" element={<CocktailDetails />} />
@@ -27,6 +34,7 @@ export const Main = () => {
 				<Route path="addCocktail" element={<AddUserCocktail />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
+			{visibleTopButton && <ButtonScrollTop />}
 		</main>
 	)
 }

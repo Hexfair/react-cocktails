@@ -12,14 +12,17 @@ import { DescriptionEl } from "./DescriptionEl/DescriptionEl";
 import { IngredientsEl } from "./IngredientsEl/IngredientsEl";
 //=========================================================================================================================
 
+// Страница с добавлением пользовательского коктейля ======================================================================
 export const AddUserCocktail = () => {
 	const dispatch = useDispatch();
 
+	/* Закрываем меню при переходе на страницу на мобильном устройстве */
 	React.useEffect(() => {
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
 	}, [dispatch]);
 
+	/* Хук хранит состояние (поля) добавляемого коктейля */
 	const [cocktail, setCocktail] = React.useState({
 		customNameDrink: '',
 		customImageDrink: '',
@@ -28,17 +31,28 @@ export const AddUserCocktail = () => {
 		customDescription: ''
 	});
 
+	/* Массив, необходимый для добавления ингредиентов. qnt равно количеству ингредиентов */
 	const [qnt, setQnt] = React.useState([1])
+
+	/* Добавление полей ингредиента. В cocktail передается предыдущее состояние, плюс
+	добавляются поля customIngredient2 и customMeasure2...и так далее. 
+	В массив qnt также добавляется один элемент	*/
 	const addIngr = (event) => {
 		event.preventDefault();
-		setCocktail((prev) => (
-			{ ...prev, ['customIngredient' + (qnt[qnt.length - 1] + 1)]: '', ['customMeasure' + (qnt[qnt.length - 1] + 1)]: '' }));
-		setQnt((prev) => [...prev, prev[prev.length - 1] + 1]);
+		const qntNumb = qnt[qnt.length - 1] + 1;
+		setCocktail(prev => (
+			{ ...prev, ['customIngredient' + qntNumb]: '', ['customMeasure' + qntNumb]: '' }));
+		setQnt(prev => [...prev, qntNumb]);
 	}
 
+	/* Функция изменения стейта cocktail. Работает для всех полей. Уникальность конкретных полей
+	задает event.target.name в соответствии с атрибутом name */
 	const onChangeInput = (event) => setCocktail((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+
+	/* numInput помогает определить, какой конкретно ингредиент редактируется */
 	const updateCocktail = (str, numInput) => setCocktail((prev) => ({ ...prev, ['customIngredient' + (numInput + 1)]: str }));
 
+	/* Сброс полей */
 	const resetState = () => {
 		setCocktail({
 			customNameDrink: '',
@@ -52,6 +66,7 @@ export const AddUserCocktail = () => {
 
 	const [isPreloader, setIsPreloader] = React.useState(false);
 
+	/* Отправка формы на сервер - добавление коктейля*/
 	const submit = (event) => {
 		event.preventDefault();
 		if (cocktail.customNameDrink.length > 4) {

@@ -3,8 +3,6 @@ import styles from './Search.module.scss';
 import allCocktails from '../../api/AllCocktails.json';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { useSearch } from './use-search';
-import { useVisibleButton } from '../../utils/use-visibleButton';
-import { ButtonScrollTop } from '../../UI/ButtonScrollTop/ButtonScrollTop';
 import { useDispatch } from 'react-redux';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
@@ -13,25 +11,25 @@ import { SearchOrCloseIcon } from './SearchOrCloseIcon/SearchOrCloseIcon';
 
 const radioInputType = ['names', 'ingredients'];
 
-//=========================================================================================================================
+// Страница поиска коктейля ===============================================================================================
 export const Search = () => {
 	const dispatch = useDispatch();
 	const [value, setValue] = React.useState('');
 	const [valueRadioInput, setValueRadioInput] = React.useState('names');
 
-	const inputRef = React.useRef();
-
-	const visibleBackButton = useVisibleButton();
-
 	const onChangeInput = (event) => setValue(event.target.value);
 
+	/* Нажатие крестика - очистка поля Input + автофокус*/
+	const inputRef = React.useRef();
 	const onClickCloseIcon = () => {
 		setValue('');
 		inputRef.current?.focus();
 	}
 
+	/* Выбор параметра поиска - радиокнопки */
 	const radioInputChange = (event) => setValueRadioInput(event.target.value)
 
+	/* Поиск коктейля производится из локального файла AllCocktails.json */
 	const drinks = useSearch(valueRadioInput, value, allCocktails);
 
 	React.useEffect(() => {
@@ -71,7 +69,6 @@ export const Search = () => {
 					? <DrinksList drinks={drinks} />
 					: <div className={styles.text}>On this page you can try to find your favorite cocktail!</div>}
 			</div>
-			{visibleBackButton && <ButtonScrollTop />}
 		</div >
 	)
 }

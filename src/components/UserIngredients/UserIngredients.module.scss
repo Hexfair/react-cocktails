@@ -20,6 +20,13 @@
 		min-height: 100%;
 		cursor: pointer;
 
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 120px;
+		}
+
 		.caption {
 			font-size: 13px;
 			margin-top: 5px;

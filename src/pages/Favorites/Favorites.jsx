@@ -8,12 +8,12 @@ import { FavoritesUserBLock } from "./FavoritesUserBLock/FavoritesUserBLock";
 
 const typeOfDrinks = ['Favorites', 'User Cocktails'];
 
-//=========================================================================================================================
-
+// Страница с любимыми коктейлями (избранными и кастомными) ===============================================================
 export const Favorites = () => {
 	const [visibleBlock, setVisibleBlock] = React.useState('Favorites');
 	const { isMobile } = useMedia();
 
+	/* Переключение между избранными и кастомными */
 	const onClickCategory = (value) => setVisibleBlock(value);
 
 	return (
@@ -30,7 +30,6 @@ export const Favorites = () => {
 					</React.Fragment>
 				))}
 			</div >
-
 			{visibleBlock === 'Favorites' ? <FavoritesLikeBlock /> : <FavoritesUserBLock />}
 		</div>
 	)

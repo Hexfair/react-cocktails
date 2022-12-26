@@ -14,22 +14,20 @@ import { setFavoritesList } from "../../redux/favorites/favorites-slice";
 
 const languageDescription = ['GBR', 'ESP', 'DEU', 'FRA', 'ITA']
 
-//=========================================================================================================================
-
+// Страница с детальной инф-цией о коктейле ===============================================================================
 export const CocktailDetails = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
-	const [currentLang, setCurrentLang] = React.useState('GBR');
-
 	const { item, status } = useSelector(state => state.cocktailDetails);
+
+	/* Смена отображаемого описания */
+	const [currentLang, setCurrentLang] = React.useState('GBR');
+	const onChangeText = (lang) => setCurrentLang(lang)
 
 	const [openPopup, setOpenPopup] = React.useState(false);
 	const [name, setName] = React.useState('');
 
-	const onChangeText = (lang) => {
-		setCurrentLang(lang)
-	}
-
+	/* Открытие и закрытие попапа с детальным описанием ингредиента */
 	const onClickOpenPopup = (obj) => {
 		setOpenPopup(true);
 		document.body.classList.add('active');
@@ -41,6 +39,7 @@ export const CocktailDetails = () => {
 		document.body.classList.remove('active');
 	}
 
+	/* Добавление коктейля в "избранное" */
 	const isFavorite = useFavorites(params.id);
 	const addFavoritesCocktail = (id, name, image) => {
 		dispatch(setFavoritesList({ id, name, image }));
@@ -59,6 +58,7 @@ export const CocktailDetails = () => {
 		return <NotFound />
 	}
 
+	/* Объект заполняется описанием коктейля на разных языках */
 	const instructions = {
 		'GBR': item.strInstructions,
 		'ESP': item.strInstructionsES,
@@ -85,6 +85,7 @@ export const CocktailDetails = () => {
 					<div className={styles.description}>
 						<h3 className={styles.label}>Description</h3>
 						<div className={styles.flags}>
+							{/* Отображаются только те языки, которые пришли с сервера */}
 							{languageDescription.map((obj, index) => instructions[obj] &&
 								<span
 									className={cn(`${styles.flag}`, `${obj === currentLang ? styles.active : ''}`)}

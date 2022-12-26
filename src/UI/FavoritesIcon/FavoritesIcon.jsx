@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 //=========================================================================================================================
 
+// Компонент иконки "избранное" в хедере ==================================================================================
 export const FavoritesIcon = () => {
 
 	const quantityFavorites = useSelector(state => state.favorites.favoritesList);

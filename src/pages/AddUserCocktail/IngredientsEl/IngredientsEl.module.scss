@@ -22,7 +22,7 @@
 		display: grid;
 		grid-template-columns: [one] auto [two] 1fr [three] auto [four];
 		column-gap: 10px;
-
+		margin-bottom: 5px;
 		@media (max-width: 810px) {
 			grid-template-columns: [one] auto [two] 1fr [three];
 			grid-template-rows: [t] auto [m] 1fr [b];

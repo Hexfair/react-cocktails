@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 //=========================================================================================================================
 
+// Слайс загрузки детальной информации о коктейле =========================================================================
 export const loadCocktailById = createAsyncThunk(
 	'@@cocktailDetails/load-cocktail',
 	async (id, { extra: { client, api } }) => {
@@ -8,7 +9,6 @@ export const loadCocktailById = createAsyncThunk(
 		return res.data.drinks[0];
 	}
 )
-
 
 const initialState = {
 	item: null,
@@ -32,7 +32,6 @@ export const cocktailDetailsSlice = createSlice({
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})
-
 	}
 })
 

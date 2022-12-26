@@ -1,12 +1,13 @@
 import React from "react";
+//=========================================================================================================================
 
+/* Хук отображает кнопку скролла вверх при скроле страницы более 600px */
 export const useVisibleButton = () => {
-
-	const [visibleBackButton, setVisibleBackButton] = React.useState(false);
+	const [visibleTopButton, setVisibleTopButton] = React.useState(false);
 
 	React.useEffect(() => {
 		const handleScroll = () => {
-			window.scrollY > 600 ? setVisibleBackButton(true) : setVisibleBackButton(false);
+			window.scrollY > 600 ? setVisibleTopButton(true) : setVisibleTopButton(false);
 		};
 		window.addEventListener('scroll', handleScroll);
 		return () => {
@@ -14,6 +15,5 @@ export const useVisibleButton = () => {
 		};
 	}, []);
 
-	return visibleBackButton;
+	return visibleTopButton;
 }
-

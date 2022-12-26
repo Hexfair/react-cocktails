@@ -2,6 +2,7 @@ import React from "react";
 import styles from './SearchOrCloseIcon.module.scss';
 //=========================================================================================================================
 
+// Смена иконки в Инпуте на странице поиска коктейля ======================================================================
 export const SearchOrCloseIcon = ({ value, onClickCloseIcon }) => {
 	return (
 		<>

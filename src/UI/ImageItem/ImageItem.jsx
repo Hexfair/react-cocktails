@@ -1,25 +1,23 @@
 import React from "react";
 import noImage from '../../assets/no-image.png';
-import styles from './ImageItem.module.scss';
 //=========================================================================================================================
 
+// Компонент подгрузки изображения в ингредиенте ==========================================================================
 export const ImageItem = ({ srcData }) => {
 
+	/* Если картинка не подгрузилась (URL-адрес не действителен), то
+	срабатывает событие onError, по которому картинка подменется 
+	пользовательской картинкой noImage */
 	const [visibleImage, setVisibleImage] = React.useState(true);
 	React.useEffect(() => {
 		setVisibleImage(true)
 	}, [srcData])
 
-	const changeImage = () => {
-		setVisibleImage(false);
-	}
+	const changeImage = () => setVisibleImage(false);
 
-	console.log(visibleImage);
 	return (
 		<>
-			{visibleImage
-				? <span className={styles.image}><img src={srcData} alt='' onError={changeImage} /></span>
-				: <span className={styles.image}><img src={noImage} alt='' /></span>}
+			{visibleImage ? <img src={srcData} alt='' onError={changeImage} /> : <img src={noImage} alt='' />}
 		</>
 	)
 }

@@ -7,13 +7,17 @@ import cn from 'classnames';
 import { useFavorites } from "../../utils/use-favorites";
 //=========================================================================================================================
 
+// Компонент карточки напитка - картинка, название и иконка "избранное" ===================================================
 export const DrinksItem = ({ id, name, image }) => {
 	const dispatch = useDispatch();
 
+	/* Добавление напитка в "избранные" */
 	const addFavoritesCocktail = (id, name, image) => {
 		dispatch(setFavoritesList({ idDrink: id, strDrink: name, strDrinkThumb: image }))
 	};
 
+	/* Изменение стиля иконки на карточке напитка, в зависимости
+	от того, добавлен коктейль в "избранное" или нет */
 	const isFavorite = useFavorites(id);
 
 	return (

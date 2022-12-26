@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
+// Слайс загрузки перечня доступных категорий =============================================================================
+/* Загрузка категорий */
 export const loadCategories = createAsyncThunk(
 	'@@categories/load-categories',
 	async (_, { extra: { client, api } }) => {
@@ -9,6 +11,7 @@ export const loadCategories = createAsyncThunk(
 	}
 )
 
+/* Загрузка коктейлей по выбранной категории */
 export const loadCategoriesItems = createAsyncThunk(
 	'@@categories/load-categoriesItems',
 	async (name, { extra: { client, api } }) => {

@@ -6,18 +6,22 @@ import { loadIngredients } from "../../../redux/ingredients/ingredients-slice";
 import { getSmallImageOfIngredient } from "../../../api/api";
 import { ImageItem } from "../../../UI/ImageItem/ImageItem";
 //=========================================================================================================================
+
+// Компонент кастомного коктейля пользователя - поля ингредиента ==========================================================
 export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }) => {
 	const dispatch = useDispatch();
 	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
 
-	const [open, isOpen] = React.useState(false);
-	const [numInput, setNumInput] = React.useState(0);
+	const [open, isOpen] = React.useState(false);			// Открытие/закрытие окна с ингредиентами
+	const [numInput, setNumInput] = React.useState(0);		// Индекс конкретного редактируемого ингредиета
 
+	/* При фокусе открывается окно с перечнем ингредиентов, подгружженых с сервера */
 	const onFocusInput = (index) => {
 		isOpen(true);
 		setNumInput(index);
 	}
 
+	/* Функция срабатывает при нажатии на ингредиент из списка - обновляет стейт cocktail */
 	const onClickLi = (str) => {
 		updateCocktail(str, numInput);
 		isOpen(false);
@@ -29,6 +33,7 @@ export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }) 
 		}
 	}, [dispatch, ingredientsList]);
 
+	/* Закрытие окна со списком ингредиентов по клику вне области этого окна */
 	React.useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (open && event.target.dataset.type !== 'ingr') {
@@ -56,6 +61,7 @@ export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }) 
 								data-type="ingr"
 							/>
 							<ul className={cn(`${styles.list}`, `${(open === true && numInput === index) ? styles.active : ''}`)}>
+								{/* Ингредиенты фильтруются в зависимости от введенных данных */}
 								{ingredientsList && ingredientsList
 									.filter((obj) => obj.strIngredient1.toLowerCase().includes(cocktail['customIngredient' + (index + 1)].toLowerCase()))
 									.map((obj) =>

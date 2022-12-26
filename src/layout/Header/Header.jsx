@@ -15,20 +15,29 @@ import { loadUserCocktails } from '../../redux/userCocktails/userCocktails-slice
 import { ButtonHeader } from '../../UI/ButtonHeader/ButtonHeader';
 //=========================================================================================================================
 
+// Компонент хедер с логикой работы бургер-меню ===========================================================================
 export const Header = () => {
 	const dispatch = useDispatch();
-	const { isTablet } = useMedia();
-	const isBurgerMenuOpen = useSelector(state => state.burger.isBurgerMenuOpen);
+
 	const glasses = useSelector(state => state.glasses.glassesList);
 	const categories = useSelector(state => state.categories.categoriesList);
 
-	const [isOpen, setIsOpen] = React.useState(false);
+	/* Хук меняет расположение иконок поиска и "избранное" при переходе на мобилку */
+	const { isTablet } = useMedia();
 
+	/* Состояние открыто/закрыто бургер-меню находится в редаксе */
+	const [isOpen, setIsOpen] = React.useState(false);
+	const isBurgerMenuOpen = useSelector(state => state.burger.isBurgerMenuOpen);
+
+	/* Открытие окна с категориями и бокалами при работе на мобилках, в бургер-меню */
 	const onClickBut = () => {
 		isTablet && setIsOpen(!isOpen)
 	}
 
-	// Сохранение коктелей в localStorage
+	/* Сохранение коктелей в localStorage. При первом рендере ничего не происходит.
+	В дальнейшем при добавлении коктейля в "избранное" меняется favoritesList в редаксе.
+	При этом изменении срабатывает useEffect (зависимость Item) и весь список 
+	избранных коктейлей сохраняется в ЛокалСтор */
 	const isMounted = React.useRef(false);
 	const items = useSelector(state => state.favorites.favoritesList)
 	React.useEffect(() => {
@@ -39,12 +48,13 @@ export const Header = () => {
 		isMounted.current = true;
 	}, [items]);
 
+	/* Загрузка списка категорий, видов бокалов и коктейлей пользователя, закрытие бургер-меню */
 	React.useEffect(() => {
 		dispatch(loadGlasses());
 		dispatch(loadCategories());
 		dispatch(setBurgerStatus(false));
 		dispatch(loadUserCocktails())
-	}, [dispatch]);;
+	}, [dispatch]);
 
 	return (
 		<header className={styles.header}>

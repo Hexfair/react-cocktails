@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 //=========================================================================================================================
 
+// Слайс загрузки коктейлей на главной странице ===========================================================================
 export const loadPopDrinks = createAsyncThunk(
 	'@@drinks/load-popularDrinks',
 	async (_, { extra: { client, api } }) => {

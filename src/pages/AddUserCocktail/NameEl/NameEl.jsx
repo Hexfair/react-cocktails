@@ -3,10 +3,11 @@ import styles from './NameEl.module.scss';
 import cn from 'classnames';
 //=========================================================================================================================
 
+// Компонент кастомного коктейля пользователя - поле название =============================================================
 export const NameEl = ({ cocktail, onChangeInput }) => {
 
+	/* Валидация названия коктейля. Валидация происходит по событию onBlur. */
 	const [isValidName, setIsValidName] = React.useState(true);
-
 	const validateName = () => {
 		cocktail.customNameDrink.length < 4 ? setIsValidName(false) : setIsValidName(true);
 	}

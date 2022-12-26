@@ -6,16 +6,16 @@ import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
-import { useVisibleButton } from "../../utils/use-visibleButton";
-import { ButtonScrollTop } from "../../UI/ButtonScrollTop/ButtonScrollTop";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
+// Страница с коктейлями по типу категории ================================================================================
 export const Categories = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 	const { categoriesItems, status } = useSelector(state => state.categories)
 
+	/* Данные подгружаются с сервера. При открытии страницы закрывается бургер-меню  */
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(loadCategoriesItems(params.category));
@@ -23,7 +23,6 @@ export const Categories = () => {
 		burgerOpenOrClose(false);
 	}, [dispatch, params.category]);
 
-	const visibleBackButton = useVisibleButton();
 
 	if (status === 'pending') {
 		return <Preloader />
@@ -36,7 +35,7 @@ export const Categories = () => {
 	return (
 		<>
 			<DrinksBlock drinksList={categoriesItems} name={params.category} label='Categories' />
-			{visibleBackButton && <ButtonScrollTop />}
+			{/* {visibleTopButton && <ButtonScrollTop />} */}
 		</>
 	)
 }

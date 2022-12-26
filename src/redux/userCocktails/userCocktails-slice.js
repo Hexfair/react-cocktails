@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
+// Слайс загрузки кастомных коктейлей, добавленных пользователем ==========================================================
 export const loadUserCocktails = createAsyncThunk(
 	'@@userCocktails/load-cocktails',
 	async (_, { extra: { client, api } }) => {

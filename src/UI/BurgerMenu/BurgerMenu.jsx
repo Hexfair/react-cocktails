@@ -6,6 +6,7 @@ import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 //=========================================================================================================================
 
+// Компонент бургер-меню ==================================================================================================
 export const BurgerMenu = () => {
 	const dispatch = useDispatch();
 	const isBurgerMenuOpen = useSelector(state => state.burger.isBurgerMenuOpen);

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
+// Слайс загрузки коктейлей по указанному ингредиенту =====================================================================
 export const loadCocktailsByIngredient = createAsyncThunk(
 	'@@cocktailsByIngredient',
 	async (name, { extra: { client, api } }) => {
@@ -31,7 +32,6 @@ export const cocktailsByIngredientSlice = createSlice({
 				state.status = 'rejected';
 				state.error = action.payload || action.meta.error;
 			})
-
 	}
 })
 

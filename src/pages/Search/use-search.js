@@ -1,3 +1,4 @@
+/* Хук поиска коктейлся в соответствии с выборанным параметром (радиокнопки) */
 export const useSearch = (valueRadioInput, value, allCocktails) => {
 	const drinks = valueRadioInput === 'names'
 		? allCocktails.filter(obj => obj.strDrink.toLowerCase().includes(value.toLowerCase()))
