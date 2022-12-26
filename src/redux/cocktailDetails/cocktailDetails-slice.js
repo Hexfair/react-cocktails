@@ -18,11 +18,6 @@ const initialState = {
 export const cocktailDetailsSlice = createSlice({
 	name: '@@cocktailDetails',
 	initialState,
-	reducers: {
-		// setActiveType: (state, action) => {
-		// 	state.activeSort = action.payload;
-		// },
-	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadCocktailById.fulfilled, (state, action) => {
@@ -40,7 +35,5 @@ export const cocktailDetailsSlice = createSlice({
 
 	}
 })
-
-//export const { setActiveType } = mainSlice.actions;
 
 export const cocktailDetailsReducer = cocktailDetailsSlice.reducer;

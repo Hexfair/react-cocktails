@@ -5,7 +5,6 @@ import { loadCocktailById } from "../../redux/cocktailDetails/cocktailDetails-sl
 import { getSmallImageOfIngredient } from "../../api/api";
 import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
-import { selectIngredients } from "../../redux/cocktailDetails/cocktailDetails-selectors";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { IngredientPopup } from "../../components/IngredientPopup/IngredientPopup";
 import { NotFound } from "../NotFound/NotFound";
@@ -23,7 +22,6 @@ export const CocktailDetails = () => {
 	const [currentLang, setCurrentLang] = React.useState('GBR');
 
 	const { item, status } = useSelector(state => state.cocktailDetails);
-	const { ingredientsArray, measuresArray } = useSelector(selectIngredients());
 
 	const [openPopup, setOpenPopup] = React.useState(false);
 	const [name, setName] = React.useState('');
@@ -107,13 +105,18 @@ export const CocktailDetails = () => {
 			</div>
 			<h3 className={styles.label}>Ingredients</h3>
 			<div className={styles.ingredients}>
-				{ingredientsArray && ingredientsArray.map((obj, index) =>
-					<div className={styles.ingredient} key={index} onClick={() => onClickOpenPopup(obj)}>
-						<img src={getSmallImageOfIngredient(obj)} alt='' />
-						<span className={styles.caption} >{obj}:</span>
-						<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
-					</div>
-				)}
+				{Object.keys(item).map((key) => {
+					if (key.includes('strIngredient') && item[key]) {
+						return (
+							<div className={styles.ingredient} key={key} onClick={() => onClickOpenPopup(item[key])}>
+								<img src={getSmallImageOfIngredient(item[key])} alt='' />
+								<span className={styles.caption} >{item[key]}:</span>
+								<span className={styles.dose}>{item[`strMeasure${key.slice(13)}`] || 'taste'}</span>
+							</div>
+						)
+					}
+					return null;
+				})}
 				{openPopup && <IngredientPopup name={name} onClickClosePopup={onClickClosePopup} />}
 			</div>
 		</div>

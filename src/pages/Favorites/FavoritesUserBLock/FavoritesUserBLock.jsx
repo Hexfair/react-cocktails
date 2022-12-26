@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { UserIngredients } from "../../../components/UserIngredients/UserIngredients";
 import { Preloader } from '../../../components/Preloader/Preloader';
-import { ImageItem } from '../../../UI/ImageItem//ImageItem';
+import { ImageItem } from '../../../UI/ImageItem/ImageItem';
 import { deleteUserCocktail, loadUserCocktails } from '../../../redux/userCocktails/userCocktails-slice'
 import { FavoritesEmpty } from "../FavoritesEmpty/FavoritesEmpty";
 //=========================================================================================================================
@@ -59,7 +59,7 @@ export const FavoritesUserBLock = () => {
 						</div>
 						<p className={styles.text}>{obj.customDescription}</p>
 						<h3 className={styles.label}>Ingredients</h3>
-						<UserIngredients idx={index} />
+						<UserIngredients idx={index} userCocktail={obj} />
 					</div>
 				</div>
 			)}

@@ -5,7 +5,6 @@ export const loadCategories = createAsyncThunk(
 	'@@categories/load-categories',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getCategories);
-		//const drinksWithFilter = res.data.drinks.filter(obj => !obj.strCategory.includes('/'));
 		return res.data.drinks;
 	}
 )
@@ -27,11 +26,6 @@ const initialState = {
 export const categoriesSlice = createSlice({
 	name: '@@options',
 	initialState,
-	reducers: {
-		// setPopularDrinks: (state, action) => {
-		// 	state.popularDrinks = action.payload;
-		// },
-	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadCategories.fulfilled, (state, action) => {
@@ -52,7 +46,5 @@ export const categoriesSlice = createSlice({
 			})
 	}
 })
-
-//export const { setPopularDrinks } = popularSlice.actions;
 
 export const categoriesReducer = categoriesSlice.reducer;

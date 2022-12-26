@@ -42,7 +42,7 @@ export const Search = () => {
 
 	return (
 		<div className={styles.body}>
-			<h2 className={styles.title}>Search by: <span>{value}</span></h2>
+			<h2 className={styles.title}>Search: <span>{value}</span></h2>
 			<div className={styles.search}>
 				<div className={styles.input}>
 					<input

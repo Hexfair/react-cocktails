@@ -151,10 +151,6 @@
 	transform: scaleY(0);
 	transform-origin: top;
 
-	@media (max-width: 880px) {
-		// position: static;
-	}
-
 	span {
 		display: inline-block;
 		margin: 10px;

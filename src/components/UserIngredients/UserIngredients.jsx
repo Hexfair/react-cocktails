@@ -1,23 +1,24 @@
 import React from "react";
 import styles from './UserIngredients.module.scss';
-import { useSelector } from "react-redux";
-import { selectUserIngredients } from "../../redux/userCocktails/userCocktails-selectors";
 import { ImageItem } from "../../UI/ImageItem/ImageItem";
 import { getSmallImageOfIngredient } from "../../api/api";
 //=========================================================================================================================
 
-export const UserIngredients = ({ idx }) => {
-	const { ingredientsArray, measuresArray } = useSelector(selectUserIngredients(idx));
-
+export const UserIngredients = ({ idx, userCocktail }) => {
 	return (
 		<div className={styles.ingredients}>
-			{ingredientsArray && ingredientsArray.map((obj, index) =>
-				<div className={styles.ingredient} key={index} >
-					<ImageItem srcData={getSmallImageOfIngredient(obj)} />
-					<span className={styles.caption} >{obj}:</span>
-					<span className={styles.dose}>{measuresArray[index] || 'taste'}</span>
-				</div>
-			)}
+			{Object.keys(userCocktail).map((key) => {
+				if (key.includes('customIngredient') && userCocktail[key]) {
+					return (
+						<div className={styles.ingredient} key={key}>
+							<ImageItem srcData={getSmallImageOfIngredient(userCocktail[key])} />
+							<span className={styles.caption} >{userCocktail[key]}:</span>
+							<span className={styles.dose}>{userCocktail[`customMeasure${key.slice(16)}`] || 'taste'}</span>
+						</div>
+					)
+				}
+				return null;
+			})}
 		</div>
 	)
 }

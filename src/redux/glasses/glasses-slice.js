@@ -5,7 +5,6 @@ export const loadGlasses = createAsyncThunk(
 	'@@glasses/load-glasses',
 	async (_, { extra: { client, api } }) => {
 		const res = await client.get(api.getGlasses);
-		//const drinksWithFilter = res.data.drinks.filter(obj => !obj.strGlass.includes('/'));
 		return res.data.drinks;
 	}
 )
@@ -27,11 +26,6 @@ const initialState = {
 export const glassesSlice = createSlice({
 	name: '@@glasses',
 	initialState,
-	reducers: {
-		// setPopularDrinks: (state, action) => {
-		// 	state.popularDrinks = action.payload;
-		// },
-	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadGlasses.fulfilled, (state, action) => {

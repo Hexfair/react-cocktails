@@ -17,11 +17,6 @@ const initialState = {
 export const cocktailsByIngredientSlice = createSlice({
 	name: '@@cocktailsByIngredient',
 	initialState,
-	reducers: {
-		// setPopularDrinks: (state, action) => {
-		// 	state.popularDrinks = action.payload;
-		// },
-	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadCocktailsByIngredient.fulfilled, (state, action) => {
@@ -39,7 +34,5 @@ export const cocktailsByIngredientSlice = createSlice({
 
 	}
 })
-
-//export const { setPopularDrinks } = popularSlice.actions;
 
 export const cocktailsByIngredientReducer = cocktailsByIngredientSlice.reducer;
