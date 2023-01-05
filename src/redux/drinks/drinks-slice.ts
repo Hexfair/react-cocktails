@@ -37,43 +37,22 @@ export const drinksSlice = createSlice({
 				state.status = 'success';
 				state.popDrinks = action.payload;
 			})
-			.addCase(loadPopDrinks.rejected, (state) => {
-				state.status = 'rejected';
-			})
-			.addCase(loadPopDrinks.pending, (state) => {
-				state.status = 'pending';
-			})
-
 			.addCase(loadAlcDrinks.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.alcDrinks = action.payload;
 			})
-			.addCase(loadAlcDrinks.pending, (state) => {
-				state.status = 'pending';
-			})
-			.addCase(loadAlcDrinks.rejected, (state) => {
-				state.status = 'rejected';
-			})
-
 			.addCase(loadNonAlcDrinks.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.nonAlcDrinks = action.payload;
 			})
-			.addCase(loadNonAlcDrinks.pending, (state) => {
-				state.status = 'pending';
-			})
-			.addCase(loadNonAlcDrinks.rejected, (state) => {
-				state.status = 'rejected';
-			})
-
 			.addCase(loadOptAlcDrinks.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.optAlcDrinks = action.payload;
 			})
-			.addCase(loadOptAlcDrinks.pending, (state) => {
+			.addMatcher((action) => action.type.endsWith('Drinks/pending'), (state) => {
 				state.status = 'pending';
 			})
-			.addCase(loadOptAlcDrinks.rejected, (state) => {
+			.addMatcher((action) => action.type.endsWith('Drinks/rejected'), (state) => {
 				state.status = 'rejected';
 			})
 	}
