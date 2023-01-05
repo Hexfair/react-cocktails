@@ -1,17 +1,9 @@
-import { UserCocktailType, Extra, Status } from './../../@types';
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserCocktailType, Status } from './../../@types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loadUserCocktails } from './userCocktails-asyncActions';
 //=========================================================================================================================
 
 // Слайс загрузки кастомных коктейлей, добавленных пользователем ==========================================================
-export const loadUserCocktails = createAsyncThunk
-	<UserCocktailType[], undefined, { extra: Extra }>
-	('@@userCocktails/load-cocktails',
-		async (_, { extra: { client, api } }) => {
-			const res = await client.get(api.getUserCocktails);
-			return res.data as UserCocktailType[]
-		}
-	)
-
 type UserCocktailsSlice = {
 	userCocktailsList: UserCocktailType[] | [],
 	status: Status,

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./NotFound.module.scss";
 import notFoundImage from "../../assets/404.png";
 //=========================================================================================================================

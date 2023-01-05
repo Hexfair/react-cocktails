@@ -5,19 +5,19 @@ import { FavoritesIcon } from '../../UI/FavoritesIcon/FavoritesIcon';
 import { SearchIcon } from '../../UI/SearchIcon/SearchIcon'
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
-import { loadCategories } from '../../redux/categories/categories-slice';
-import { loadGlasses } from '../../redux/glasses/glasses-slice';
 import { Link } from 'react-router-dom';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { useMedia } from '../../utils/use-media';
 import { BurgerMenu } from '../../UI/BurgerMenu/BurgerMenu';
-import { loadUserCocktails } from '../../redux/userCocktails/userCocktails-slice';
 import { ButtonHeader } from '../../UI/ButtonHeader/ButtonHeader';
 import { selectorGlassesList } from '../../redux/glasses/glasses-selectors';
 import { useAppDispatch } from '../../redux/store';
 import { selectorCategoriesList } from '../../redux/categories/categories-selectors';
 import { selectStatusBurgerMenu } from '../../redux/burgerMenu/burgerMenu-selectors';
 import { selectorFavoritesList } from '../../redux/favorites/favorites-selectors';
+import { loadCategories } from '../../redux/categories/categories-asyncActions';
+import { loadGlasses } from '../../redux/glasses/glasses-asyncActions';
+import { loadUserCocktails } from '../../redux/userCocktails/userCocktails-asyncActions';
 //=========================================================================================================================
 
 // Компонент хедер с логикой работы бургер-меню ===========================================================================

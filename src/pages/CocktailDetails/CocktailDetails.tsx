@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { loadCocktailById } from "../../redux/cocktailDetails/cocktailDetails-slice";
 import { getSmallImageOfIngredient } from "../../api/api";
 import styles from './CocktailDetails.module.scss';
 import cn from 'classnames';
@@ -13,6 +12,7 @@ import { setFavoritesList } from "../../redux/favorites/favorites-slice";
 import { selectorCocktailDetails } from "../../redux/cocktailDetails/cocktailDetails-selectors";
 import { useAppDispatch } from "../../redux/store";
 import { CocktailDetailsType } from "../../@types";
+import { loadCocktailById } from "../../redux/cocktailDetails/cocktailDetails-asyncActions";
 //=========================================================================================================================
 
 type Language = 'GBR' | 'ESP' | 'DEU' | 'FRA' | 'ITA';
@@ -44,7 +44,7 @@ export const CocktailDetails = () => {
 	}
 
 	/* Добавление коктейля в "избранное" */
-	const isFavorite = useFavorites(params.id);
+	const isFavorite = useFavorites(params.id ? params.id : '');
 	const addFavoritesCocktail = (id: string, name: string, image: string) => {
 		dispatch(setFavoritesList({ idDrink: id, strDrink: name, strDrinkThumb: image }));
 	};

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from './DrinksItem.module.scss';
 import { Link } from "react-router-dom";
 import { setFavoritesList } from "../../redux/favorites/favorites-slice";

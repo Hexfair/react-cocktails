@@ -1,28 +1,9 @@
-import { Extra, Status, CocktailShortType, StrGlassType } from './../../@types';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Status, CocktailShortType, StrGlassType } from './../../@types';
+import { createSlice } from "@reduxjs/toolkit";
+import { loadGlasses, loadGlassesItems } from './glasses-asyncActions';
 //=========================================================================================================================
 
 // Слайс загрузки любимых коктейлей =======================================================================================
-/* Загрузка типов бокалов */
-export const loadGlasses = createAsyncThunk
-	<StrGlassType[], undefined, { extra: Extra }>
-	('@@glasses/load-glasses',
-		async (_, { extra: { client, api } }) => {
-			const res = await client.get(api.getGlasses);
-			return res.data.drinks as StrGlassType[];
-		}
-	)
-
-/* Загрузка коктейлей по выбранному типу бокалов */
-export const loadGlassesItems = createAsyncThunk
-	<CocktailShortType[], string, { extra: Extra }>
-	('@@glasses/load-glassesItems',
-		async (name, { extra: { client, api } }) => {
-			const res = await client.get(api.getGlassesItem(name));
-			return res.data.drinks as CocktailShortType[]
-		}
-	)
-
 type GlassesSlice = {
 	glassesList: StrGlassType[],
 	glassesItems: CocktailShortType[],

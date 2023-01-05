@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { IngredientItem } from "../../components/IngredientItem/IngredientItem";
-import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import styles from './Ingredients.module.scss';
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
@@ -9,6 +8,7 @@ import { Preloader } from "../../components/Preloader/Preloader";
 import { NotFound } from "../NotFound/NotFound";
 import { selectorIngredients } from "../../redux/ingredients/ingredients-selectors";
 import { useAppDispatch } from "../../redux/store";
+import { loadIngredients } from "../../redux/ingredients/ingredients-asyncActions";
 //=========================================================================================================================
 
 // Страница с перечнем всех ингредиентов ==================================================================================

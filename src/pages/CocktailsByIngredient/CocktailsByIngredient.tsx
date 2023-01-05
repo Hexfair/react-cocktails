@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-asyncActions";
 import { selectorCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-selectors";
-import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-slice";
 import { useAppDispatch } from "../../redux/store";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================

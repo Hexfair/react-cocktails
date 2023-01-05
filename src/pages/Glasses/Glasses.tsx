@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { loadGlassesItems } from "../../redux/glasses/glasses-slice";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
@@ -9,6 +8,7 @@ import { Preloader } from "../../components/Preloader/Preloader";
 import { NotFound } from "../NotFound/NotFound";
 import { selectorGlasses } from "../../redux/glasses/glasses-selectors";
 import { useAppDispatch } from "../../redux/store";
+import { loadGlassesItems } from "../../redux/glasses/glasses-asyncActions";
 //=========================================================================================================================
 
 // Страница с коктейлями по типу бокала ===================================================================================

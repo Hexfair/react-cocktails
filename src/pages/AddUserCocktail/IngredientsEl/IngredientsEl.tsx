@@ -2,12 +2,12 @@ import React from "react";
 import styles from './IngredientsEl.module.scss';
 import cn from 'classnames';
 import { useSelector } from "react-redux";
-import { loadIngredients } from "../../../redux/ingredients/ingredients-slice";
 import { getSmallImageOfIngredient } from "../../../api/api";
 import { ImageItem } from "../../../UI/ImageItem/ImageItem";
 import { UserCocktailProps } from "../../../@types";
 import { selectorIngredientsList } from "../../../redux/ingredients/ingredients-selectors";
 import { useAppDispatch } from "../../../redux/store";
+import { loadIngredients } from "../../../redux/ingredients/ingredients-asyncActions";
 //=========================================================================================================================
 
 // Компонент кастомного коктейля пользователя - поля ингредиента ==========================================================

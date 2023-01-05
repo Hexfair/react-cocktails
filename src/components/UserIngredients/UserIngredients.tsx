@@ -1,4 +1,3 @@
-import React from "react";
 import styles from './UserIngredients.module.scss';
 import { ImageItem } from "../../UI/ImageItem/ImageItem";
 import { getSmallImageOfIngredient } from "../../api/api";
@@ -7,11 +6,10 @@ import { UserCocktailType } from '../../@types'
 
 // Компонент с ингредиентами коктейля, который добавил пользователь =======================================================
 type UserIngredientsProps = {
-	idx: number,
 	userCocktail: UserCocktailType
 }
 
-export const UserIngredients = ({ idx, userCocktail }: UserIngredientsProps) => {
+export const UserIngredients = ({ userCocktail }: UserIngredientsProps) => {
 
 	/* Функция внутри компонента:
 	1 - получает все ключи объекта (коктейля)

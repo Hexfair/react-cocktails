@@ -5,11 +5,12 @@ import axios from "axios";
 import { UserIngredients } from "../../../components/UserIngredients/UserIngredients";
 import { Preloader } from '../../../components/Preloader/Preloader';
 import { ImageItem } from '../../../UI/ImageItem/ImageItem';
-import { deleteUserCocktail, loadUserCocktails } from '../../../redux/userCocktails/userCocktails-slice'
+import { deleteUserCocktail } from '../../../redux/userCocktails/userCocktails-slice'
 import { FavoritesEmpty } from "../FavoritesEmpty/FavoritesEmpty";
 import { selectorUserCocktailsList } from "../../../redux/userCocktails/userCocktails-selectors";
 import { useAppDispatch } from "../../../redux/store";
 import { UserCocktailType } from "../../../@types";
+import { loadUserCocktails } from "../../../redux/userCocktails/userCocktails-asyncActions";
 //=========================================================================================================================
 
 // Страница с любимыми коктейлями (кастомными) ==============================================================================
@@ -66,7 +67,7 @@ export const FavoritesUserBLock = () => {
 						</div>
 						<p className={styles.text}>{obj.customDescription}</p>
 						<h3 className={styles.label}>Ingredients</h3>
-						<UserIngredients idx={index} userCocktail={obj} />
+						<UserIngredients userCocktail={obj} />
 					</div>
 				</div>
 			)}

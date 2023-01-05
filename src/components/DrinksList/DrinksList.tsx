@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './DrinksList.module.scss';
 import { DrinksItem } from '../DrinksItem/DrinksItem';
 import { CocktailShortType } from '../../@types';

@@ -1,17 +1,9 @@
-import { Extra, Status, CocktailShortType } from './../../@types';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Status, CocktailShortType } from './../../@types';
+import { createSlice } from "@reduxjs/toolkit";
+import { loadCocktailsByIngredient } from './cocktailsByIngredient-asyncActions';
 //=========================================================================================================================
 
 // Слайс загрузки коктейлей по указанному ингредиенту =====================================================================
-export const loadCocktailsByIngredient = createAsyncThunk
-	<CocktailShortType[], string, { extra: Extra }>
-	('@@cocktailsByIngredient',
-		async (name, { extra: { client, api } }) => {
-			const res = await client.get(api.getCocktailsByIngredient(name));
-			return res.data.drinks as CocktailShortType[]
-		}
-	)
-
 type CocktailsByIngredientSlice = {
 	cocktailsList: CocktailShortType[] | [],
 	status: Status

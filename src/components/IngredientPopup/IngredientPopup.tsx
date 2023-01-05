@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './IngredientPopup.module.scss';
 import { useSelector } from "react-redux";
-import { loadIngredientDetails } from "../../redux/ingredientDetails/ingredientDetails-slice";
 import { getMediumImageOfIngredient } from '../../api/api';
 import { Preloader } from '../Preloader/Preloader';
 import { Link } from 'react-router-dom';
 import { NotFound } from '../../pages/NotFound/NotFound';
 import { useAppDispatch } from '../../redux/store';
 import { selectorIngredientDetails } from '../../redux/ingredientDetails/ingredientDetails-selectors';
+import { loadIngredientDetails } from '../../redux/ingredientDetails/ingredientDetails-asyncActions';
 //=========================================================================================================================
 
 // Компонент с детальной инф-цией об ингредиенете - в отдельном попапе ====================================================

@@ -1,17 +1,9 @@
-import { IngredientType, Extra, Status } from './../../@types';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { IngredientType, Status } from './../../@types';
+import { createSlice } from "@reduxjs/toolkit";
+import { loadIngredientDetails } from './ingredientDetails-asyncActions';
 //=========================================================================================================================
 
 // Слайс загрузки детальной информации об ингредиенте =====================================================================
-export const loadIngredientDetails = createAsyncThunk
-	<IngredientType, string, { extra: Extra }>
-	('@@ingredientDetails/load-ingredientItem',
-		async (name, { extra: { client, api } }) => {
-			const res = await client.get(api.getIngredientItem(name));
-			return res.data.ingredients[0] as IngredientType;
-		}
-	)
-
 type IngredientDetailsSlice = {
 	ingredient: IngredientType | null,
 	status: Status,

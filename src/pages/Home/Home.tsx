@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Home.module.scss';
 import { useSelector } from 'react-redux';
-import { loadAlcDrinks, loadPopDrinks, loadNonAlcDrinks, loadOptAlcDrinks, setActiveSort, } from '../../redux/drinks/drinks-slice';
+import { setActiveSort, } from '../../redux/drinks/drinks-slice';
 import cn from 'classnames';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
@@ -11,6 +11,7 @@ import { NotFound } from '../NotFound/NotFound';
 import { useMedia } from '../../utils/use-media';
 import { selectorDrinks } from '../../redux/drinks/drinks-selectors';
 import { useAppDispatch } from '../../redux/store';
+import { loadAlcDrinks, loadNonAlcDrinks, loadOptAlcDrinks, loadPopDrinks } from '../../redux/drinks/drinks-asyncActions';
 //=========================================================================================================================
 
 const typeOfDrinks = ['Poppular Drinks', 'Alcoholic', 'Non Alcoholic', 'Optional Alcoholic'];

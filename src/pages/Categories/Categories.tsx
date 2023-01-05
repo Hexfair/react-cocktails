@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { loadCategoriesItems } from "../../redux/categories/categories-slice";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
@@ -9,6 +8,7 @@ import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { NotFound } from "../NotFound/NotFound";
 import { useAppDispatch } from "../../redux/store";
 import { selectorCategories } from "../../redux/categories/categories-selectors";
+import { loadCategoriesItems } from "../../redux/categories/categories-asyncActions";
 //=========================================================================================================================
 
 // Страница с коктейлями по типу категории ================================================================================
@@ -37,7 +37,6 @@ export const Categories = () => {
 	return (
 		<>
 			<DrinksBlock drinksList={categoriesItems} name={params.category ? params.category : ''} label='Categories' />
-			{/* {visibleTopButton && <ButtonScrollTop />} */}
 		</>
 	)
 }

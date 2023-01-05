@@ -2,7 +2,6 @@ import React from "react";
 import styles from './AddUserCocktail.module.scss';
 import axios from 'axios';
 import { Preloader } from "../../components/Preloader/Preloader";
-import { loadUserCocktails } from "../../redux/userCocktails/userCocktails-slice";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { NameEl } from "./NameEl/NameEl";
@@ -10,6 +9,7 @@ import { ImageUrlEl } from "./ImageUrlEl/ImageUrlEl";
 import { DescriptionEl } from "./DescriptionEl/DescriptionEl";
 import { IngredientsEl } from "./IngredientsEl/IngredientsEl";
 import { useAppDispatch } from "../../redux/store";
+import { loadUserCocktails } from "../../redux/userCocktails/userCocktails-asyncActions";
 //=========================================================================================================================
 
 // Страница с добавлением пользовательского коктейля ======================================================================
