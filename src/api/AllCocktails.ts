@@ -1,4 +1,7 @@
-[
+import { CocktailDetailsType } from "../@types";
+//=========================================================================================================================
+
+export const allCocktails: CocktailDetailsType[] = [
 	{
 		"idDrink": "17222",
 		"strDrink": "A1",

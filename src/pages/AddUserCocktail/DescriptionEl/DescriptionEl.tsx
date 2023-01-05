@@ -1,9 +1,9 @@
-import React from "react";
+import { UserCocktailProps } from '../../../@types';
 import styles from './DescriptionEl.module.scss';
 //=========================================================================================================================
 
 // Компонент кастомного коктейля пользователя - поле описание =============================================================
-export const DescriptionEl = ({ cocktail, onChangeInput }) => {
+export const DescriptionEl = ({ cocktail, onChangeInput }: UserCocktailProps) => {
 	return (
 		<>
 			<span className={styles.label}>Description:</span>

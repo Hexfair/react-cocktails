@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadGlassesItems } from "../../redux/glasses/glasses-slice";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
@@ -7,18 +7,20 @@ import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { NotFound } from "../NotFound/NotFound";
+import { selectorGlasses } from "../../redux/glasses/glasses-selectors";
+import { useAppDispatch } from "../../redux/store";
 //=========================================================================================================================
 
 // Страница с коктейлями по типу бокала ===================================================================================
 export const Glasses = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const params = useParams();
-	const { glassesItems, status } = useSelector(state => state.glasses);
+	const { glassesItems, status } = useSelector(selectorGlasses);
 
 	/* Данные подгружаются с сервера. При открытии страницы закрывается бургер-меню  */
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
-		dispatch(loadGlassesItems(params.glass));
+		params.glass && dispatch(loadGlassesItems(params.glass));
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
 	}, [dispatch, params.glass])
@@ -31,5 +33,9 @@ export const Glasses = () => {
 		return <NotFound />
 	}
 
-	return <DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />
+	return (
+		<>
+			{params.glass && <DrinksBlock drinksList={glassesItems} name={params.glass} label='Glasses' />}
+		</>
+	)
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from './AddUserCocktail.module.scss';
 import axios from 'axios';
-import { useDispatch } from "react-redux";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { loadUserCocktails } from "../../redux/userCocktails/userCocktails-slice";
 import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
@@ -10,11 +9,12 @@ import { NameEl } from "./NameEl/NameEl";
 import { ImageUrlEl } from "./ImageUrlEl/ImageUrlEl";
 import { DescriptionEl } from "./DescriptionEl/DescriptionEl";
 import { IngredientsEl } from "./IngredientsEl/IngredientsEl";
+import { useAppDispatch } from "../../redux/store";
 //=========================================================================================================================
 
 // Страница с добавлением пользовательского коктейля ======================================================================
 export const AddUserCocktail = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	/* Закрываем меню при переходе на страницу на мобильном устройстве */
 	React.useEffect(() => {
@@ -37,7 +37,7 @@ export const AddUserCocktail = () => {
 	/* Добавление полей ингредиента. В cocktail передается предыдущее состояние, плюс
 	добавляются поля customIngredient2 и customMeasure2...и так далее. 
 	В массив qnt также добавляется один элемент	*/
-	const addIngr = (event) => {
+	const addIngr = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		const qntNumb = qnt[qnt.length - 1] + 1;
 		setCocktail(prev => (
@@ -47,10 +47,10 @@ export const AddUserCocktail = () => {
 
 	/* Функция изменения стейта cocktail. Работает для всех полей. Уникальность конкретных полей
 	задает event.target.name в соответствии с атрибутом name */
-	const onChangeInput = (event) => setCocktail((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setCocktail((prev) => ({ ...prev, [event.target.name]: event.target.value }));
 
 	/* numInput помогает определить, какой конкретно ингредиент редактируется */
-	const updateCocktail = (str, numInput) => setCocktail((prev) => ({ ...prev, ['customIngredient' + (numInput + 1)]: str }));
+	const updateCocktail = (str: string, numInput: number) => setCocktail((prev) => ({ ...prev, ['customIngredient' + (numInput + 1)]: str }));
 
 	/* Сброс полей */
 	const resetState = () => {
@@ -59,7 +59,7 @@ export const AddUserCocktail = () => {
 			customImageDrink: '',
 			customIngredient1: '',
 			customMeasure1: '',
-			customDescription: ''
+			customDescription: '',
 		});
 		setQnt([1]);
 	}
@@ -67,7 +67,7 @@ export const AddUserCocktail = () => {
 	const [isPreloader, setIsPreloader] = React.useState(false);
 
 	/* Отправка формы на сервер - добавление коктейля*/
-	const submit = (event) => {
+	const submit = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		if (cocktail.customNameDrink.length > 4) {
 			setIsPreloader(true);

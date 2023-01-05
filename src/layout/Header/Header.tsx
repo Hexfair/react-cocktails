@@ -4,7 +4,7 @@ import logo from '../../assets/header-logo.png';
 import { FavoritesIcon } from '../../UI/FavoritesIcon/FavoritesIcon';
 import { SearchIcon } from '../../UI/SearchIcon/SearchIcon'
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { loadCategories } from '../../redux/categories/categories-slice';
 import { loadGlasses } from '../../redux/glasses/glasses-slice';
 import { Link } from 'react-router-dom';
@@ -13,21 +13,26 @@ import { useMedia } from '../../utils/use-media';
 import { BurgerMenu } from '../../UI/BurgerMenu/BurgerMenu';
 import { loadUserCocktails } from '../../redux/userCocktails/userCocktails-slice';
 import { ButtonHeader } from '../../UI/ButtonHeader/ButtonHeader';
+import { selectorGlassesList } from '../../redux/glasses/glasses-selectors';
+import { useAppDispatch } from '../../redux/store';
+import { selectorCategoriesList } from '../../redux/categories/categories-selectors';
+import { selectStatusBurgerMenu } from '../../redux/burgerMenu/burgerMenu-selectors';
+import { selectorFavoritesList } from '../../redux/favorites/favorites-selectors';
 //=========================================================================================================================
 
 // Компонент хедер с логикой работы бургер-меню ===========================================================================
 export const Header = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const glasses = useSelector(state => state.glasses.glassesList);
-	const categories = useSelector(state => state.categories.categoriesList);
+	const glasses = useSelector(selectorGlassesList);
+	const categories = useSelector(selectorCategoriesList);
 
 	/* Хук меняет расположение иконок поиска и "избранное" при переходе на мобилку */
 	const { isTablet } = useMedia();
 
 	/* Состояние открыто/закрыто бургер-меню находится в редаксе */
 	const [isOpen, setIsOpen] = React.useState(false);
-	const isBurgerMenuOpen = useSelector(state => state.burger.isBurgerMenuOpen);
+	const isBurgerMenuOpen = useSelector(selectStatusBurgerMenu);
 
 	/* Открытие окна с категориями и бокалами при работе на мобилках, в бургер-меню */
 	const onClickBut = () => {
@@ -39,7 +44,7 @@ export const Header = () => {
 	При этом изменении срабатывает useEffect (зависимость Item) и весь список 
 	избранных коктейлей сохраняется в ЛокалСтор */
 	const isMounted = React.useRef(false);
-	const items = useSelector(state => state.favorites.favoritesList)
+	const items = useSelector(selectorFavoritesList)
 	React.useEffect(() => {
 		if (isMounted.current) {
 			const json = JSON.stringify(items);
@@ -66,7 +71,7 @@ export const Header = () => {
 			<div className={cn(`${styles.navigation}`, `${isBurgerMenuOpen ? styles.active : ''}`)}>
 				<ul className={styles.list}>
 					<Link to="/" className={styles.link}>
-						<ButtonHeader text='HOME' />
+						<ButtonHeader text='HOME' icon='' />
 					</Link>
 					<Link to="/ingredients" className={styles.link}>
 						<ButtonHeader icon='ingredients' text='Ingredients' />

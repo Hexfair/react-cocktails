@@ -1,21 +1,23 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { DrinksBlock } from "../../components/DrinksBlock/DrinksBlock";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { selectorCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-selectors";
 import { loadCocktailsByIngredient } from "../../redux/cocktailsByIngredient/cocktailsByIngredient-slice";
+import { useAppDispatch } from "../../redux/store";
 import { NotFound } from "../NotFound/NotFound";
 //=========================================================================================================================
 
 // Страница с коктейлями по типу ингредиента ==============================================================================
 export const CocktailsByIngredient = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const params = useParams();
-	const { cocktailsList, status } = useSelector(state => state.cocktailsByIngredient);
+	const { cocktailsList, status } = useSelector(selectorCocktailsByIngredient);
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
-		dispatch(loadCocktailsByIngredient(params.cocktails));
+		params.cocktails && dispatch(loadCocktailsByIngredient(params.cocktails));
 	}, [dispatch, params.cocktails])
 
 	if (status === 'pending') {
@@ -26,5 +28,9 @@ export const CocktailsByIngredient = () => {
 		return <NotFound />
 	}
 
-	return <DrinksBlock drinksList={cocktailsList} name={params.cocktails} label='with' />
+	return (
+		<>
+			{params.cocktails && <DrinksBlock drinksList={cocktailsList} name={params.cocktails} label='with' />}
+		</>
+	)
 }

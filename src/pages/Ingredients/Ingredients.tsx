@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IngredientItem } from "../../components/IngredientItem/IngredientItem";
 import { loadIngredients } from "../../redux/ingredients/ingredients-slice";
 import styles from './Ingredients.module.scss';
@@ -7,12 +7,14 @@ import { setBurgerStatus } from "../../redux/burgerMenu/burgerMenu-slice";
 import { burgerOpenOrClose } from "../../utils/burgerMenuOpen";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { NotFound } from "../NotFound/NotFound";
+import { selectorIngredients } from "../../redux/ingredients/ingredients-selectors";
+import { useAppDispatch } from "../../redux/store";
 //=========================================================================================================================
 
 // Страница с перечнем всех ингредиентов ==================================================================================
 export const Ingredients = () => {
-	const dispatch = useDispatch();
-	const { ingredientsList, status } = useSelector(state => state.ingredients);
+	const dispatch = useAppDispatch();
+	const { ingredientsList, status } = useSelector(selectorIngredients);
 	const [value, setValue] = React.useState(25);
 
 	React.useEffect(() => {

@@ -2,17 +2,23 @@ import React from "react";
 import styles from './DrinksItem.module.scss';
 import { Link } from "react-router-dom";
 import { setFavoritesList } from "../../redux/favorites/favorites-slice";
-import { useDispatch } from "react-redux";
 import cn from 'classnames';
 import { useFavorites } from "../../utils/use-favorites";
+import { useAppDispatch } from "../../redux/store";
 //=========================================================================================================================
 
 // Компонент карточки напитка - картинка, название и иконка "избранное" ===================================================
-export const DrinksItem = ({ id, name, image }) => {
-	const dispatch = useDispatch();
+type DrinksItemProps = {
+	id: string,
+	name: string,
+	image: string,
+}
+
+export const DrinksItem = ({ id, name, image }: DrinksItemProps) => {
+	const dispatch = useAppDispatch();
 
 	/* Добавление напитка в "избранные" */
-	const addFavoritesCocktail = (id, name, image) => {
+	const addFavoritesCocktail = (id: string, name: string, image: string) => {
 		dispatch(setFavoritesList({ idDrink: id, strDrink: name, strDrinkThumb: image }))
 	};
 

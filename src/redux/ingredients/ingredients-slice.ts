@@ -1,19 +1,19 @@
-import { IngredientType, Extra, Status } from './../../@types';
+import { Extra, Status, StrIngredientType } from './../../@types';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
 // Слайс загрузки перечня ингредиентов ====================================================================================
 export const loadIngredients = createAsyncThunk
-	<IngredientType[], undefined, { extra: Extra }>
+	<StrIngredientType[], undefined, { extra: Extra }>
 	('@@ingredients/load-ingredients',
 		async (_, { extra: { client, api } }) => {
 			const res = await client.get(api.getIngredients);
-			return res.data.drinks as IngredientType[];
+			return res.data.drinks as StrIngredientType[];
 		}
 	)
 
 type IngredientsSlice = {
-	ingredientsList: IngredientType[] | [],
+	ingredientsList: StrIngredientType[],
 	status: Status,
 }
 

@@ -2,18 +2,24 @@ import React from "react";
 import styles from './UserIngredients.module.scss';
 import { ImageItem } from "../../UI/ImageItem/ImageItem";
 import { getSmallImageOfIngredient } from "../../api/api";
+import { UserCocktailType } from '../../@types'
 //=========================================================================================================================
 
 // Компонент с ингредиентами коктейля, который добавил пользователь =======================================================
-export const UserIngredients = ({ idx, userCocktail }) => {
+type UserIngredientsProps = {
+	idx: number,
+	userCocktail: UserCocktailType
+}
+
+export const UserIngredients = ({ idx, userCocktail }: UserIngredientsProps) => {
 
 	/* Функция внутри компонента:
-	1- получает все ключи объекта (коктейля)
+	1 - получает все ключи объекта (коктейля)
 	2 - проходит по всем этим ключам (map)
 	3 - отрисовывает разметку (ингредиент), только когда находит поле с "customIngredient"
 	4 - получает картинку, название игредиента и его дозу (customMeasure)
 	*/
-
+	console.log(userCocktail);
 	return (
 		<div className={styles.ingredients}>
 			{Object.keys(userCocktail).map((key) => {

@@ -1,28 +1,36 @@
 import React from "react";
 import styles from './IngredientsEl.module.scss';
 import cn from 'classnames';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { loadIngredients } from "../../../redux/ingredients/ingredients-slice";
 import { getSmallImageOfIngredient } from "../../../api/api";
 import { ImageItem } from "../../../UI/ImageItem/ImageItem";
+import { UserCocktailProps } from "../../../@types";
+import { selectorIngredientsList } from "../../../redux/ingredients/ingredients-selectors";
+import { useAppDispatch } from "../../../redux/store";
 //=========================================================================================================================
 
 // Компонент кастомного коктейля пользователя - поля ингредиента ==========================================================
-export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }) => {
-	const dispatch = useDispatch();
-	const ingredientsList = useSelector(state => state.ingredients.ingredientsList);
+type IngredientsElProps = {
+	updateCocktail: (str: string, numInput: number) => void,
+	qnt: number[],
+} & UserCocktailProps
+
+export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }: IngredientsElProps) => {
+	const dispatch = useAppDispatch();
+	const ingredientsList = useSelector(selectorIngredientsList);
 
 	const [open, isOpen] = React.useState(false);			// Открытие/закрытие окна с ингредиентами
 	const [numInput, setNumInput] = React.useState(0);		// Индекс конкретного редактируемого ингредиета
 
 	/* При фокусе открывается окно с перечнем ингредиентов, подгружженых с сервера */
-	const onFocusInput = (index) => {
+	const onFocusInput = (index: number) => {
 		isOpen(true);
 		setNumInput(index);
 	}
 
 	/* Функция срабатывает при нажатии на ингредиент из списка - обновляет стейт cocktail */
-	const onClickLi = (str) => {
+	const onClickLi = (str: string) => {
 		updateCocktail(str, numInput);
 		isOpen(false);
 	}
@@ -34,9 +42,10 @@ export const IngredientsEl = ({ cocktail, onChangeInput, updateCocktail, qnt }) 
 	}, [dispatch, ingredientsList]);
 
 	/* Закрытие окна со списком ингредиентов по клику вне области этого окна */
+
 	React.useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (open && event.target.dataset.type !== 'ingr') {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (open && (event.target instanceof HTMLElement) && event.target.dataset.type !== 'ingr') {
 				isOpen(false);
 			}
 		}

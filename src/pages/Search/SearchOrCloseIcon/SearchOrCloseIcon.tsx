@@ -3,7 +3,12 @@ import styles from './SearchOrCloseIcon.module.scss';
 //=========================================================================================================================
 
 // Смена иконки в Инпуте на странице поиска коктейля ======================================================================
-export const SearchOrCloseIcon = ({ value, onClickCloseIcon }) => {
+type SearchOrCloseIconProps = {
+	value: string,
+	onClickCloseIcon: () => void
+}
+
+export const SearchOrCloseIcon = ({ value, onClickCloseIcon }: SearchOrCloseIconProps) => {
 	return (
 		<>
 			{!value

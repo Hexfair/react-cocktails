@@ -5,7 +5,11 @@ import { IngredientPopup } from "../IngredientPopup/IngredientPopup";
 //=========================================================================================================================
 
 // Карточка ингредиента (на стр. Ingredients) - картинка и название с открытием попапа ====================================
-export const IngredientItem = ({ name }) => {
+type IngredientItemProps = {
+	name: string
+}
+
+export const IngredientItem = ({ name }: IngredientItemProps) => {
 
 	/* Работа попапа - открыть и закрытить */
 	const [openPopup, setOpenPopup] = React.useState(false);

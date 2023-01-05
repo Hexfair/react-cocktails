@@ -2,10 +2,17 @@ import React from 'react';
 import styles from './DrinksBlock.module.scss';
 import { DrinksList } from '../DrinksList/DrinksList';
 import { NotFound } from '../../pages/NotFound/NotFound';
+import { CocktailShortType } from '../../@types';
 //=========================================================================================================================
 
 // Компонент отображает блок напитков - заголовок и блок карточек напитков ================================================
-export const DrinksBlock = ({ drinksList, name, label }) => {
+type DrinksBlockProps = {
+	drinksList: CocktailShortType[],
+	name: string,
+	label: string,
+}
+
+export const DrinksBlock = ({ drinksList, name, label }: DrinksBlockProps) => {
 
 	/* Отображение карточек напитков + работа кнопки Show More */
 	const [visibleDrinks, setVisibleDrinks] = React.useState(20);

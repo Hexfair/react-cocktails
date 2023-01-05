@@ -6,20 +6,21 @@ import { FavoritesLikeBlock } from "./FavoritesLikeBlock/FavoritesLikeBlock";
 import { FavoritesUserBLock } from "./FavoritesUserBLock/FavoritesUserBLock";
 //=========================================================================================================================
 
-const typeOfDrinks = ['Favorites', 'User Cocktails'];
+type TypeOfDrinks = 'Favorites' | 'User Cocktails';
+const typeOfDrinks: TypeOfDrinks[] = ['Favorites', 'User Cocktails'];
 
 // Страница с любимыми коктейлями (избранными и кастомными) ===============================================================
 export const Favorites = () => {
-	const [visibleBlock, setVisibleBlock] = React.useState('Favorites');
+	const [visibleBlock, setVisibleBlock] = React.useState<TypeOfDrinks>('Favorites');
 	const { isMobile } = useMedia();
 
 	/* Переключение между избранными и кастомными */
-	const onClickCategory = (value) => setVisibleBlock(value);
+	const onClickCategory = (value: TypeOfDrinks) => setVisibleBlock(value);
 
 	return (
 		<div className={styles.body}>
 			<div className={styles.types} >
-				{typeOfDrinks.map((type) => (
+				{typeOfDrinks.map(type => (
 					<React.Fragment key={type}>
 						<button
 							className={cn(`${styles.sort}`, `${visibleBlock === type ? styles.active : ''}`)}

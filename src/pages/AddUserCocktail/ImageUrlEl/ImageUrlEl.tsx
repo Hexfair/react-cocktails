@@ -1,9 +1,9 @@
-import React from "react";
+import { UserCocktailProps } from "../../../@types";
 import styles from './ImageUrlEl.module.scss';
 //=========================================================================================================================
 
 // Компонент кастомного коктейля пользователя - поле URL картинки =========================================================
-export const ImageUrlEl = ({ cocktail, onChangeInput }) => {
+export const ImageUrlEl = ({ cocktail, onChangeInput }: UserCocktailProps) => {
 	return (
 		<>
 			<span className={styles.label}>Image URL:</span>

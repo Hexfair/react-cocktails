@@ -1,20 +1,23 @@
 import React from "react";
 import styles from './FavoritesUserBLock.module.scss';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { UserIngredients } from "../../../components/UserIngredients/UserIngredients";
 import { Preloader } from '../../../components/Preloader/Preloader';
 import { ImageItem } from '../../../UI/ImageItem/ImageItem';
 import { deleteUserCocktail, loadUserCocktails } from '../../../redux/userCocktails/userCocktails-slice'
 import { FavoritesEmpty } from "../FavoritesEmpty/FavoritesEmpty";
+import { selectorUserCocktailsList } from "../../../redux/userCocktails/userCocktails-selectors";
+import { useAppDispatch } from "../../../redux/store";
+import { UserCocktailType } from "../../../@types";
 //=========================================================================================================================
 
 // Страница с любимыми коктейлями (кастомными) ==============================================================================
 export const FavoritesUserBLock = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	/* Кастомные коктейли хранятся на сервере и подгружаются в редакс */
-	const userCocktailsList = useSelector(state => state.userCocktails.userCocktailsList)
+	const userCocktailsList = useSelector(selectorUserCocktailsList)
 	const [isPreloader, setIsPreloader] = React.useState(false);
 
 	React.useEffect(() => {
@@ -22,7 +25,7 @@ export const FavoritesUserBLock = () => {
 	}, [dispatch])
 
 	/* Удаление кастомного коктейля с сервера */
-	const deleteItem = (id) => {
+	const deleteItem = (id: UserCocktailType['idDrink']) => {
 		setIsPreloader(true);
 		axios.delete('https://633b5933c1910b5de0c41000.mockapi.io/cocktails-favorites/' + id)
 			.then(() => {

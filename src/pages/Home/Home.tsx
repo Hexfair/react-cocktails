@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Home.module.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { loadAlcDrinks, loadPopDrinks, loadNonAlcDrinks, loadOptAlcDrinks, setActiveSort, } from '../../redux/drinks/drinks-slice';
 import cn from 'classnames';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
@@ -9,14 +9,16 @@ import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { Preloader } from '../../components/Preloader/Preloader';
 import { NotFound } from '../NotFound/NotFound';
 import { useMedia } from '../../utils/use-media';
+import { selectorDrinks } from '../../redux/drinks/drinks-selectors';
+import { useAppDispatch } from '../../redux/store';
 //=========================================================================================================================
 
 const typeOfDrinks = ['Poppular Drinks', 'Alcoholic', 'Non Alcoholic', 'Optional Alcoholic'];
 
 // Главная страница с коктейлями ==========================================================================================
 export const Home = () => {
-	const dispatch = useDispatch();
-	const { activeSort, popDrinks, alcDrinks, nonAlcDrinks, optAlcDrinks, status } = useSelector(state => state.drinks);
+	const dispatch = useAppDispatch();
+	const { activeSort, popDrinks, alcDrinks, nonAlcDrinks, optAlcDrinks, status } = useSelector(selectorDrinks);
 	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
 
 	/* На мобильных устройствах скрывается разделяющая полоска в заголовке */
@@ -25,7 +27,7 @@ export const Home = () => {
 	const onClickShowMore = () => setVisibleDrinks(visibleDrinks + 20)
 
 	/* Изменение категории при соответствующем нажатии */
-	const changeCategory = (value) => {
+	const changeCategory = (value: number) => {
 		dispatch(setActiveSort(value));
 		setVisibleDrinks(20);
 	}
@@ -33,7 +35,7 @@ export const Home = () => {
 	/* При изменении категории осуществляется проверка, есть ли она уже в редаксе.
 	Если категория уже ранее была загружена, то данные будут браться из редакса,
 	иначе - с сервера */
-	const onClickCategory = (value) => {
+	const onClickCategory = (value: number) => {
 		switch (value) {
 			case 1:
 				changeCategory(value);

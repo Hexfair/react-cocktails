@@ -1,35 +1,36 @@
 import React from 'react';
 import styles from './Search.module.scss';
-import allCocktails from '../../api/AllCocktails.json';
+import { allCocktails } from '../../api/AllCocktails';
 import { DrinksList } from '../../components/DrinksList/DrinksList';
 import { useSearch } from './use-search';
-import { useDispatch } from 'react-redux';
 import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { SearchOrCloseIcon } from './SearchOrCloseIcon/SearchOrCloseIcon';
+import { useAppDispatch } from '../../redux/store';
 //=========================================================================================================================
 
-const radioInputType = ['names', 'ingredients'];
+export type RadioInputType = 'names' | 'ingredients';
+const radioInputType: RadioInputType[] = ['names', 'ingredients'];
 
 // Страница поиска коктейля ===============================================================================================
 export const Search = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const [value, setValue] = React.useState('');
-	const [valueRadioInput, setValueRadioInput] = React.useState('names');
+	const [valueRadioInput, setValueRadioInput] = React.useState<RadioInputType>('names');
 
-	const onChangeInput = (event) => setValue(event.target.value);
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
 
 	/* Нажатие крестика - очистка поля Input + автофокус*/
-	const inputRef = React.useRef();
+	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const onClickCloseIcon = () => {
 		setValue('');
 		inputRef.current?.focus();
 	}
 
 	/* Выбор параметра поиска - радиокнопки */
-	const radioInputChange = (event) => setValueRadioInput(event.target.value)
+	const radioInputChange = (event: React.ChangeEvent<HTMLInputElement>) => setValueRadioInput(event.target.value as RadioInputType)
 
-	/* Поиск коктейля производится из локального файла AllCocktails.json */
+	/* Поиск коктейля производится из локального файла AllCocktails.ts */
 	const drinks = useSearch(valueRadioInput, value, allCocktails);
 
 	React.useEffect(() => {

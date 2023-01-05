@@ -1,10 +1,11 @@
 import React from "react";
 import styles from './NameEl.module.scss';
 import cn from 'classnames';
+import { UserCocktailProps } from "../../../@types";
 //=========================================================================================================================
 
 // Компонент кастомного коктейля пользователя - поле название =============================================================
-export const NameEl = ({ cocktail, onChangeInput }) => {
+export const NameEl = ({ cocktail, onChangeInput }: UserCocktailProps) => {
 
 	/* Валидация названия коктейля. Валидация происходит по событию onBlur. */
 	const [isValidName, setIsValidName] = React.useState(true);
