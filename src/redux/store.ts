@@ -12,6 +12,7 @@ import { cocktailsByIngredientReducer } from './cocktailsByIngredient/cocktailsB
 import { favoritesReducer } from './favorites/favorites-slice';
 import { userCocktailsReducer } from './userCocktails/userCocktails-slice';
 import { themeReducer } from './theme/theme-slice';
+import { useDispatch } from 'react-redux';
 //=========================================================================================================================
 
 const store = configureStore({
@@ -39,4 +40,8 @@ const store = configureStore({
 	})
 })
 
-export default store
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+
+export default store;

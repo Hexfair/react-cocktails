@@ -2,13 +2,15 @@ import React from 'react';
 import styles from './FavoritesIcon.module.scss';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { selectorFavoritesList } from '../../redux/favorites/favorites-selectors';
+import { selectorUserCocktailsList } from '../../redux/userCocktails/userCocktails-selectors';
 //=========================================================================================================================
 
 // Компонент иконки "избранное" в хедере ==================================================================================
 export const FavoritesIcon = () => {
 
-	const quantityFavorites = useSelector(state => state.favorites.favoritesList);
-	const quantityUserCocktails = useSelector(state => state.userCocktails.userCocktailsList);
+	const quantityFavorites = useSelector(selectorFavoritesList);
+	const quantityUserCocktails = useSelector(selectorUserCocktailsList);
 
 	return (
 		<div className={styles.favorites}  >

@@ -1,9 +1,13 @@
-import React from "react";
 import styles from './ButtonHeader.module.scss';
 //=========================================================================================================================
 
 // Компонент кнопок меню хедера с разными иконками =========================================================================
-export const ButtonHeader = ({ icon, text }) => {
+type ButtonHeaderProps = {
+	icon: string,
+	text: string,
+}
+
+export const ButtonHeader = ({ icon, text }: ButtonHeaderProps) => {
 	return (
 		<button className={styles.button}>
 			{icon === 'ingredients' && <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.984 40.984">

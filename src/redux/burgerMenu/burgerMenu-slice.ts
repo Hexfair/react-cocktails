@@ -1,8 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
+
 // Слайс открытия/закрытия меню на мобильном устройстве ===================================================================
-const initialState = {
+type BurgerSlice = { isBurgerMenuOpen: Boolean };
+
+const initialState: BurgerSlice = {
 	isBurgerMenuOpen: false,
 }
 
@@ -10,7 +13,7 @@ export const burgerSlice = createSlice({
 	name: '@@burger',
 	initialState,
 	reducers: {
-		setBurgerStatus: (state, action) => {
+		setBurgerStatus: (state, action: PayloadAction<boolean>) => {
 			state.isBurgerMenuOpen = action.payload;
 		},
 	}

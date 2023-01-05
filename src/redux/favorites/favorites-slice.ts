@@ -1,9 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { CocktailShortType } from './../../@types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getFavoritesFromLC } from "./favorites-localStorage";
 //=========================================================================================================================
 
 // Слайс загрузки любимых коктейлей =======================================================================================
 /* Проверяем есть ли в ЛокалСтор "избранные" напитки */
+
 const favoritesList = getFavoritesFromLC();
 
 const initialState = {
@@ -14,8 +16,8 @@ export const favoritesSlice = createSlice({
 	name: '@@favorites',
 	initialState,
 	reducers: {
-		setFavoritesList: (state, action) => {
-			const findItem = state.favoritesList.find(obj => obj.idDrink === action.payload.idDrink);
+		setFavoritesList: (state, action: PayloadAction<CocktailShortType>) => {
+			const findItem = state.favoritesList.find((obj) => obj.idDrink === action.payload.idDrink);
 			if (!findItem) {
 				state.favoritesList.push(action.payload);
 			} else {

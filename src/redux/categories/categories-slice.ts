@@ -1,34 +1,44 @@
+import { Extra, CocktailShortType, Status, StrCategoryType } from './../../@types';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
 // Слайс загрузки перечня доступных категорий =============================================================================
 /* Загрузка категорий */
-export const loadCategories = createAsyncThunk(
-	'@@categories/load-categories',
-	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getCategories);
-		return res.data.drinks;
-	}
-)
+export const loadCategories = createAsyncThunk
+	<StrCategoryType[], undefined, { extra: Extra, }>
+	('@@categories/load-categories',
+		async (_, { extra: { client, api } }) => {
+			const { data } = await client.get(api.getCategories);
+			return data.drinks as StrCategoryType[]
+		}
+	)
 
 /* Загрузка коктейлей по выбранной категории */
-export const loadCategoriesItems = createAsyncThunk(
-	'@@categories/load-categoriesItems',
-	async (name, { extra: { client, api } }) => {
-		const res = await client.get(api.getCategoriesItem(name));
-		return res.data.drinks
-	}
-)
+export const loadCategoriesItems = createAsyncThunk
+	<CocktailShortType[], string, { extra: Extra, }>
+	('@@categories/load-categoriesItems',
+		async (name, { extra: { client, api } }) => {
+			const res = await client.get(api.getCategoriesItem(name));
+			return res.data.drinks as CocktailShortType[]
+		}
+	)
 
-const initialState = {
+type CategoriesSlice = {
+	categoriesList: StrCategoryType[],
+	categoriesItems: CocktailShortType[],
+	status: Status,
+}
+
+const initialState: CategoriesSlice = {
 	categoriesList: [],
 	categoriesItems: [],
-	status: 'loading'
+	status: 'pending'
 }
 
 export const categoriesSlice = createSlice({
 	name: '@@options',
 	initialState,
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadCategories.fulfilled, (state, action) => {
@@ -41,11 +51,9 @@ export const categoriesSlice = createSlice({
 			})
 			.addMatcher((action) => action.type.endsWith('/pending'), (state) => {
 				state.status = 'pending';
-				state.error = null;
 			})
 			.addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
 				state.status = 'rejected';
-				state.error = null;
 			})
 	}
 })

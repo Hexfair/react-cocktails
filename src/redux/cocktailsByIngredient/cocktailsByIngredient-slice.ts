@@ -1,16 +1,22 @@
+import { Extra, Status, CocktailShortType } from './../../@types';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
 // Слайс загрузки коктейлей по указанному ингредиенту =====================================================================
-export const loadCocktailsByIngredient = createAsyncThunk(
-	'@@cocktailsByIngredient',
-	async (name, { extra: { client, api } }) => {
-		const res = await client.get(api.getCocktailsByIngredient(name));
-		return res.data.drinks
-	}
-)
+export const loadCocktailsByIngredient = createAsyncThunk
+	<CocktailShortType[], string, { extra: Extra }>
+	('@@cocktailsByIngredient',
+		async (name, { extra: { client, api } }) => {
+			const res = await client.get(api.getCocktailsByIngredient(name));
+			return res.data.drinks as CocktailShortType[]
+		}
+	)
 
-const initialState = {
+type CocktailsByIngredientSlice = {
+	cocktailsList: CocktailShortType[] | [],
+	status: Status
+}
+const initialState: CocktailsByIngredientSlice = {
 	cocktailsList: [],
 	status: 'pending'
 }
@@ -18,6 +24,7 @@ const initialState = {
 export const cocktailsByIngredientSlice = createSlice({
 	name: '@@cocktailsByIngredient',
 	initialState,
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(loadCocktailsByIngredient.fulfilled, (state, action) => {
@@ -26,11 +33,9 @@ export const cocktailsByIngredientSlice = createSlice({
 			})
 			.addCase(loadCocktailsByIngredient.pending, (state) => {
 				state.status = 'pending';
-				state.error = null;
 			})
 			.addCase(loadCocktailsByIngredient.rejected, (state, action) => {
 				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
 			})
 	}
 })

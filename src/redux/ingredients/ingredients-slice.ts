@@ -1,16 +1,23 @@
+import { IngredientType, Extra, Status } from './../../@types';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //=========================================================================================================================
 
 // Слайс загрузки перечня ингредиентов ====================================================================================
-export const loadIngredients = createAsyncThunk(
-	'@@ingredients/load-ingredients',
-	async (_, { extra: { client, api } }) => {
-		const res = await client.get(api.getIngredients);
-		return res.data.drinks;
-	}
-)
+export const loadIngredients = createAsyncThunk
+	<IngredientType[], undefined, { extra: Extra }>
+	('@@ingredients/load-ingredients',
+		async (_, { extra: { client, api } }) => {
+			const res = await client.get(api.getIngredients);
+			return res.data.drinks as IngredientType[];
+		}
+	)
 
-const initialState = {
+type IngredientsSlice = {
+	ingredientsList: IngredientType[] | [],
+	status: Status,
+}
+
+const initialState: IngredientsSlice = {
 	ingredientsList: [],
 	status: 'pending'
 }
@@ -27,11 +34,9 @@ export const ingredientsSlice = createSlice({
 			})
 			.addCase(loadIngredients.pending, (state) => {
 				state.status = 'pending';
-				state.error = null;
 			})
 			.addCase(loadIngredients.rejected, (state, action) => {
 				state.status = 'rejected';
-				state.error = action.payload || action.meta.error;
 			})
 	}
 })

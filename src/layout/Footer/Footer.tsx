@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './Footer.module.scss';
 import cn from 'classnames';
 import { setTheme } from '../../redux/theme/theme-slice';
+import { selectorTheme } from '../../redux/theme/theme-selectors';
 //=========================================================================================================================
 
 // Компонент футер, который также отвечает за цветовую тему проекта =======================================================
@@ -10,7 +11,7 @@ export const Footer = () => {
 	const dispatch = useDispatch();
 
 	/* Получение темы из редакса, изменение темы по клику */
-	const theme = useSelector(state => state.theme.theme)
+	const theme = useSelector(selectorTheme)
 	const changeTheme = () => {
 		dispatch(setTheme(theme === 'brown' ? 'blue' : 'brown'))
 	}
