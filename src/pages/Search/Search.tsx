@@ -7,6 +7,7 @@ import { setBurgerStatus } from '../../redux/burgerMenu/burgerMenu-slice';
 import { burgerOpenOrClose } from '../../utils/burgerMenuOpen';
 import { SearchOrCloseIcon } from './SearchOrCloseIcon/SearchOrCloseIcon';
 import { useAppDispatch } from '../../redux/store';
+import debounce from "lodash.debounce";
 //=========================================================================================================================
 
 export type RadioInputType = 'names' | 'ingredients';
@@ -16,14 +17,27 @@ const radioInputType: RadioInputType[] = ['names', 'ingredients'];
 export const Search = () => {
 	const dispatch = useAppDispatch();
 	const [value, setValue] = React.useState('');
+	const [searchDebounceValue, setSearchDebounceValue] = React.useState('');
 	const [valueRadioInput, setValueRadioInput] = React.useState<RadioInputType>('names');
 
-	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
+	/* Использование debounce для оптимизации получения коктелей */
+	const updateSearchValue = React.useCallback(
+		debounce((str: string) => {
+			setSearchDebounceValue(str)
+		}, 1000),
+		[],
+	);
+
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		updateSearchValue(event.target.value);		// Для фильтрации коктелей
+		setValue(event.target.value);					// Для работы инпута
+	}
 
 	/* Нажатие крестика - очистка поля Input + автофокус*/
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
 	const onClickCloseIcon = () => {
 		setValue('');
+		setSearchDebounceValue('');
 		inputRef.current?.focus();
 	}
 
@@ -31,7 +45,7 @@ export const Search = () => {
 	const radioInputChange = (event: React.ChangeEvent<HTMLInputElement>) => setValueRadioInput(event.target.value as RadioInputType)
 
 	/* Поиск коктейля производится из локального файла AllCocktails.ts */
-	const drinks = useSearch(valueRadioInput, value, allCocktails);
+	const drinks = useSearch(valueRadioInput, searchDebounceValue, allCocktails);
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
@@ -53,7 +67,7 @@ export const Search = () => {
 				</div>
 				<div className={styles.radio}>
 					{radioInputType.map(obj =>
-						<label>
+						<label key={obj}>
 							<input
 								className={styles.real}
 								type="radio"
@@ -66,7 +80,7 @@ export const Search = () => {
 				</div>
 			</div>
 			<div className={styles.content}>
-				{value
+				{searchDebounceValue
 					? <DrinksList drinks={drinks} />
 					: <div className={styles.text}>On this page you can try to find your favorite cocktail!</div>}
 			</div>

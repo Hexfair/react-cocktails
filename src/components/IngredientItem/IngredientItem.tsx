@@ -16,13 +16,13 @@ export const IngredientItem = ({ name }: IngredientItemProps) => {
 
 	const onClickOpenPopup = () => {
 		setOpenPopup(true);
-		document.body.classList.add('active');
+		document.body.classList.add('lock');
 	}
 
 	/* Закрывается попап по нажатию кнопки внутри него */
 	const onClickClosePopup = () => {
 		setOpenPopup(false);
-		document.body.classList.remove('active');
+		document.body.classList.remove('lock');
 	}
 
 	return (

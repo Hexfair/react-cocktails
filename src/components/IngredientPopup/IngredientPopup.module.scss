@@ -9,7 +9,7 @@
    align-items: center;
    justify-content: center;
    overflow: auto;
-
+	z-index: 5;
    .content {
       background-color: var(--black);
       max-width: 1000px;
