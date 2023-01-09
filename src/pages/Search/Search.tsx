@@ -45,12 +45,23 @@ export const Search = () => {
 	const radioInputChange = (event: React.ChangeEvent<HTMLInputElement>) => setValueRadioInput(event.target.value as RadioInputType)
 
 	/* Поиск коктейля производится из локального файла AllCocktails.ts */
-	const drinks = useSearch(valueRadioInput, searchDebounceValue, allCocktails);
+	const drinksList = useSearch(valueRadioInput, searchDebounceValue, allCocktails);
+
+	const [visibleDrinks, setVisibleDrinks] = React.useState(20);
+	const onClickShowMore = () => setVisibleDrinks(visibleDrinks + 20)
+	let drinks = drinksList.slice(0, visibleDrinks);
+
+
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBurgerStatus(false));
 		burgerOpenOrClose(false);
+
+		return () => {
+			setValue('');
+			setSearchDebounceValue('');
+		}
 	}, [dispatch]);
 
 	return (
@@ -81,7 +92,7 @@ export const Search = () => {
 			</div>
 			<div className={styles.content}>
 				{searchDebounceValue
-					? <DrinksList drinks={drinks} />
+					? <DrinksList drinks={drinks} onClickShowMore={onClickShowMore} visibleDrinks={visibleDrinks} />
 					: <div className={styles.text}>On this page you can try to find your favorite cocktail!</div>}
 			</div>
 		</div >
