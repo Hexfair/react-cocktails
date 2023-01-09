@@ -105,10 +105,11 @@
 			color: var(--primary3-light);
 			margin-right: 10px;
 			cursor: pointer;
+			text-decoration: underline;
 
 			&.active {
-				text-decoration: underline;
-				color: var(--primary3)
+				color: var(--primary3);
+				text-decoration: none;
 			}
 		}
 	}
